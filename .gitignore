@@ -67,3 +67,4 @@ yarn-debug.log*
 /storage/*
 !/storage/.keep
 /public/uploads
+server/config/credentials.yml.enc
