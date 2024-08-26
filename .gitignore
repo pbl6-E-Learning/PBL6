@@ -68,3 +68,4 @@ yarn-debug.log*
 !/storage/.keep
 /public/uploads
 server/config/credentials.yml.enc
+server/config/database.yml
