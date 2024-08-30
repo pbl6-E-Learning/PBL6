@@ -1,0 +1,21 @@
+{
+  "index": {
+    "title": "Xin chào!",
+    "about": "Đây là tôi"
+  },
+  "noti": {
+    "error_message": "Ôi không! Có gì đó không ổn.",
+    "success_message": "Thành công!"
+  },
+  "login": {
+    "title":"Đăng nhập | Return ",
+    "welcome_message": "Chào mừng đến với nền tảng học tiếng Nhật của chúng tôi",
+    "sign_in": "Đăng nhập",
+    "sign_in_prompt": "Đăng nhập để bắt đầu hành trình học tiếng Nhật của bạn và khám phá một thế giới mới đầy thú vị!",
+    "email": "Email",
+    "password": "Mật khẩu",
+    "or_continue_with": "HOẶC TIẾP TỤC VỚI",
+    "login_successful": "Đăng nhập thành công!",
+    "login_failed": "Đăng nhập thất bại!"
+  }
+}
