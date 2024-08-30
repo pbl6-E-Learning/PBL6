@@ -69,3 +69,4 @@ yarn-debug.log*
 /public/uploads
 server/config/credentials.yml.enc
 server/config/database.yml
+server/config/application.yml
