@@ -7,6 +7,7 @@ gem "bootsnap", require: false
 gem "config"
 gem "faker", "2.21.0"
 gem "figaro"
+gem "httparty"
 gem "image_processing", "~> 1.2"
 gem "jsonapi-serializer"
 gem "jwt", "~> 2.5"

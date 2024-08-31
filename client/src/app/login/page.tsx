@@ -1,5 +1,6 @@
 "use client";
 import React, { FormEvent, useEffect, useState } from "react";
+import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
 import useHttpClient from "../utils/useHttpClient";
 import { deleteCookie, getCookie, hasCookie, setCookie } from "cookies-next";
 import { useRouter } from "next/navigation";
@@ -39,24 +40,39 @@ export default function LoginPage() {
     }
   }, [router]);
 
+  const handleLoginSuccess = (response: any) => {
+    const token = response.message.jwt;
+    const role = response.message.roles;
+    console.log(role);
+    setCookie('authToken', token);
+    setCookie('role', role);
+    console.log('Login successful!');
+    dispatch(successPopUp('Login successful!'));
+    role === 'admin' ? router.push("/admin") : router.push("/")
+  }
+
   const handleLogin = async (event: FormEvent) => {
     event.preventDefault();
 
     try {
       const response: any = await post('auth/login', { "auth": {email: email, password: password}});
-      const token = response.message.jwt;
-      const role = response.message.roles;
-      console.log(role);
-      setCookie('authToken', token);
-      setCookie('role', role);
-      console.log('Login successful!');
-      dispatch(successPopUp('Login successful!'));
-      role === 'admin' ? router.push("/admin") : router.push("/")
+      handleLoginSuccess(response);
     } catch (error) {
       console.log('Login failed!');
       dispatch(failPopUp('Login failed!'));
     }
   };
+
+  const responseGoogle = async (response: any) => {
+    try {
+      const res: any = await post(`auth/google_oauth2`,{auth: {id_token : response.credential}})
+      handleLoginSuccess(res)
+    } 
+    catch (error) {
+      console.log('Login failed!');
+      dispatch(failPopUp('Login failed!'));
+    }
+  }
 
   return (
       <div className="flex flex-row h-screen bg-[url('/images/login_bg.svg')]">
@@ -109,14 +125,33 @@ export default function LoginPage() {
                 </div>
               </form>
             </CardContent>
-            <CardFooter className="flex justify-center">
-              <Button onClick={(
-                  e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-                ) => {
-                  handleLogin(e);
-                }
-                }
-              >Sign in</Button>
+            <CardFooter className="flex justify-center w-full">
+              <div className="flex flex-col items-center w-full">
+                <div className="mb-8">
+                  <Button
+                    onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+                      handleLogin(e);
+                    }}
+                  >
+                    Sign in
+                  </Button>
+                </div>
+                <div className="flex items-center justify-center mb-8 relative w-full">
+                  <div className="flex-grow border-t border-gray-500"></div>
+                  <span className="mx-4 text-sm text-gray-500 whitespace-nowrap">OR CONTINUE WITH</span>
+                  <div className="flex-grow border-t border-gray-500"></div>
+                </div>
+                <div>
+                  <GoogleOAuthProvider clientId={process.env.clientId as string}>
+                    <GoogleLogin
+                      onSuccess={responseGoogle}
+                      onError={() => {
+                        console.log('Login failed!');
+                      }}
+                    />
+                  </GoogleOAuthProvider>
+                </div>
+              </div>
             </CardFooter>
           </Card>
         </div>
