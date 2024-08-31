@@ -1,5 +1,5 @@
 class Account < ApplicationRecord
-  VALID_ATTRIBUTES = %i(email password).freeze
+  VALID_ATTRIBUTES = %i(email password id_token).freeze
   enum roles: {user: 0, teacher: 1, admin: 2}
 
   mail_regex = Regexp.new(Settings.VALID_EMAIL_REGEX)
