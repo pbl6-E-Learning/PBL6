@@ -1,33 +1,35 @@
-"use client"
-import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "../hooks/store";
-import { resetPopUp } from "../hooks/features/popup.slice";
-import { useToast } from "@/components/ui/use-toast";
+'use client'
+import React, { useEffect } from 'react'
+import { useTranslations } from 'next-intl'
+import { useSelector, useDispatch } from 'react-redux'
+import { RootState } from '../hooks/store'
+import { resetPopUp } from '../hooks/features/popup.slice'
+import { useToast } from './use-toast'
 
 export default function Popup() {
-  const dispatch = useDispatch();
-  const { toast } = useToast();
-  const { type, text } = useSelector((state: RootState) => state.popup);
+  const t = useTranslations('noti')
+  const dispatch = useDispatch()
+  const { toast } = useToast()
+  const { type, text } = useSelector((state: RootState) => state.popup)
 
   useEffect(() => {
     if (type) {
-      if (type === "fail") {
+      if (type === 'fail') {
         toast({
-          variant: "destructive",
-          title: "Uh oh! Something went wrong.",
-          description: text,
-        });
-      } else if (type === "success") {
+          variant: 'destructive',
+          title: t('error_message'),
+          description: text
+        })
+      } else if (type === 'success') {
         toast({
-          variant: "success",
-          title: "Success!",
-          description: text,
-        });
+          variant: 'success',
+          title: t('success_message'),
+          description: text
+        })
       }
-      dispatch(resetPopUp());
+      dispatch(resetPopUp())
     }
-  }, [type, text, toast, dispatch]);
+  }, [type, text, toast, dispatch, t])
 
-  return null;
+  return null
 }

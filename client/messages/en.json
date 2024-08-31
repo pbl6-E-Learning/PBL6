@@ -1,0 +1,25 @@
+{
+  "index": {
+    "title": "Hello world!",
+    "about": "Go to the about page",
+    "metadata": {
+      "title": "E-learning",
+      "description": "App supports learning japan online"
+    }
+  },
+  "noti": {
+    "error_message": "Uh oh! Something went wrong.",
+    "success_message": "Success!"
+  },
+  "login": {
+    "title": "Sign in | Return",
+    "welcome_message": "Welcome to our Japanese learning platform",
+    "sign_in": "Sign in",
+    "sign_in_prompt": "Sign in to start your Japanese learning journey and explore a fascinating new world!",
+    "email": "Email",
+    "password": "Password",
+    "or_continue_with": "OR CONTINUE WITH",
+    "login_successful": "Login successful!",
+    "login_failed": "Login failed!"
+  }
+}
