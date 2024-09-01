@@ -10,13 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_03_025219) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_03_034455) do
   create_table "accounts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "email", null: false
     t.string "password_digest", null: false
     t.integer "roles", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "activation_token"
+    t.boolean "activated", default: false
+    t.datetime "activated_at"
     t.index ["email"], name: "index_accounts_on_email", unique: true
   end
 
@@ -118,6 +121,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_03_025219) do
     t.string "image_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "sex", default: 0
     t.index ["account_id"], name: "index_users_on_account_id"
   end
 

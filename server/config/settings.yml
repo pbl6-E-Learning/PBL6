@@ -3,3 +3,4 @@ ALGORITHM: "HS256"
 email_max_length: 255
 min_password_length: 6
 success_code: 200
+maximum_name_length: 255
