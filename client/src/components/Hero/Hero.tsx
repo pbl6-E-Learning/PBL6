@@ -1,8 +1,8 @@
 'use client'
 import Navbar from '../Navbar/Navbar'
 import { IoIosArrowRoundForward } from 'react-icons/io'
-import Blob from '../../assets/blob.svg'
-import HeroPng from '../../assets/hero.png'
+import Blob from '@/src/app/assets/blob.svg'
+import HeroPng from '@/src/app/assets/hero.png'
 import { motion } from 'framer-motion'
 
 export const FadeUp = (delay: number) => {
