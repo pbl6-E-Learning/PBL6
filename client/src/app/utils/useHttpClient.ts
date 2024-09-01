@@ -1,6 +1,6 @@
 import axios, { AxiosInstance, AxiosResponse } from 'axios'
 import { getCookie } from 'cookies-next'
-import { useToast } from '../components/use-toast'
+import { useToast } from '../../components/ui/use-toast'
 
 const useHttpClient = () => {
   const { toast } = useToast()

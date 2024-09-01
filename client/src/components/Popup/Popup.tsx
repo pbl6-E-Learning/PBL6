@@ -2,9 +2,9 @@
 import React, { useEffect } from 'react'
 import { useTranslations } from 'next-intl'
 import { useSelector, useDispatch } from 'react-redux'
-import { RootState } from '../hooks/store'
-import { resetPopUp } from '../hooks/features/popup.slice'
-import { useToast } from './use-toast'
+import { RootState } from '../../app/hooks/store'
+import { resetPopUp } from '../../app/hooks/features/popup.slice'
+import { useToast } from '../ui/use-toast'
 
 export default function Popup() {
   const t = useTranslations('noti')

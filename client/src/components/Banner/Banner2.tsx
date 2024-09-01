@@ -1,5 +1,5 @@
 'use client'
-import BannerPng from '../../assets/banner.png'
+import BannerPng from '@/src/app/assets/banner.png'
 import { motion } from 'framer-motion'
 
 const Banner2: React.FC = () => {

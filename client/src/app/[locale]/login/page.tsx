@@ -7,11 +7,11 @@ import { useRouter } from 'next/navigation'
 import { useAppDispatch, useAppSelector } from '../../hooks/store'
 import { failPopUp, resetPopUp, successPopUp } from '../../hooks/features/popup.slice'
 import Image from 'next/image'
-import { PasswordInput } from '../../components/password-input'
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '../../components/card'
-import { Label } from '../../components/label'
-import { Input } from '../../components/input'
-import { Button } from '../../components/button'
+import { PasswordInput } from '../../../components/ui/password-input'
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '../../../components/ui/card'
+import { Label } from '../../../components/ui/label'
+import { Input } from '../../../components/ui/input'
+import { Button } from '../../../components/ui/button'
 import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google'
 import RImage from '@/src/app/assets/RImage.png'
 import LoginImage from '@/src/app/assets/login_img.png'
@@ -29,8 +29,8 @@ export default function LoginPage() {
   const [password, setPassword] = useState<string>('')
 
   useEffect(() => {
-    document.title = t('title');
-  }, [t]);
+    document.title = t('title')
+  }, [t])
 
   useEffect(() => {
     const token = getCookie('authToken')
