@@ -17,5 +17,21 @@
     "or_continue_with": "HOẶC TIẾP TỤC VỚI",
     "login_successful": "Đăng nhập thành công!",
     "login_failed": "Đăng nhập thất bại!"
+  },
+  "trans": {
+    "title": "Dịch",
+    "fr_lang": "Chọn ngôn ngữ",
+    "to_lang": "Chọn ngôn ngữ",
+    "translate": "Dịch",
+    "input": "Nhập văn bản để dịch",
+    "vi": "Tiếng Việt",
+    "en": "Tiếng Anh",
+    "ja": "Tiếng Nhật",
+    "additional_translations": "Các bản dịch khác"
+  },
+  "layout": {
+    "light": "Sáng",
+    "dark": "Tối",
+    "system": "Hệ thống"
   }
 }

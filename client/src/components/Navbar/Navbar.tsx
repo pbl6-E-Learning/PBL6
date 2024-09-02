@@ -1,6 +1,8 @@
 'use client'
 import { IoMdMenu } from 'react-icons/io'
 import { motion } from 'framer-motion'
+import { Button } from '../ui/button'
+import { ModeToggle } from '../ModeToggle/ModeToggle'
 import Link from 'next/link'
 import Flag_EN from '@/src/app/assets/england.png'
 import Flag_VI from '@/src/app/assets/vietnam.png'
@@ -52,7 +54,8 @@ const Navbar = () => {
             <Link href='/vi'>
               <Image src={Flag_VI} alt='Flag EN' className='w-9 h-7' />
             </Link>
-            <button className='primary-btn'>Sign In</button>
+            <Button variant='outline'>Sign In</Button>
+            <ModeToggle />
           </ul>
         </div>
         {/* Mobile Hamburger menu section */}

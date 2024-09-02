@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google'
 import Popup from '../../components/Popup'
 import { Toaster } from '../../components/ui/toaster'
 import { Providers } from '../providers'
+import { ThemeProvider } from '../../components/theme-provider'
 import '@/src/app/globals.css'
 import { NextIntlClientProvider } from 'next-intl'
 import { getLocale, getMessages } from 'next-intl/server'
@@ -25,13 +26,15 @@ export default async function LocaleLayout({
   return (
     <html lang={locale}>
       <body className={inter.className}>
-        <NextIntlClientProvider messages={messages}>
-          <Providers>
-            {children}
-            <Popup />
-          </Providers>
-          <Toaster />
-        </NextIntlClientProvider>
+        <ThemeProvider attribute='class' defaultTheme='system' enableSystem disableTransitionOnChange>
+          <NextIntlClientProvider messages={messages}>
+            <Providers>
+              {children}
+              <Popup />
+            </Providers>
+            <Toaster />
+          </NextIntlClientProvider>
+        </ThemeProvider>
       </body>
     </html>
   )

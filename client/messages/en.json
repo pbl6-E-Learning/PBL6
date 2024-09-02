@@ -21,5 +21,21 @@
     "or_continue_with": "OR CONTINUE WITH",
     "login_successful": "Login successful!",
     "login_failed": "Login failed!"
+  },
+  "trans" : {
+    "title": "Translate",
+    "translate": "Translate",
+    "input": "Enter text to translate",
+    "fr_lang": "Select language",
+    "to_lang": "Select language",
+    "vi": "Vietnamese",
+    "en": "English",
+    "ja": "Japanese",
+    "additional_translations": "Anothers additional translations"
+  },
+  "layout" : {
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
   }
 }
