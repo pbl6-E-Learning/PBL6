@@ -1,8 +1,8 @@
 require "json"
 
-teachers_file_path = Rails.root.join("db","teachers.json")
-courses_file_path = Rails.root.join("db","courses.json")
-categories_file_path = Rails.root.join("db","categories.json")
+teachers_file_path = Rails.root.join("db", "teachers.json")
+courses_file_path = Rails.root.join("db", "courses.json")
+categories_file_path = Rails.root.join("db", "categories.json")
 
 teachers_file = File.read(teachers_file_path)
 courses_file = File.read(courses_file_path)
@@ -35,12 +35,12 @@ categories_map = {}
 categories_data.each do |category|
   created_category = Category.create!(
     name: category["name"],
-    description: category["description"],
+    description: category["description"]
   )
   categories_map[category["id"]] = created_category.id
 end
 
-levels = ["Beginner", "Intermediate", "Advanced"]
+levels = %w(Beginner Intermediate Advanced)
 category_ids = Category.pluck(:id)
 courses_data.each do |course|
   teacher_id = teachers_map[course["teacher_id"]]
