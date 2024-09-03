@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_26_102441) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_03_025219) do
   create_table "accounts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "email", null: false
     t.string "password_digest", null: false
@@ -56,6 +56,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_26_102441) do
     t.bigint "teacher_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "image_url"
     t.index ["category_id"], name: "index_courses_on_category_id"
     t.index ["teacher_id"], name: "index_courses_on_teacher_id"
   end
@@ -104,6 +105,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_26_102441) do
     t.text "experience"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "job_title"
+    t.string "name"
     t.index ["account_id"], name: "index_teachers_on_account_id"
   end
 
