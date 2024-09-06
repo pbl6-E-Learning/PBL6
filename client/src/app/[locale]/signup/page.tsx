@@ -1,31 +1,44 @@
 'use client'
 import React, { FormEvent, useEffect, useState } from 'react'
-import http from '../../utils/http'
+import useHttpClient from '../../utils/http'
 import { useTranslations } from 'next-intl'
 import { deleteCookie, getCookie, hasCookie, setCookie } from 'cookies-next'
 import { useRouter } from 'next/navigation'
 import { useAppDispatch, useAppSelector } from '../../hooks/store'
 import { failPopUp, resetPopUp, successPopUp } from '../../hooks/features/popup.slice'
 import Image from 'next/image'
-import { PasswordInput } from '../../../components/ui/password-input'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '../../../components/ui/card'
 import { Label } from '../../../components/ui/label'
 import { Input } from '../../../components/ui/input'
 import { Button } from '../../../components/ui/button'
 import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google'
 import RImage from '@/src/app/assets/RImage.png'
-import LoginImage from '@/src/app/assets/login_img.png'
+import SignUpImage from '@/src/app/assets/Sign_up_Image.png'
 import BGImage from '@/src/app/assets/login_bg.svg'
 import Link from 'next/link'
 import Flag_EN from '@/src/app/assets/england.png'
 import Flag_VI from '@/src/app/assets/vietnam.png'
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue
+} from '../../../components/ui/select'
+import { AccountConfirmation } from '../../types/account.type'
+import http from '../../utils/http'
 
-export default function LoginPage() {
-  const t = useTranslations('login')
+export default function SignUpPage() {
+  const t = useTranslations('sign_up')
   const router = useRouter()
   const dispatch = useAppDispatch()
   const [email, setEmail] = useState<string>('')
+  const [fullName, setFullName] = useState<string>('')
+  const [sex, setSex] = useState<string>('')
   const [password, setPassword] = useState<string>('')
+  const [password_confirmation, setRePassword] = useState<string>('')
 
   useEffect(() => {
     document.title = t('title')
@@ -40,7 +53,7 @@ export default function LoginPage() {
     }
   }, [router])
 
-  const handleLoginSuccess = (response: any) => {
+  const handleLoginSuccess = (response) => {
     const token = response.message.jwt
     const role = response.message.roles
     console.log(role)
@@ -51,23 +64,27 @@ export default function LoginPage() {
     role === 'admin' ? router.push('/admin') : router.push('/')
   }
 
-  const handleLogin = async (event: FormEvent) => {
+  const handleRegister = async (event: FormEvent) => {
     event.preventDefault()
 
     try {
-      const response: any = await http.post('auth/login', { auth: { email: email, password: password } })
-      // console.log(response)
-      handleLoginSuccess(response.data)
+      const response = await http.post('accounts', {
+        account: { email, password, password_confirmation },
+        user: { full_name: fullName, sex }
+      })
+      const messenger = response.data.message
+      console.log(messenger)
+      dispatch(successPopUp(t('check_mail')))
     } catch (error) {
-      console.log(error)
-      dispatch(failPopUp(t('login_failed')))
+      console.log(t('register_failed'))
+      dispatch(failPopUp(t('register_failed')))
     }
   }
 
   const responseGoogle = async (response: any) => {
     try {
       const res: any = await http.post(`auth/google_oauth2`, { auth: { id_token: response.credential } })
-      handleLoginSuccess(res.data)
+      handleLoginSuccess(res)
     } catch (error) {
       console.log(t('login_failed'))
       dispatch(failPopUp(t('login_failed')))
@@ -83,17 +100,29 @@ export default function LoginPage() {
             <Image className='max-w-md mb-5' src={RImage.src} alt='img' width={200} height={200} />
           </Link>
           <p className='text-3xl font-bold w-[500px] mb-10'>{t('welcome_message')}</p>
-          <Image className='max-w-md' src={LoginImage.src} alt='img' width={500} height={200} />
+          <Image className='max-w-md' src={SignUpImage.src} alt='img' width={500} height={200} />
         </div>
         <div className='flex basis-1/2 items-center'>
-          <Card className='w-[500px] p-6'>
+          <Card className='w-[500px] p-6 max-h-[calc(100vh-100px)] overflow-y-scroll no-scrollbar'>
             <CardHeader>
-              <CardTitle className='text-3xl'>{t('sign_in')}</CardTitle>
-              <CardDescription>{t('sign_in_prompt')}</CardDescription>
+              <CardTitle className='text-3xl'>{t('sign_up')}</CardTitle>
+              <CardDescription>{t('sign_up_prompt')}</CardDescription>
             </CardHeader>
             <CardContent>
               <form>
                 <div className='grid w-full items-center gap-4'>
+                  <div className='flex flex-col space-y-1.5'>
+                    <Label htmlFor='full_name' className='text-lg font-bold'>
+                      {t('full_name')}
+                    </Label>
+                    <Input
+                      id='text'
+                      placeholder={t('full_name')}
+                      onChange={(e) => {
+                        setEmail(e.target.value)
+                      }}
+                    />
+                  </div>
                   <div className='flex flex-col space-y-1.5'>
                     <Label htmlFor='email' className='text-lg font-bold'>
                       {t('email')}
@@ -105,6 +134,24 @@ export default function LoginPage() {
                         setEmail(e.target.value)
                       }}
                     />
+                  </div>
+                  <div className='flex flex-col space-y-1.5'>
+                    <Label htmlFor='sex' className='text-lg font-bold'>
+                      {t('sex')}
+                    </Label>
+                    <Select>
+                      <SelectTrigger className='w-full'>
+                        <SelectValue placeholder={t('choose_sex')} />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectGroup>
+                          <SelectLabel>{t('sex')}</SelectLabel>
+                          <SelectItem value='male'>{t('male')}</SelectItem>
+                          <SelectItem value='female'>{t('female')}</SelectItem>
+                          <SelectItem value='other'>{t('other')}</SelectItem>
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
                   </div>
                   <div className='flex flex-col space-y-1.5'>
                     <Label htmlFor='password' className='text-lg font-bold'>
@@ -119,6 +166,19 @@ export default function LoginPage() {
                       }}
                     />
                   </div>
+                  <div className='flex flex-col space-y-1.5'>
+                    <Label htmlFor='password' className='text-lg font-bold'>
+                      {t('re_password')}
+                    </Label>
+                    <Input
+                      id='re_password'
+                      type='password'
+                      placeholder={t('re_password')}
+                      onChange={(e) => {
+                        setRePassword(e.target.value)
+                      }}
+                    />
+                  </div>
                 </div>
               </form>
             </CardContent>
@@ -127,10 +187,10 @@ export default function LoginPage() {
                 <div className='mb-8'>
                   <Button
                     onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-                      handleLogin(e)
+                      handleRegister(e)
                     }}
                   >
-                    {t('sign_in')}
+                    {t('sign_up')}
                   </Button>
                 </div>
                 <div className='flex items-center justify-center mb-8 relative w-full'>
@@ -150,19 +210,19 @@ export default function LoginPage() {
                 </div>
               </div>
               <div className='flex gap-3 mt-4'>
-                <p>{t('sign_up_account')}</p>
-                <Link href='/signup'>
-                  <p className='font-bold text-primary'>{t('page_sign_up')}</p>
+                <p>{t('have_account')}</p>
+                <Link href='/login'>
+                  <p className='font-bold text-primary'>{t('page_login')}</p>
                 </Link>
               </div>
             </CardFooter>
           </Card>
         </div>
         <div className='grid grid-cols-2 content-end h-full gap-4 mr-5 pb-2 text-xl font-bold'>
-          <Link href='/en/login'>
+          <Link href='/en/signup'>
             <Image src={Flag_EN} alt='Flag EN' className='w-9 h-7' />
           </Link>
-          <Link href='/vi/login'>
+          <Link href='/vi/signup'>
             <Image src={Flag_VI} alt='Flag EN' className='w-9 h-7' />
           </Link>
         </div>

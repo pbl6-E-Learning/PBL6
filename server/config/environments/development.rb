@@ -36,7 +36,7 @@ Rails.application.configure do
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.default_url_options = { host: ENV["host"], port: 3001 }
+  config.action_mailer.default_url_options = { host: ENV["host"]  }
 
   # SMTP settings for gmail
   config.action_mailer.smtp_settings = {
