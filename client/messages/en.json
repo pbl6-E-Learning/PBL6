@@ -60,5 +60,21 @@
     "page_login": "Login here",
     "check_mail": "Check your email address to verify your account",
     "register_failed": "Register failed"
+  },
+  "show_course" : {
+    "title": "Detail Course",
+    "error": "An error occurred",
+    "contain": "Here we have:",
+    "lesson": "Lesson",
+    "teacher": "Teacher",
+    "update": "Update",
+    "level": "Level",
+    "enroll": "Enroll",
+    "list_lessons": "List Lessons"
+  },
+  "nodata": {
+    "no_data_title": "No result found",
+    "no_data_description": "It looks like we couldn't find the information you're looking for. Please try again later or visit the homepage for more options.",
+    "go_home": "Go back to homepage"
   }
 }
