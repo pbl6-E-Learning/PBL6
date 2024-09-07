@@ -72,5 +72,20 @@
     "no_data_title": "Không tìm thấy kết quả",
     "no_data_description": "Dường như chúng tôi không thể tìm thấy thông tin bạn đang tìm kiếm. Vui lòng thử lại sau hoặc truy cập trang chủ để có nhiều lựa chọn hơn.",
     "go_home": "Quay lại trang chủ"
+  },
+  "footer": {
+    "return": "Return E-Learning™",
+    "allRightsReserved": "All Rights Reserved.",
+    "home": "Trang chủ",
+    "privacyPolicy": "Chính sách bảo mật",
+    "licensing": "Cấp phép",
+    "contact": "Liên hệ",
+    "japaneseLearningInfo": "@return",
+    "credits": "Phát triển bởi Đội ngũ Return.",
+    "learnJapaneseDescription": "The Return_E-Learning – được tạo ra và duy trì bởi @return",
+    "date_time": "Joined August 2024"
+  },
+  "navbar": {
+    "button_sign_in": "Đăng nhập"
   }
 }

@@ -113,6 +113,7 @@ Account.create!(
     full_name: Faker::Name.name,
     bio: Faker::Lorem.paragraph(sentence_count: 2),
     goals: Faker::Lorem.paragraph(sentence_count: 2),
-    image_url: "https://i.pinimg.com/1200x/ff/c2/dd/ffc2ddb4e8a9074262ca5192f8d86ee1.jpg"
+    image_url: "https://i.pinimg.com/1200x/ff/c2/dd/ffc2ddb4e8a9074262ca5192f8d86ee1.jpg",
+    sex: User.sexes.values.sample
   )
 end

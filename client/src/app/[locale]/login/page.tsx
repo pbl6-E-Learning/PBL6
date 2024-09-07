@@ -75,9 +75,9 @@ export default function LoginPage() {
   }
 
   return (
-    <div>
+    <div className='fixed w-full'>
       <Image className='-z-50' src={BGImage.src} layout='fill' objectFit='cover' alt='Background' />
-      <div className='flex flex-row h-screen z-0'>
+      <div className='flex flex-row h-dvh z-0'>
         <div className='flex flex-col basis-1/2 justify-end ml-36'>
           <Link href='/'>
             <Image className='max-w-md mb-5' src={RImage.src} alt='img' width={200} height={200} />
