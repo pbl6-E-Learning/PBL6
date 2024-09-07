@@ -56,5 +56,21 @@
     "page_login": "Đăng nhập ngay",
     "check_mail": "Kiểm tra địa chỉ email của bạn để xác minh tài khoản",
     "register_failed": "Đăng ký thất bại!"
+  },
+  "show_course": {
+    "title": "Chi tiết thông tin khóa học",
+    "error": "Đã xảy ra lỗi",
+    "contain": "Ở đây chúng tôi có:",
+    "lesson": "Bài học",
+    "teacher": "Giáo viên",
+    "update": "Cập nhật",
+    "level": "Cấp độ",
+    "enroll": "Đăng ký",
+    "list_lessons": "Danh sách bài học"
+  },
+  "nodata": {
+    "no_data_title": "Không tìm thấy kết quả",
+    "no_data_description": "Dường như chúng tôi không thể tìm thấy thông tin bạn đang tìm kiếm. Vui lòng thử lại sau hoặc truy cập trang chủ để có nhiều lựa chọn hơn.",
+    "go_home": "Quay lại trang chủ"
   }
 }

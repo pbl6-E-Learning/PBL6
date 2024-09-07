@@ -3,8 +3,9 @@ class CoursesController < ApplicationController
   before_action :set_course, only: :show
 
   def show
+    course_with_lessons = @course.as_json(include: :lessons)
     if @course.present?
-      json_response(message: {course: @course}, status: :ok)
+      json_response(message: {course: course_with_lessons}, status: :ok)
     else
       error_response(message: "Course not found", status: :not_found)
     end
