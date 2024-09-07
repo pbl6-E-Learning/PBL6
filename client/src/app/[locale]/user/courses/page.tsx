@@ -3,23 +3,22 @@ import * as React from 'react'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState, useMemo, Fragment } from 'react'
 import { useTranslations } from 'next-intl'
-import http from '../../utils/http'
+import http from '../../../utils/http'
 import moment from 'moment'
-import { useAppDispatch } from '../../hooks/store'
-import { failPopUp } from '../../hooks/features/popup.slice'
-import { Course } from '../../types/course'
+import { useAppDispatch } from '../../../hooks/store'
+import { failPopUp } from '../../../hooks/features/popup.slice'
+import { Course } from '../../../types/course'
 import { useSearchParams } from 'next/navigation'
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '../../../components/ui/card'
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '../../../../components/ui/card'
 import Image from 'next/image'
 import { MdOutlinePlayLesson, MdSystemUpdateAlt } from 'react-icons/md'
 import { PiChalkboardTeacher } from 'react-icons/pi'
 import { LiaLevelUpAltSolid } from 'react-icons/lia'
 import LessonImg from '../../assets/lesson.png'
-import Navbar from '../../../components/Navbar/Navbar'
-import { Separator } from '../../../components/ui/separator'
-import { Button } from '../../../components/ui/button'
-import { LessonScrollArea } from '../../../components/LessonScrollArea/LessonScrollArea'
-import { ProgressBar } from '../../../components/ProgressBar/ProgressBar'
+import { Separator } from '../../../../components/ui/separator'
+import { Button } from '../../../../components/ui/button'
+import { LessonScrollArea } from '../../../../components/LessonScrollArea/LessonScrollArea'
+import { ProgressBar } from '../../../../components/ProgressBar/ProgressBar'
 
 const CourseDetail = () => {
   const t = useTranslations('show_course')
@@ -60,7 +59,6 @@ const CourseDetail = () => {
 
   return (
     <div>
-      <Navbar />
       <div className='flex flex-col lg:flex-row gap-10 lg:gap-16 mx-auto max-w-7xl px-4 lg:px-8'>
         <div className='lg:flex-1'>
           <div className='lg:ml-20'>

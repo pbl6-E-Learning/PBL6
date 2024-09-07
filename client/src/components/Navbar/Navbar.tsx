@@ -7,6 +7,9 @@ import Link from 'next/link'
 import Flag_EN from '@/src/app/assets/england.png'
 import Flag_VI from '@/src/app/assets/vietnam.png'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
+import { usePathname } from 'next/navigation'
+import { useTranslations } from 'next-intl'
 
 const NavbarMenu = [
   {
@@ -26,6 +29,27 @@ const NavbarMenu = [
   }
 ]
 const Navbar = () => {
+  const router = useRouter()
+  const pathname = usePathname()
+  const t = useTranslations('navbar')
+
+  const getFileName = (path) => {
+    if (path === '/vi' || path === '/en') {
+      return '/'
+    }
+
+    const parts = path.split('/').filter((part) => part)
+
+    if (parts.length === 0) {
+      return '/'
+    }
+
+    return parts[parts.length - 1]
+  }
+
+  const fileName = getFileName(pathname)
+  console.log(fileName)
+
   return (
     <nav className='relative z-20'>
       <motion.div
@@ -35,7 +59,7 @@ const Navbar = () => {
       >
         {/* Logo section */}
         <div>
-          <h1 className='font-bold text-2xl'>The Coding Journey</h1>
+          <h1 className='font-bold text-4xl'>Return</h1>
         </div>
         {/* Menu section */}
         <div className='hidden lg:block'>
@@ -48,13 +72,20 @@ const Navbar = () => {
                 </a>
               </li>
             ))}
-            <Link href='/en'>
+            <Link href={`/en/user/${fileName}`}>
               <Image src={Flag_EN} alt='Flag EN' className='w-9 h-7' />
             </Link>
-            <Link href='/vi'>
+            <Link href={`/vi/user/${fileName}`}>
               <Image src={Flag_VI} alt='Flag EN' className='w-9 h-7' />
             </Link>
-            <Button variant='outline'>Sign In</Button>
+            <Button
+              variant='outline'
+              onClick={() => {
+                router.push(`/signup`)
+              }}
+            >
+              {t('button_sign_in')}
+            </Button>
             <ModeToggle />
           </ul>
         </div>
