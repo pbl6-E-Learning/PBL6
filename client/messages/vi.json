@@ -87,5 +87,41 @@
   },
   "navbar": {
     "button_sign_in": "Đăng nhập"
+  },
+  "announcements": {
+    "title": "Thông báo",
+    "viewAll": "Xem tất cả",
+    "announcementTitle": "Lorem ipsum dolor sit",
+    "announcementDescription": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum, expedita. Rerum, quidem facilis?"
+  },
+  "attendanceChart": {
+    "title": "Attendance"
+  },
+  "footer_page": {
+    "title": "The Coding Journey",
+    "description": "TCJ là nền tảng cung cấp các kiến thức lập trình từ cơ bản đến nâng cao, giúp các lập trình viên tương lai phát triển kỹ năng, xây dựng dự án và khởi nghiệp trong lĩnh vực công nghệ.",
+    "coursesTitle": "Khoá học",
+    "linksTitle": "Liên kết",
+    "getInTouchTitle": "Liên hệ",
+    "emailPlaceholder": "Nhập email của bạn",
+    "goButton": "Go",
+    "courses": {
+      "eLearning": "E-learning"
+    },
+    "links": {
+      "home": "Trang chủ",
+      "services": "Dịch vụ",
+      "about": "Giới thiệu",
+      "contact": "Liên hệ"
+    }
+  },
+  "services": {
+    "title": "Dịch vụ chúng tôi cung cấp",
+    "webDevelopment": "Phát triển Web",
+    "mobileDevelopment": "Phát triển Di động",
+    "softwareDevelopment": "Phát triển Phần mềm",
+    "satisfiedClients": "Khách hàng Hài lòng",
+    "seoOptimization": "Tối ưu SEO",
+    "support": "Hỗ trợ 24/7"
   }
 }

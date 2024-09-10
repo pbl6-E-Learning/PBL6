@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 export default function Index() {
   const t = useTranslations('index')
   return (
-    <main className='overflow-x-hidden bg-white text-dark'>
+    <main className='overflow-x-hidden'>
       <Hero />
       <Services />
       <Banner />

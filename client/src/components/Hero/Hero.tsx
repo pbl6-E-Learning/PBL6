@@ -27,7 +27,7 @@ export const FadeUp = (delay: number) => {
 
 const Hero = () => {
   return (
-    <section className='bg-light overflow-hidden relative'>
+    <section className='bg-light overflow-hidden relative dark:bg-dark dark:text-white'>
       <Navbar />
       <div className='container grid grid-cols-1 md:grid-cols-2 min-h-[650px]'>
         {/* Brand Info */}
@@ -54,7 +54,6 @@ const Hero = () => {
             </motion.div>
           </div>
         </div>
-        {/* Hero Image */}
         <div className='flex justify-center items-center'>
           <motion.img
             initial={{ x: 50, opacity: 0 }}
@@ -62,7 +61,7 @@ const Hero = () => {
             transition={{ duration: 0.6, delay: 0.4, ease: 'easeInOut' }}
             src={HeroPng.src}
             alt=''
-            className='w-[400px] xl:w-[600px] relative z-10 drop-shadow'
+            className='w-[350px] xl:w-[550px] relative z-10 drop-shadow'
           />
           <motion.img
             initial={{ x: -50, opacity: 0 }}
