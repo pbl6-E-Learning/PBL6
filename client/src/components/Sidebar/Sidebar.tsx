@@ -12,7 +12,7 @@ const Sidebar = ({ activeItem }) => {
   }
 
   return (
-    <div className='flex h-auto w-full max-w-64 flex-col bg-clip-border p-4 sticky top-20 '>
+    <div className='flex h-auto w-full max-w-64 flex-col bg-clip-border p-4 sticky fixed top-20 '>
       <nav className='flex min-w-[240px] flex-col gap-1 p-2 font-sans text-base font-normal text-blue-gray-700'>
         <div role='button' className={getNavItemClass('dashboard')}>
           <div className='grid mr-4 place-items-center'>

@@ -11,6 +11,22 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import { usePathname } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import { switchLanguage } from '@/src/app/utils/switchLanguage'
+import { useEffect, useState } from 'react'
+import { getCookie, hasCookie } from 'cookies-next'
+import { Profile } from '@/src/app/types/profile.type'
+import { useAppDispatch } from '@/src/app/hooks/store'
+import { failPopUp } from '@/src/app/hooks/features/popup.slice'
+import http from '@/src/app/utils/http'
+import { Avatar, AvatarImage } from '../ui/avatar'
+import avtDefault from '@/src/app/assets/avtDefault.png'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger
+} from '../ui/dropdown-menu'
 
 const NavbarMenu = [
   {
@@ -34,6 +50,35 @@ const Navbar = () => {
   const pathname = usePathname()
   const searchParams = useSearchParams()
   const t = useTranslations('navbar')
+  const [token, setToken] = useState<string>('')
+  const [profile, setProfile] = useState<Profile>()
+  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    if (hasCookie('authToken')) {
+      setToken(getCookie('authToken'))
+      return
+    }
+  }, [])
+
+  const handleNavigation = (href: string) => {
+    router.push(href)
+    setIsOpen(false)
+  }
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const res: { data: { message: Profile } } = await http.get(`users/profile`)
+        setProfile(res.data.message)
+      } catch (error) {
+        const message = error?.response?.data?.error || error.message || t('error')
+        dispatch(failPopUp(message))
+      }
+    }
+    fetchProfile()
+  }, [dispatch, t])
 
   const queryString = searchParams.toString()
 
@@ -62,21 +107,38 @@ const Navbar = () => {
                 </Link>
               </li>
             ))}
+            <ModeToggle />
             <Link href={switchLanguage('en', pathname, queryString)}>
               <Image src={Flag_EN} alt='Flag EN' className='w-9 h-7' />
             </Link>
             <Link href={switchLanguage('vi', pathname, queryString)}>
               <Image src={Flag_VI} alt='Flag VI' className='w-9 h-7' />
             </Link>
-            <Button
-              variant='outline'
-              onClick={() => {
-                router.push(`/signup`)
-              }}
-            >
-              {t('button_sign_in')}
-            </Button>
-            <ModeToggle />
+            {token ? (
+              <Avatar>
+                <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
+                  <DropdownMenuTrigger>
+                    <AvatarImage src={profile?.profile?.image_url ? profile?.profile?.image_url : avtDefault.src} />
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent>
+                    <DropdownMenuLabel>{t('my_account')}</DropdownMenuLabel>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem onClick={() => handleNavigation('profile')}>{t('profile')}</DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => handleNavigation('mycourses')}>{t('my_course')}</DropdownMenuItem>
+                    <DropdownMenuItem>{t('logout')}</DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </Avatar>
+            ) : (
+              <Button
+                variant='outline'
+                onClick={() => {
+                  router.push(`/signup`)
+                }}
+              >
+                {t('button_sign_in')}
+              </Button>
+            )}
           </ul>
         </div>
         <div className='lg:hidden'>

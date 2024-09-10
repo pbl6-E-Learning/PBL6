@@ -59,7 +59,8 @@
     "have_account": "Already have an account?",
     "page_login": "Login here",
     "check_mail": "Check your email address to verify your account",
-    "register_failed": "Register failed"
+    "register_failed": "Register failed",
+    "login_successful": "Login successful!"
   },
   "show_course": {
     "title": "Detail Course",
@@ -90,7 +91,11 @@
     "date_time": "Joined August 2024"
   },
   "navbar": {
-    "button_sign_in": "Sign in"
+    "button_sign_in": "Sign in",
+    "my_account": "My Account",
+    "profile": "Profile",
+    "my_course": "My course",
+    "logout": "Logout"
   },
   "announcements": {
     "title": "Announcements",
@@ -148,5 +153,23 @@
       "description": "Contact Return for 24/7 consultation",
       "store_button": "Go to Store"
     }
+  },
+  "profile": {
+    "title": "Profile your",
+    "description": "Manage your account settings and personal information.",
+    "full_name": "Full Name",
+    "email": "Email",
+    "created_at": "Created At",
+    "updated_at": "Updated At",
+    "sex": "Sex",
+    "choose_sex": "Choose your sex",
+    "male": "Male",
+    "female": "Female",
+    "other": "Other",
+    "bio": "Please share a little about yourself",
+    "goals": "Learning Goals",
+    "update_success": "Update Success",
+    "update_failed": "Update Failed",
+    "changeProfile": "Change Profile"
   }
 }

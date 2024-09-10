@@ -3,6 +3,8 @@ class Account < ApplicationRecord
   VALID_ATTRIBUTES = %i(email password id_token).freeze
   VALID_ATTRIBUTES_ACCOUNT = %i(email password password_confirmation).freeze
   VALID_ATTRIBUTES_USER = %i(full_name sex).freeze
+  VALID_ATTRIBUTES_USER_CHANGE = %i(full_name sex bio goals image_url
+                                    email).freeze
   enum roles: {user: 0, teacher: 1, admin: 2}
 
   mail_regex = Regexp.new(Settings.VALID_EMAIL_REGEX)

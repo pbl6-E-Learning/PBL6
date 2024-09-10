@@ -27,7 +27,6 @@ import {
   SelectTrigger,
   SelectValue
 } from '../../../components/ui/select'
-import { AccountConfirmation } from '../../types/account.type'
 import http from '../../utils/http'
 
 export default function SignUpPage() {
@@ -84,7 +83,7 @@ export default function SignUpPage() {
   const responseGoogle = async (response: any) => {
     try {
       const res: any = await http.post(`auth/google_oauth2`, { auth: { id_token: response.credential } })
-      handleLoginSuccess(res)
+      handleLoginSuccess(res.data)
     } catch (error) {
       console.log(t('login_failed'))
       dispatch(failPopUp(t('login_failed')))
@@ -139,7 +138,11 @@ export default function SignUpPage() {
                     <Label htmlFor='sex' className='text-lg font-bold'>
                       {t('sex')}
                     </Label>
-                    <Select>
+                    <Select
+                      onValueChange={(e) => {
+                        setSex(e)
+                      }}
+                    >
                       <SelectTrigger className='w-full'>
                         <SelectValue placeholder={t('choose_sex')} />
                       </SelectTrigger>
