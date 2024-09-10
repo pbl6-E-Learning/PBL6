@@ -55,7 +55,8 @@
     "have_account": "Bạn đã có tài khoản?",
     "page_login": "Đăng nhập ngay",
     "check_mail": "Kiểm tra địa chỉ email của bạn để xác minh tài khoản",
-    "register_failed": "Đăng ký thất bại!"
+    "register_failed": "Đăng ký thất bại!",
+    "login_successful": "Đăng nhập thành công!"
   },
   "show_course": {
     "title": "Chi tiết thông tin khóa học",
@@ -86,7 +87,11 @@
     "date_time": "Joined August 2024"
   },
   "navbar": {
-    "button_sign_in": "Đăng nhập"
+    "button_sign_in": "Đăng nhập",
+    "my_account": "Tài Khoản Của Tôi",
+    "profile": "Thông tin cá nhân",
+    "my_course": "Khóa Học Của Tôi",
+    "logout": "Đăng Xuất"
   },
   "announcements": {
     "title": "Thông báo",
@@ -134,7 +139,7 @@
   },
   "course_card": {
     "detail": "Xem chi tiết",
-    "category" : "Danh mục"
+    "category": "Danh mục"
   },
   "mycourse": {
     "title": "Khóa học của tôi",
@@ -144,5 +149,24 @@
       "description": "Hãy liên hệ với Return để nhận tư vấn 24/7 nhé",
       "store_button": "Tới cửa hàng"
     }
+  },
+  "profile": {
+    "title": "Thông tin của bạn",
+    "description": "Quản lý cài đặt tài khoản và thông tin cá nhân của bạn.",
+    "full_name": "Họ và tên",
+    "email": "Email",
+    "created_at": "Ngày tạo",
+    "updated_at": "Ngày cập nhật",
+    "sex": "Giới tính",
+    "choose_sex": "Chọn giới tính của bạn",
+    "male": "Nam",
+    "female": "Nữ",
+    "other": "Khác",
+    "bio": "Hãy chia sẻ một chút về bản thân bạn",
+    "goals": "Mục tiêu học tập",
+    "update_success": "Cập nhật thành công",
+    "update_failed": "Cập nhật thất bại",
+    "changeProfile": "Lưu thông tin",
+    "login_first": "Vui lòng đăng nhập!!!"
   }
 }
