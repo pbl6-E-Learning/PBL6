@@ -2,6 +2,7 @@ class User < ApplicationRecord
   belongs_to :account
 
   has_many :course_assignments, dependent: :destroy
+  has_many :courses, through: :course_assignments
   has_many :follows, dependent: :destroy
 
   enum sex: {male: 0, female: 1, other: 2}
