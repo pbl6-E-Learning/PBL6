@@ -6,8 +6,8 @@ class ApplicationController < ActionController::API
   def current_user
     return unless auth_present?
 
-    user = User.find_by(id: auth["user"])
-    @current_user ||= user if user
+    account = Account.find_by(id: auth["payload"]["account"])
+    @current_user ||= account&.user if account&.user
   end
 
   def authenticate

@@ -5,4 +5,9 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
   post "accounts", to: "account#create", as: "create_account"
   get "activate/:token", to: "account#activate", as: "activate_user"
+  resources :users do
+    collection do
+      get "enrolled_courses", to: "users#enrolled_courses"
+    end
+  end
 end
