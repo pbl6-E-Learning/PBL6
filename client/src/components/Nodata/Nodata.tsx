@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl'
 const Nodata = () => {
   const t = useTranslations('nodata')
   return (
-    <div className='flex flex-col justify-center items-center w-screen h-4/5 text-center'>
+    <div className='flex flex-col justify-center items-center w-full h-4/5 text-center'>
       <div className='mb-8'>
         <Image src={Img.src} alt='No data' height={650} width={650} />
       </div>

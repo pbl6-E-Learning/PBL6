@@ -61,7 +61,7 @@
     "check_mail": "Check your email address to verify your account",
     "register_failed": "Register failed"
   },
-  "show_course" : {
+  "show_course": {
     "title": "Detail Course",
     "error": "An error occurred",
     "contain": "Here we have:",
@@ -91,5 +91,41 @@
   },
   "navbar": {
     "button_sign_in": "Sign in"
+  },
+  "announcements": {
+    "title": "Announcements",
+    "viewAll": "View All",
+    "announcementTitle": "Lorem ipsum dolor sit",
+    "announcementDescription": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum, expedita. Rerum, quidem facilis?"
+  },
+  "attendanceChart": {
+    "title": "Attendance Chart"
+  },
+  "footer_page": {
+    "title": "The Coding Journey",
+    "description": "TCJ is a platform dedicated to empowering aspiring developers. From beginner tutorials to advanced programming concepts, we provide a comprehensive learning experience designed to help you master coding skills, build projects, and launch your tech career.",
+    "coursesTitle": "Courses",
+    "linksTitle": "Links",
+    "getInTouchTitle": "Get In Touch",
+    "emailPlaceholder": "Enter your email",
+    "goButton": "Go",
+    "courses": {
+      "eLearning": "E-learning"
+    },
+    "links": {
+      "home": "Home",
+      "services": "Services",
+      "about": "About",
+      "contact": "Contact"
+    }
+  },
+  "services": {
+    "title": "Services we provide",
+    "webDevelopment": "Web Development",
+    "mobileDevelopment": "Mobile Development",
+    "softwareDevelopment": "Software Development",
+    "satisfiedClients": "Satisfied Clients",
+    "seoOptimization": "SEO Optimization",
+    "support": "24/7 Support"
   }
 }

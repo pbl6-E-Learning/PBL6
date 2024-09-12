@@ -45,13 +45,14 @@ const CourseDetail = () => {
 
   if (!course) {
     return (
-      <div className='h-screen w-screen flex items-center justify-center'>
+      <div className='w-full flex items-center justify-center'>
         <ProgressBar
           onComplete={() => {
             if (dataLoaded) {
               setDataLoaded(true)
             }
           }}
+          isComplete={!course}
         />
       </div>
     )
