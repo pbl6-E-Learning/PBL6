@@ -42,7 +42,7 @@ const Navbar = () => {
       <motion.div
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
-        className='container py-10 flex justify-between items-center'
+        className='container pt-10 flex justify-between items-center'
       >
         <div>
           <Link href='/' className='font-bold text-4xl cursor-pointer'>
@@ -86,5 +86,4 @@ const Navbar = () => {
     </nav>
   )
 }
-
 export default Navbar

@@ -56,7 +56,6 @@ export default function LoginPage() {
 
     try {
       const response: any = await http.post('auth/login', { auth: { email: email, password: password } })
-      // console.log(response)
       handleLoginSuccess(response.data)
     } catch (error) {
       console.log(error)
@@ -75,18 +74,25 @@ export default function LoginPage() {
   }
 
   return (
-    <div className='fixed w-full'>
-      <Image className='-z-50' src={BGImage.src} layout='fill' objectFit='cover' alt='Background' />
-      <div className='flex flex-row h-dvh z-0'>
-        <div className='flex flex-col basis-1/2 justify-end ml-36'>
+    <div className='relative min-h-screen'>
+      <Image
+        className='absolute top-0 left-0 w-full h-full object-cover -z-50'
+        src={BGImage.src}
+        layout='fill'
+        objectFit='cover'
+        alt='Background'
+      />
+      <div className='flex flex-col lg:flex-row min-h-screen z-0'>
+        <div className='hidden lg:flex flex-col basis-1/2 justify-end ml-36'>
           <Link href='/'>
             <Image className='max-w-md mb-5' src={RImage.src} alt='img' width={200} height={200} />
           </Link>
           <p className='text-3xl font-bold w-[500px] mb-10'>{t('welcome_message')}</p>
           <Image className='max-w-md' src={LoginImage.src} alt='img' width={500} height={200} />
         </div>
-        <div className='flex basis-1/2 items-center'>
-          <Card className='w-[500px] p-6'>
+
+        <div className='flex basis-full lg:basis-1/2 items-center justify-center'>
+          <Card className='w-[90%] max-w-[500px] p-6'>
             <CardHeader>
               <CardTitle className='text-3xl'>{t('sign_in')}</CardTitle>
               <CardDescription>{t('sign_in_prompt')}</CardDescription>
@@ -158,12 +164,13 @@ export default function LoginPage() {
             </CardFooter>
           </Card>
         </div>
-        <div className='grid grid-cols-2 content-end h-full gap-4 mr-5 pb-2 text-xl font-bold'>
+
+        <div className='hidden lg:grid grid-cols-2 content-end h-full gap-4 mr-5 pb-2 text-xl font-bold'>
           <Link href='/en/login'>
             <Image src={Flag_EN} alt='Flag EN' className='w-9 h-7' />
           </Link>
           <Link href='/vi/login'>
-            <Image src={Flag_VI} alt='Flag EN' className='w-9 h-7' />
+            <Image src={Flag_VI} alt='Flag VI' className='w-9 h-7' />
           </Link>
         </div>
       </div>

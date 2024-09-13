@@ -127,5 +127,26 @@
     "satisfiedClients": "Satisfied Clients",
     "seoOptimization": "SEO Optimization",
     "support": "24/7 Support"
+  },
+  "sidebar": {
+    "dashboard": "Dashboard",
+    "myCourse": "My Courses",
+    "profile": "Profile",
+    "settings": "Settings",
+    "logout": "Logout",
+    "inbox": "Inbox"
+  },
+  "course_card": {
+    "detail": "View Details",
+    "category": "Category"
+  },
+  "mycourse": {
+    "title": "My Courses",
+    "no_token_message": "You are not logged in. Redirecting to login page...",
+    "no_courses": {
+      "title": "You currently have no courses",
+      "description": "Contact Return for 24/7 consultation",
+      "store_button": "Go to Store"
+    }
   }
 }

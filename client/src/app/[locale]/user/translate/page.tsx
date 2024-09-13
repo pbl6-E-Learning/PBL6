@@ -10,7 +10,7 @@ export default function TranslatePage() {
     document.title = t('title')
   }, [t])
   return (
-    <div>
+    <div className='mt-10'>
       <TranslateForm />
       <div className='fixed bottom-14 w-full flex justify-center z-[-1] mt-4'>
         <Image src={Img.src} alt='translate' width={1300} height={1500}></Image>
