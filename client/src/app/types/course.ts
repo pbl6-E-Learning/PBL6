@@ -1,4 +1,6 @@
 import { Lesson } from './lesson'
+import { Teacher } from './teacher'
+import { Category } from './category'
 export interface Course {
   id?: number
   category_id?: number
@@ -10,4 +12,6 @@ export interface Course {
   updated_at?: string
   image_url?: string
   lessons?: Lesson[]
+  teacher?: Teacher
+  category?: Category
 }

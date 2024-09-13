@@ -19,6 +19,7 @@ import { Separator } from '../../../../components/ui/separator'
 import { Button } from '../../../../components/ui/button'
 import { LessonScrollArea } from '../../../../components/LessonScrollArea/LessonScrollArea'
 import { ProgressBar } from '../../../../components/ProgressBar/ProgressBar'
+import Nodata from '@/src/components/Nodata/Nodata'
 
 const CourseDetail = () => {
   const t = useTranslations('show_course')
@@ -28,6 +29,9 @@ const CourseDetail = () => {
   const id = useMemo(() => searchParams.get('id') || '', [searchParams])
   const dispatch = useAppDispatch()
   const [dataLoaded, setDataLoaded] = useState(false)
+  useEffect(() => {
+    document.title = t('title')
+  })
   useEffect(() => {
     const getCourse = async (id: string | string[]) => {
       try {
@@ -39,7 +43,6 @@ const CourseDetail = () => {
         dispatch(failPopUp(message))
       }
     }
-    document.title = t('title')
     getCourse(id)
   }, [dispatch, t, id])
 
@@ -53,6 +56,7 @@ const CourseDetail = () => {
             }
           }}
           isComplete={!course}
+          NoDataComponent={Nodata}
         />
       </div>
     )
@@ -60,7 +64,7 @@ const CourseDetail = () => {
 
   return (
     <div>
-      <div className='flex flex-col lg:flex-row gap-10 lg:gap-16 mx-auto max-w-7xl px-4 lg:px-8'>
+      <div className='flex flex-col lg:flex-row gap-10 lg:gap-16 mx-auto max-w-7xl px-4 lg:px-8 mt-5'>
         <div className='lg:flex-1'>
           <div className='lg:ml-20'>
             <h1 className='text-3xl font-extrabold mb-6'>{course.title}</h1>
@@ -105,7 +109,7 @@ const CourseDetail = () => {
                   <PiChalkboardTeacher size={24} className='text-primary' />
                   <span className='text-lg font-medium'>{t('teacher')}</span>
                 </div>
-                <span className='text-lg font-bold'>{course.teacher_id}</span>
+                <span className='text-lg font-bold'>{course.teacher.name}</span>
               </div>
               <Separator className='my-4' />
               <div className='flex justify-between items-center mb-4'>

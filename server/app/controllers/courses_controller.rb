@@ -3,7 +3,7 @@ class CoursesController < ApplicationController
   before_action :set_course, only: :show
 
   def show
-    course_with_lessons = @course.as_json(include: :lessons)
+    course_with_lessons = @course.as_json(include: %i(lessons teacher category))
     if @course.present?
       json_response(message: {course: course_with_lessons}, status: :ok)
     else

@@ -123,5 +123,26 @@
     "satisfiedClients": "Khách hàng Hài lòng",
     "seoOptimization": "Tối ưu SEO",
     "support": "Hỗ trợ 24/7"
+  },
+  "sidebar": {
+    "dashboard": "Bảng điều khiển",
+    "myCourse": "Khóa học của tôi",
+    "profile": "Hồ sơ",
+    "settings": "Cài đặt",
+    "logout": "Đăng xuất",
+    "inbox": "Hộp thư"
+  },
+  "course_card": {
+    "detail": "Xem chi tiết",
+    "category" : "Danh mục"
+  },
+  "mycourse": {
+    "title": "Khóa học của tôi",
+    "no_token_message": "Bạn chưa đăng nhập. Đang chuyển hướng đến trang đăng nhập...",
+    "no_courses": {
+      "title": "Hiện tại bạn chưa có khóa học nào",
+      "description": "Hãy liên hệ với Return để nhận tư vấn 24/7 nhé",
+      "store_button": "Tới cửa hàng"
+    }
   }
 }
