@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   get "activate/:token", to: "account#activate", as: "activate_user"
   resources :users do
     collection do
+      get "profile", to: "users#show"
+      patch  "update_profile", to: "users#update"
       get "enrolled_courses", to: "users#enrolled_courses"
     end
   end
