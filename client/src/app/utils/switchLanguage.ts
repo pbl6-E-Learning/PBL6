@@ -1,5 +1,5 @@
 export const switchLanguage = (lang: string, pathname: string, queryString: string) => {
-  let parts = pathname.split('/').filter((part) => part)
+  const parts = pathname.split('/').filter((part) => part)
 
   if (parts[0] === 'vi' || parts[0] === 'en') {
     parts[0] = lang

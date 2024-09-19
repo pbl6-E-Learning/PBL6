@@ -1,4 +1,4 @@
-class CategoriesController < ApplicationController
+class Api::CategoriesController < Api::ApplicationController
   include Response
 
   def index

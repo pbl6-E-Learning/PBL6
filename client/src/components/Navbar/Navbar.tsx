@@ -27,7 +27,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger
 } from '../ui/dropdown-menu'
-import { HoverCard, HoverCardContent, HoverCardTrigger } from '../ui/hover-card'
 import { Category } from '@/src/app/types/category.type'
 
 const NavbarMenu = [

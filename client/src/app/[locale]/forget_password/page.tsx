@@ -1,8 +1,6 @@
 'use client'
-import { FormEvent, useEffect, useMemo, useState } from 'react'
-import { useSearchParams } from 'next/navigation'
+import { FormEvent, useState } from 'react'
 import BGImage from '@/src/app/assets/login_bg.svg'
-import Loading from '@/src/app/assets/loading.svg'
 import Image from 'next/image'
 import http from '../../utils/http'
 import { failPopUp, successPopUp } from '../../hooks/features/popup.slice'
@@ -22,11 +20,11 @@ export default function ForgetPassword() {
   const handleReset = async (event: FormEvent) => {
     event.preventDefault()
     try {
-      const response = await http.post('accounts/forgot_password', {
+      await http.post('accounts/forgot_password', {
         email
       })
       dispatch(successPopUp(t('check_mail')))
-    } catch (error) {
+    } catch {
       dispatch(failPopUp(t('register_failed')))
     }
   }

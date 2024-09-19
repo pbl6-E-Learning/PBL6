@@ -1,4 +1,4 @@
-class ApplicationController < ActionController::API
+class Api::ApplicationController < ActionController::API
   def logged_in?
     !!current_user
   end

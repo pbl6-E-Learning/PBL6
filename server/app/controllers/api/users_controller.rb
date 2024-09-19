@@ -1,4 +1,4 @@
-class UsersController < ApplicationController
+class Api::UsersController < Api::ApplicationController
   include Response
   before_action :authenticate, only: %i(enrolled_courses update)
 

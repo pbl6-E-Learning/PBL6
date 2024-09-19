@@ -1,6 +1,6 @@
 'use client'
 import Image from 'next/image'
-import { BarChart, Bar, Rectangle, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts'
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts'
 import moreDark from '@/src/app/assets/moreDark.png'
 import { useTranslations } from 'next-intl'
 

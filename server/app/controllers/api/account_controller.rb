@@ -1,4 +1,4 @@
-class AccountController < ApplicationController
+class Api::AccountController < Api::ApplicationController
   include Response
 
   def create
