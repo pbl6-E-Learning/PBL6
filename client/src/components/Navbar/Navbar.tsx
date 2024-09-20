@@ -12,7 +12,7 @@ import { usePathname } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import { switchLanguage } from '@/src/app/utils/switchLanguage'
 import { useEffect, useState } from 'react'
-import { getCookie, hasCookie } from 'cookies-next'
+import { deleteCookie, getCookie, hasCookie } from 'cookies-next'
 import { Profile } from '@/src/app/types/profile.type'
 import { useAppDispatch } from '@/src/app/hooks/store'
 import { failPopUp } from '@/src/app/hooks/features/popup.slice'
@@ -31,17 +31,17 @@ import {
 const NavbarMenu = [
   {
     id: 1,
-    title: 'Home',
+    key: 'home',
     path: '/'
   },
   {
     id: 2,
-    title: 'Services',
+    key: 'services',
     link: '#'
   },
   {
     id: 3,
-    title: 'About Us',
+    key: 'about_us',
     link: '#'
   }
 ]
@@ -105,7 +105,7 @@ const Navbar = () => {
                   className='inline-block py-2 px-3 hover:text-secondary relative group dark:text-dark'
                 >
                   <div className='w-2 h-2 bg-secondary absolute mt-4 rounded-full left-1/2 -translate-x-1/2 top-1/2 bottom-0 group-hover:block hidden cursor-pointer'></div>
-                  {menu.title}
+                  {t(menu.key)}
                 </Link>
               </li>
             ))}
@@ -131,7 +131,15 @@ const Navbar = () => {
                     <DropdownMenuItem onClick={() => handleNavigation('/user/mycourses')}>
                       {t('my_course')}
                     </DropdownMenuItem>
-                    <DropdownMenuItem>{t('logout')}</DropdownMenuItem>
+                    <DropdownMenuItem
+                      onClick={() => {
+                        deleteCookie('authToken')
+                        deleteCookie('role')
+                        router.push('/login')
+                      }}
+                    >
+                      {t('logout')}
+                    </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
               </Avatar>
@@ -139,7 +147,7 @@ const Navbar = () => {
               <Button
                 variant='outline'
                 onClick={() => {
-                  router.push(`/signup`)
+                  router.push(`/login`)
                 }}
               >
                 {t('button_sign_in')}

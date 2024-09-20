@@ -20,7 +20,7 @@ class AccountController < ApplicationController
   end
 
   def activate
-    account = Account.find_by(activation_token: params[:token])
+    account = Account.find_by activation_token: params[:token]
 
     unless account && !account.activated?
       error_response(
@@ -30,6 +30,37 @@ class AccountController < ApplicationController
     end
 
     activate_account(account)
+  end
+
+  def forgot_password
+    account = Account.find_by email: params[:email]
+
+    if account
+      account.send_password_reset_email
+      json_response(message: "Email hướng dẫn đặt lại mật khẩu đã được gửi.",
+                    status: :ok)
+    else
+      error_response(message: "Email không tồn tại.",
+                     status: :unprocessable_entity)
+    end
+  end
+
+  def reset_password
+    account = Account.find_by reset_password_token: params[:token]
+
+    if account&.password_token_valid?
+      if account.reset_password! params[:password]
+        json_response(message: "Mật khẩu đã được cập nhật.", status: :ok)
+      else
+        error_response(message: account.errors.full_messages.join(", "),
+                       status: :unprocessable_entity)
+      end
+    else
+      error_response(
+        message: "Token đặt lại mật khẩu không hợp lệ hoặc đã hết hạn.",
+        status: :unprocessable_entity
+      )
+    end
   end
 
   private

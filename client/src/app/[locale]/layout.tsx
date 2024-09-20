@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Nunito } from 'next/font/google'
 import Popup from '../../components/Popup'
 import { Toaster } from '../../components/ui/toaster'
+import { Toaster as Loading } from '../../components/ui/sonner'
 import { Providers } from '../providers'
 import { ThemeProvider } from '../../components/theme-provider'
 import '@/src/app/globals.css'
@@ -33,6 +34,7 @@ export default async function LocaleLayout({
               <Popup />
             </Providers>
             <Toaster />
+            <Loading />
           </NextIntlClientProvider>
         </ThemeProvider>
       </body>

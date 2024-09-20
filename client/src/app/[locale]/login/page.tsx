@@ -156,6 +156,12 @@ export default function LoginPage() {
                 </div>
               </div>
               <div className='flex gap-3 mt-4'>
+                <p>{t('forget_password')}</p>
+                <Link href='/forget_password'>
+                  <p className='font-bold text-primary'>{t('page_forget_password')}</p>
+                </Link>
+              </div>
+              <div className='flex gap-3 mt-4'>
                 <p>{t('sign_up_account')}</p>
                 <Link href='/signup'>
                   <p className='font-bold text-primary'>{t('page_sign_up')}</p>
