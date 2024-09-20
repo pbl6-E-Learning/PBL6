@@ -22,7 +22,9 @@
     "login_successful": "Login successful!",
     "login_failed": "Login failed!",
     "sign_up_account": "Don't have an account?",
-    "page_sign_up": "Sign Up"
+    "page_sign_up": "Sign Up",
+    "forget_password": "Forget password?",
+    "page_forget_password": "Reset password"
   },
   "trans": {
     "title": "Translate",
@@ -60,7 +62,10 @@
     "page_login": "Login here",
     "check_mail": "Check your email address to verify your account",
     "register_failed": "Register failed",
-    "login_successful": "Login successful!"
+    "login_successful": "Login successful!",
+    "processing": "Processing ...",
+    "processing_check": "Checking email for you...",
+    "close": "Close"
   },
   "show_course": {
     "title": "Detail Course",
@@ -95,7 +100,10 @@
     "my_account": "My Account",
     "profile": "Profile",
     "my_course": "My course",
-    "logout": "Logout"
+    "logout": "Logout",
+    "home": "Home",
+    "services": "Services",
+    "about_us": "About Us"
   },
   "announcements": {
     "title": "Announcements",
@@ -172,5 +180,21 @@
     "update_failed": "Update Failed",
     "changeProfile": "Change Profile",
     "login_first": "Please login!!!"
+  },
+  "account_reset_password": {
+    "email": "Email",
+    "reset_password": "Reset Password",
+    "check_mail": "Please check your email for reset instructions.",
+    "register_failed": "Failed to process your request, please try again.",
+    "processing": "Processing ...",
+    "close": "Close",
+    "processing_check": "Checking email for you..."
+  },
+  "account_password_new": {
+    "password_new": "New Password",
+    "reset_password": "Reset Password",
+    "password_reset_success": "Your password has been reset successfully.",
+    "password_reset_failed": "Failed to reset the password. Please try again.",
+    "redirecting": "Redirecting login ..."
   }
 }

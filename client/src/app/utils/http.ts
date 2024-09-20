@@ -8,10 +8,24 @@ class Http {
       baseURL: process.env.BACKEND_URL,
       timeout: 120000,
       headers: {
-        Authorization: `Bearer ${getCookie('authToken')}`,
         'Content-Type': 'application/json'
       }
     })
+    this.instance.interceptors.request.use(
+      (config) => {
+        const authToken = getCookie('authToken')
+        if (authToken) {
+          config.headers.Authorization = `Bearer ${authToken}`
+        } else {
+          console.log('No authToken found in cookies')
+        }
+        return config
+      },
+      (error) => {
+        console.log('Interceptor error:', error)
+        return Promise.reject(error)
+      }
+    )
   }
 }
 

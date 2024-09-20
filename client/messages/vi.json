@@ -18,7 +18,9 @@
     "login_successful": "Đăng nhập thành công!",
     "login_failed": "Đăng nhập thất bại!",
     "sign_up_account": "Bạn chưa có tài khoản?",
-    "page_sign_up": "Đăng ký"
+    "page_sign_up": "Đăng ký",
+    "forget_password": "Quên mật khẩu?",
+    "page_forget_password": "Khôi phục mật khẩu"
   },
   "trans": {
     "title": "Dịch",
@@ -56,7 +58,10 @@
     "page_login": "Đăng nhập ngay",
     "check_mail": "Kiểm tra địa chỉ email của bạn để xác minh tài khoản",
     "register_failed": "Đăng ký thất bại!",
-    "login_successful": "Đăng nhập thành công!"
+    "login_successful": "Đăng nhập thành công!",
+    "processing": "Đang xử lý ...",
+    "processing_check": "Đang kiểm tra email của bạn...",
+    "close": "Đóng"
   },
   "show_course": {
     "title": "Chi tiết thông tin khóa học",
@@ -88,10 +93,13 @@
   },
   "navbar": {
     "button_sign_in": "Đăng nhập",
-    "my_account": "Tài Khoản Của Tôi",
+    "my_account": "Tài khoản của tôi",
     "profile": "Thông tin cá nhân",
-    "my_course": "Khóa Học Của Tôi",
-    "logout": "Đăng Xuất"
+    "my_course": "Khóa học của tôi",
+    "logout": "Đăng xuất",
+    "home": "Trang chủ",
+    "services": "Dịch vụ",
+    "about_us": "Về chúng tôi"
   },
   "announcements": {
     "title": "Thông báo",
@@ -168,5 +176,21 @@
     "update_failed": "Cập nhật thất bại",
     "changeProfile": "Lưu thông tin",
     "login_first": "Vui lòng đăng nhập!!!"
+  },
+  "account_reset_password": {
+    "email": "Email",
+    "reset_password": "Đặt lại mật khẩu",
+    "check_mail": "Vui lòng kiểm tra email của bạn để nhận hướng dẫn đặt lại mật khẩu.",
+    "register_failed": "Yêu cầu không thành công, vui lòng thử lại.",
+    "processing": "Đang xử lý ...",
+    "close": "Đóng",
+    "processing_check": "Đang kiểm tra email của bạn..."
+  },
+  "account_password_new": {
+    "password_new": "Mật khẩu mới",
+    "reset_password": "Đặt lại mật khẩu",
+    "password_reset_success": "Mật khẩu của bạn đã được đặt lại thành công.",
+    "password_reset_failed": "Không thể đặt lại mật khẩu. Vui lòng thử lại.",
+    "redirecting": "Đang chuyển hướng đến trang đăng nhập ..."
   }
 }

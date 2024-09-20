@@ -16,6 +16,7 @@ import RImage from '@/src/app/assets/RImage.png'
 import SignUpImage from '@/src/app/assets/Sign_up_Image.png'
 import BGImage from '@/src/app/assets/login_bg.svg'
 import Link from 'next/link'
+import { toast } from 'sonner'
 import Flag_EN from '@/src/app/assets/england.png'
 import Flag_VI from '@/src/app/assets/vietnam.png'
 import {
@@ -118,7 +119,7 @@ export default function SignUpPage() {
                       id='text'
                       placeholder={t('full_name')}
                       onChange={(e) => {
-                        setEmail(e.target.value)
+                        setFullName(e.target.value)
                       }}
                     />
                   </div>
@@ -191,6 +192,13 @@ export default function SignUpPage() {
                   <Button
                     onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
                       handleRegister(e)
+                      toast(t('processing'), {
+                        description: t('processing_check'),
+                        action: {
+                          label: t('close'),
+                          onClick: () => {}
+                        }
+                      })
                     }}
                   >
                     {t('sign_up')}

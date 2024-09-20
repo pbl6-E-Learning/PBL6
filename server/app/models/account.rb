@@ -23,4 +23,25 @@ class Account < ApplicationRecord
     self.activation_token = SecureRandom.urlsafe_base64(10)
     self.activated = false
   end
+
+  def generate_reset_password_token
+    self.reset_password_token = SecureRandom.urlsafe_base64(10)
+    self.reset_password_sent_at = Time.zone.now
+    save!(validate: false)
+  end
+
+  def password_token_valid?
+    (reset_password_sent_at + Settings.constant_2.hours) > Time.zone.now
+  end
+
+  def reset_password! new_password
+    self.password = new_password
+    self.reset_password_token = nil
+    save!
+  end
+
+  def send_password_reset_email
+    generate_reset_password_token
+    AccountMailer.password_reset(self).deliver_now
+  end
 end

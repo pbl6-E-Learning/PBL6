@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_03_034455) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_18_032828) do
   create_table "accounts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "email", null: false
     t.string "password_digest", null: false
@@ -20,6 +20,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_03_034455) do
     t.string "activation_token"
     t.boolean "activated", default: false
     t.datetime "activated_at"
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
     t.index ["email"], name: "index_accounts_on_email", unique: true
   end
 

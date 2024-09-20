@@ -12,4 +12,10 @@ Rails.application.routes.draw do
       get "enrolled_courses", to: "users#enrolled_courses"
     end
   end
+  resource :accounts do
+    collection do
+      post "forgot_password", to: "account#forgot_password"
+      put "reset_password/:token", to: "account#reset_password"
+    end
+  end
 end

@@ -17,7 +17,7 @@ class UsersController < ApplicationController
       )
     else
       error_response(message: "Update profile failed",
-                    status: :unprocessable_entity)
+                     status: :unprocessable_entity)
     end
   end
 
