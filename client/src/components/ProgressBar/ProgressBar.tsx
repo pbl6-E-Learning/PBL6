@@ -5,7 +5,13 @@ import imageUrl from '../../app/assets/loadpage.png'
 import { useEffect, useState } from 'react'
 import { useTranslations } from 'next-intl'
 
-export function ProgressBar({ onComplete, isComplete, NoDataComponent }) {
+interface ProgressBarProps {
+  onComplete: () => void
+  isComplete: boolean
+  NoDataComponent?: React.ComponentType
+}
+
+export function ProgressBar({ onComplete, isComplete, NoDataComponent }: ProgressBarProps) {
   const [progress, setProgress] = useState(0)
   const [isVisible, setIsVisible] = useState(true)
   const [showNoData, setShowNoData] = useState(false)
