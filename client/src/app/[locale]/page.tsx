@@ -6,6 +6,7 @@ import Banner from '../../components/Banner/Banner'
 import Subscribe from '../../components/Subscribe/Subscribe'
 import Banner2 from '../../components/Banner/Banner2'
 import Footer from '../../components/Footer/Footer'
+import ShowCourse from '@/src/components/ShowCourse/ShowCourse'
 
 export const metadata: Metadata = {
   title: 'E-learning',
@@ -18,6 +19,7 @@ export default function Index() {
     <main className='overflow-x-hidden'>
       <Hero />
       <Services />
+      <ShowCourse />
       <Banner />
       <Subscribe />
       <Banner2 />

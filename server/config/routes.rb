@@ -18,4 +18,5 @@ Rails.application.routes.draw do
       put "reset_password/:token", to: "account#reset_password"
     end
   end
+  resources :categories, only: %i(index)
 end

@@ -102,8 +102,9 @@
     "my_course": "My course",
     "logout": "Logout",
     "home": "Home",
-    "services": "Services",
-    "about_us": "About Us"
+    "translate": "Translate",
+    "list_courses": "List Courses",
+    "logo": "Return"
   },
   "announcements": {
     "title": "Announcements",
@@ -127,13 +128,13 @@
     },
     "links": {
       "home": "Home",
-      "services": "Services",
+      "translate": "Translate",
       "about": "About",
       "contact": "Contact"
     }
   },
   "services": {
-    "title": "Services we provide",
+    "title": "Categories",
     "webDevelopment": "Web Development",
     "mobileDevelopment": "Mobile Development",
     "softwareDevelopment": "Software Development",
@@ -196,5 +197,28 @@
     "password_reset_success": "Your password has been reset successfully.",
     "password_reset_failed": "Failed to reset the password. Please try again.",
     "redirecting": "Redirecting login ..."
+  },
+  "hero": {
+    "sologan": "知識への投資は最高の利益をもたらす",
+    "explore": "Get Started"
+  },
+  "banner2": {
+    "heading": "Join Our Community to Start your Journey",
+    "description": "More than 300 high-quality business lectures. Supports all skills in interviews, writing emails, and communication in the workplace.",
+    "joinNow": "Join Now"
+  },
+  "banner1": {
+    "title": "The World’s Leading Online Learning Platform",
+    "courses": "10,000+ Courses",
+    "instruction": "Expert Instruction",
+    "access": "Lifetime Access"
+  },
+  "subscribe": {
+    "title": "450K+ Students are learning from us",
+    "description": "Helps you communicate fluently when working at a Japanese company.",
+    "buttonText": "Subscribe Now"
+  },
+  "view_course": {
+    "title": "Recommended Courses"
   }
 }

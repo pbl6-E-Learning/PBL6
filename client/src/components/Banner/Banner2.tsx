@@ -1,8 +1,11 @@
 'use client'
 import BannerPng from '@/src/app/assets/banner.png'
 import { motion } from 'framer-motion'
+import { useTranslations } from 'next-intl'
 
 const Banner2: React.FC = () => {
+  const t = useTranslations('banner2')
+
   return (
     <section>
       <div className='container py-14 md:py-24 grid grid-cols-1 md:grid-cols-2 gap-8 space-y-6 md:space-y-0 dark:bg-dark dark:text-white'>
@@ -12,13 +15,10 @@ const Banner2: React.FC = () => {
           className='flex flex-col justify-center'
         >
           <div className='text-center md:text-left space-y-4 lg:max-w-[450px] dark:bg-dark dark:text-white'>
-            <h1 className='text-4xl font-bold !leading-snug'>Join Our Community to Start your Journey</h1>
-            <p className='text-dark2'>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae iusto minima ad ut id eos accusantium
-              aut, aperiam quis incidunt!
-            </p>
+            <h1 className='text-4xl font-bold !leading-snug'>{t('heading')}</h1>
+            <p className='text-dark2'>{t('description')}</p>
             <a href='https://chat.whatsapp.com/FQSKgJ5f1eIAhlyF5sVym0' className='primary-btn !mt-8'>
-              Join Now
+              {t('joinNow')}
             </a>
           </div>
         </motion.div>

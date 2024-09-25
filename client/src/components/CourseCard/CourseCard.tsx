@@ -28,8 +28,7 @@ const CourseCard = ({ course }: CourseCardProps) => {
           className='w-full h-38 object-cover rounded-lg'
         />
         <CardDescription className='overflow-hidden whitespace-nowrap text-ellipsis'>
-          {' '}
-          {t('category')} : {course?.category?.name || ''}
+          {course?.category?.name ? `${t('category')} : ${course?.category?.name}` : ''}
         </CardDescription>
         <div>
           <Tooltip>

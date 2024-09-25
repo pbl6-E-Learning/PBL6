@@ -6,8 +6,11 @@ import { FaBookReader } from 'react-icons/fa'
 import { FadeUp } from '../Hero/Hero'
 import { motion } from 'framer-motion'
 import { FC } from 'react'
+import { useTranslations } from 'next-intl'
 
 const Banner: FC = () => {
+  const t = useTranslations('banner1')
+
   return (
     <section>
       <div className='container py-14 md:py-24 grid grid-cols-1 md:grid-cols-2 gap-8 space-y-6 md:space-y-0 dark:bg-dark dark:text-white'>
@@ -31,7 +34,7 @@ const Banner: FC = () => {
               transition={{ duration: 0.5 }}
               className='text-3xl md:text-4xl font-bold !leading-snug'
             >
-              The World&rsquo;s Leading Online learning Platform
+              {t('title')}
             </motion.h1>
             <div className='flex flex-col gap-6'>
               <motion.div
@@ -42,7 +45,7 @@ const Banner: FC = () => {
                 className='flex items-center gap-4 p-6 bg-[#f4f4f4] rounded-2xl hover:bg-white duration-300 hover:shadow-2xl dark:bg-dark dark:text-white dark:shadow-2xl'
               >
                 <FaBookReader className='text-2xl' />
-                <p className='text-lg'>10,000+ Courses</p>
+                <p className='text-lg'>{t('courses')}</p>
               </motion.div>
               <motion.div
                 variants={FadeUp(0.4)}
@@ -52,7 +55,7 @@ const Banner: FC = () => {
                 className='flex items-center gap-4 p-6 bg-[#f4f4f4] rounded-2xl hover:bg-white duration-300 hover:shadow-2xl dark:bg-dark dark:text-white dark:shadow-2xl'
               >
                 <GrUserExpert className='text-2xl' />
-                <p className='text-lg'>Expert Instruction</p>
+                <p className='text-lg'>{t('instruction')}</p>
               </motion.div>
               <motion.div
                 variants={FadeUp(0.6)}
@@ -62,7 +65,7 @@ const Banner: FC = () => {
                 className='flex items-center gap-4 p-6 bg-[#f4f4f4] rounded-2xl hover:bg-white duration-300 hover:shadow-2xl dark:bg-dark dark:text-white dark:shadow-2xl'
               >
                 <MdOutlineAccessTime className='text-2xl' />
-                <p className='text-lg'>Lifetime Access</p>
+                <p className='text-lg'>{t('access')}</p>
               </motion.div>
             </div>
           </div>
