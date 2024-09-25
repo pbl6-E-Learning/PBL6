@@ -39,7 +39,7 @@ const MyCourses = () => {
       try {
         const res: { data: { message: { courses: Course[] } } } = await http.get(`users/enrolled_courses`)
         setCourses(res.data.message.courses)
-      } catch (error) {
+      } catch (error: any) {
         const message = error?.response?.data?.error || error.message || t('error')
         dispatch(failPopUp(message))
       }

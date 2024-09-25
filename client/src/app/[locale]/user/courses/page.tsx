@@ -20,6 +20,7 @@ import { Button } from '../../../../components/ui/button'
 import { LessonScrollArea } from '../../../../components/LessonScrollArea/LessonScrollArea'
 import { ProgressBar } from '../../../../components/ProgressBar/ProgressBar'
 import Nodata from '@/src/components/Nodata/Nodata'
+import Img_default from '@/src/app/assets/default_course_img.png'
 
 const CourseDetail = () => {
   const t = useTranslations('show_course')
@@ -38,7 +39,7 @@ const CourseDetail = () => {
         const res: { data: { message: { course: Course } } } = await http.get(`courses/${id}`)
         setCourse(res.data.message.course)
         setDataLoaded(true)
-      } catch (error) {
+      } catch (error: any) {
         const message = error?.response?.data?.error || error.message || t('error')
         dispatch(failPopUp(message))
       }
@@ -69,7 +70,7 @@ const CourseDetail = () => {
           <div className='lg:ml-20'>
             <h1 className='text-3xl font-extrabold mb-6'>{course.title}</h1>
             <p className=' text-gray-600 leading-relaxed'>
-              {course.description.split('\n').map((line, index) => (
+              {course.description?.split('\n').map((line, index) => (
                 <Fragment key={index}>
                   {line}
                   <br />
@@ -83,7 +84,7 @@ const CourseDetail = () => {
               </div>
             </div>
             <div>
-              <LessonScrollArea lessons={course?.lessons} />
+              <LessonScrollArea lessons={course?.lessons || []} />
             </div>
           </div>
         </div>
@@ -91,7 +92,13 @@ const CourseDetail = () => {
         <div className='lg:flex-none lg:w-[400px] pt-10'>
           <Card className='w-full shadow-lg rounded-lg sticky top-20'>
             <CardHeader className='p-0'>
-              <Image className='rounded-t-lg' src={course.image_url} height={400} width={400} alt='course image' />
+              <Image
+                className='rounded-t-lg'
+                src={course.image_url || Img_default.src}
+                height={400}
+                width={400}
+                alt='course image'
+              />
             </CardHeader>
             <CardContent className='p-6'>
               <div className='flex justify-between items-center mb-4'>
@@ -100,7 +107,7 @@ const CourseDetail = () => {
                   <span className='text-lg font-medium'>{t('lesson')}</span>
                 </div>
                 <span className='text-lg font-bold'>
-                  {course.lessons.length} {t('lesson')}
+                  {course.lessons?.length || 0} {t('lesson')}
                 </span>
               </div>
               <Separator className='my-4' />
@@ -109,7 +116,7 @@ const CourseDetail = () => {
                   <PiChalkboardTeacher size={24} className='text-primary' />
                   <span className='text-lg font-medium'>{t('teacher')}</span>
                 </div>
-                <span className='text-lg font-bold'>{course.teacher.name}</span>
+                <span className='text-lg font-bold'>{course.teacher?.name}</span>
               </div>
               <Separator className='my-4' />
               <div className='flex justify-between items-center mb-4'>
