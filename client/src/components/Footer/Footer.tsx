@@ -30,7 +30,6 @@ const Footer: React.FC = () => {
               <div className='text-dark2'>
                 <ul className='space-y-2 text-lg'>
                   <li className='cursor-pointer hover:text-secondary duration-200'>{t('links.home')}</li>
-                  <li className='cursor-pointer hover:text-secondary duration-200'>{t('links.services')}</li>
                   <li className='cursor-pointer hover:text-secondary duration-200'>{t('links.about')}</li>
                   <li className='cursor-pointer hover:text-secondary duration-200'>{t('links.contact')}</li>
                 </ul>

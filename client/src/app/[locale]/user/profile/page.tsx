@@ -60,7 +60,7 @@ export default function Profile() {
         try {
           const res: { data: { message: Profile } } = await http.get(`users/profile`)
           setProfile(res.data.message)
-        } catch (error) {
+        } catch (error: any) {
           const message = error?.response?.data?.error || error.message || t('error')
           dispatch(failPopUp(message))
         }
@@ -183,13 +183,15 @@ export default function Profile() {
                   </Label>
                   <Input
                     id='created_at'
-                    className='border-gray-200'
+                    className='border-gray-200 cursor-not-allowed bg-gray-200'
+                    readOnly={true}
                     type='date'
                     placeholder={t('created_at')}
-                    value={created ? new Date(profile.profile.created_at).toISOString().split('T')[0] : ''}
-                    onChange={(e) => {
-                      setCreated(e.target.value)
-                    }}
+                    value={
+                      created && profile && profile.profile?.created_at
+                        ? new Date(profile.profile.created_at).toISOString().split('T')[0]
+                        : ''
+                    }
                   />
                 </div>
                 <div className='flex flex-col space-y-1.5'>
@@ -199,12 +201,14 @@ export default function Profile() {
                   <Input
                     id='updated_at'
                     type='date'
-                    className='border-gray-200'
+                    readOnly={true}
+                    className='border-gray-200 cursor-not-allowed bg-gray-200'
                     placeholder={t('updated_at')}
-                    value={update ? new Date(profile.profile.updated_at).toISOString().split('T')[0] : ''}
-                    onChange={(e) => {
-                      setUpdate(e.target.value)
-                    }}
+                    value={
+                      update && profile && profile.profile?.updated_at
+                        ? new Date(profile?.profile?.updated_at).toISOString().split('T')[0]
+                        : ''
+                    }
                   />
                 </div>
               </div>

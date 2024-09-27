@@ -28,7 +28,7 @@ export default function Activate() {
           console.log(messenger)
           setMessage(messenger)
           dispatch(successPopUp(messenger))
-        } catch (error) {
+        } catch (error: any) {
           setError(error.response.data.error)
           dispatch(failPopUp(error.response.data.error))
         }

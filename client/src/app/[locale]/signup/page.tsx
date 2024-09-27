@@ -1,11 +1,10 @@
 'use client'
 import React, { FormEvent, useEffect, useState } from 'react'
-import useHttpClient from '../../utils/http'
 import { useTranslations } from 'next-intl'
-import { deleteCookie, getCookie, hasCookie, setCookie } from 'cookies-next'
+import { getCookie, setCookie } from 'cookies-next'
 import { useRouter } from 'next/navigation'
-import { useAppDispatch, useAppSelector } from '../../hooks/store'
-import { failPopUp, resetPopUp, successPopUp } from '../../hooks/features/popup.slice'
+import { useAppDispatch } from '../../hooks/store'
+import { failPopUp, successPopUp } from '../../hooks/features/popup.slice'
 import Image from 'next/image'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '../../../components/ui/card'
 import { Label } from '../../../components/ui/label'
@@ -29,6 +28,7 @@ import {
   SelectValue
 } from '../../../components/ui/select'
 import http from '../../utils/http'
+import { AuthenticationType } from '../../types/authentication.type'
 
 export default function SignUpPage() {
   const t = useTranslations('sign_up')
@@ -53,7 +53,7 @@ export default function SignUpPage() {
     }
   }, [router])
 
-  const handleLoginSuccess = (response) => {
+  const handleLoginSuccess = (response: { message: AuthenticationType }) => {
     const token = response.message.jwt
     const role = response.message.roles
     console.log(role)

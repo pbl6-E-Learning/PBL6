@@ -12,7 +12,7 @@ import { usePathname } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import { switchLanguage } from '@/src/app/utils/switchLanguage'
 import { useEffect, useState } from 'react'
-import { deleteCookie, getCookie, hasCookie } from 'cookies-next'
+import { CookieValueTypes, deleteCookie, getCookie, hasCookie } from 'cookies-next'
 import { Profile } from '@/src/app/types/profile.type'
 import { useAppDispatch } from '@/src/app/hooks/store'
 import { failPopUp } from '@/src/app/hooks/features/popup.slice'
@@ -27,6 +27,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger
 } from '../ui/dropdown-menu'
+import { HoverCard, HoverCardContent, HoverCardTrigger } from '../ui/hover-card'
+import { Category } from '@/src/app/types/category.type'
 
 const NavbarMenu = [
   {
@@ -36,13 +38,13 @@ const NavbarMenu = [
   },
   {
     id: 2,
-    key: 'services',
-    link: '#'
+    key: 'translate',
+    path: 'user/translate'
   },
   {
     id: 3,
-    key: 'about_us',
-    link: '#'
+    key: 'list_courses',
+    path: '#'
   }
 ]
 const Navbar = () => {
@@ -50,10 +52,19 @@ const Navbar = () => {
   const pathname = usePathname()
   const searchParams = useSearchParams()
   const t = useTranslations('navbar')
-  const [token, setToken] = useState<string>('')
+  const [token, setToken] = useState<CookieValueTypes>()
   const [profile, setProfile] = useState<Profile>()
   const [isOpen, setIsOpen] = useState<boolean>(false)
+  const [category, setCategory] = useState<Category[]>([])
   const dispatch = useAppDispatch()
+
+  const removeAccents = (str: string) => {
+    return str
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/ /g, '')
+  }
 
   useEffect(() => {
     if (hasCookie('authToken')) {
@@ -61,6 +72,19 @@ const Navbar = () => {
       return
     }
   }, [])
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const res: { data: { message: Category[] } } = await http.get(`categories`)
+        setCategory(res.data.message)
+      } catch (error: any) {
+        const message = error?.response?.data?.error || error.message || t('error')
+        dispatch(failPopUp(message))
+      }
+    }
+    fetchProfile()
+  }, [dispatch, t])
 
   const handleNavigation = (href: string) => {
     router.push(href)
@@ -73,7 +97,7 @@ const Navbar = () => {
         try {
           const res: { data: { message: Profile } } = await http.get(`users/profile`)
           setProfile(res.data.message)
-        } catch (error) {
+        } catch (error: any) {
           const message = error?.response?.data?.error || error.message || t('error')
           dispatch(failPopUp(message))
         }
@@ -93,20 +117,43 @@ const Navbar = () => {
       >
         <div>
           <Link href='/' className='font-bold text-4xl cursor-pointer'>
-            Return
+            {t('logo')}
           </Link>
         </div>
         <div className='hidden lg:block'>
           <ul className='flex items-center gap-3'>
             {NavbarMenu?.map((menu) => (
               <li key={menu.id}>
-                <Link
-                  href={`${menu.path}`}
-                  className='inline-block py-2 px-3 hover:text-secondary relative group dark:text-dark'
-                >
-                  <div className='w-2 h-2 bg-secondary absolute mt-4 rounded-full left-1/2 -translate-x-1/2 top-1/2 bottom-0 group-hover:block hidden cursor-pointer'></div>
-                  {t(menu.key)}
-                </Link>
+                {menu.key === 'list_courses' ? (
+                  <div>
+                    <div className='group relative cursor-pointer'>
+                      <div className='inline-block py-2 px-3 hover:text-secondary relative group dark:text-dark'>
+                        <div className='w-2 h-2 bg-secondary absolute mt-4 rounded-full left-1/2 -translate-x-1/2 top-1/2 bottom-0 group-hover:block hidden cursor-pointer'></div>
+                        {t('list_courses')}
+                      </div>
+
+                      <div className='invisible absolute z-50 flex flex-col w-60 bg-white py-1 px-4 text-gray-800 shadow-xl group-hover:visible rounded-lg'>
+                        {category?.map((categories, index) => (
+                          <Link
+                            className='my-2 block border-b border-gray-100 py-1 font-semibold text-gray-500 hover:text-primary md:mx-2'
+                            key={index}
+                            href={`${removeAccents(categories.name as string)}`}
+                          >
+                            {categories?.name}
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <Link
+                    href={`${menu.path}`}
+                    className='inline-block py-2 px-3 hover:text-secondary relative group dark:text-dark'
+                  >
+                    <div className='w-2 h-2 bg-secondary absolute mt-4 rounded-full left-1/2 -translate-x-1/2 top-1/2 bottom-0 group-hover:block hidden cursor-pointer'></div>
+                    {t(menu.key)}
+                  </Link>
+                )}
               </li>
             ))}
             <ModeToggle />

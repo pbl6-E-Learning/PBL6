@@ -1,60 +1,63 @@
 'use client'
-import { RiComputerLine } from 'react-icons/ri'
-import { CiMobile3 } from 'react-icons/ci'
-import { TbWorldWww } from 'react-icons/tb'
-import { IoMdHappy } from 'react-icons/io'
-import { BiSupport } from 'react-icons/bi'
-import { IoPulseOutline } from 'react-icons/io5'
 import { motion } from 'framer-motion'
 import { useTranslations } from 'next-intl'
+import { useEffect, useState } from 'react'
+import { Category } from '@/src/app/types/category.type'
+import http from '@/src/app/utils/http'
+import { useAppDispatch } from '@/src/app/hooks/store'
+import { failPopUp } from '@/src/app/hooks/features/popup.slice'
+import intermediateJapanese from '@/src/app/assets/intermediateJapanese.png'
+import advancedJapanese from '@/src/app/assets/advancedJapanese.png'
+import jLPTPreparation from '@/src/app/assets/jLPTPreparation.png'
+import japaneseCulture from '@/src/app/assets/japaneseCulture.png'
+import languageBasics from '@/src/app/assets/languageBasics.png'
+import japaneseForTravel from '@/src/app/assets/japaneseForTravel.png'
+import Image from 'next/image'
 
 const Services = () => {
   const t = useTranslations('services')
+  const [category, setCategory] = useState<Category[]>([])
+  const dispatch = useAppDispatch()
 
   const ServicesData = [
     {
-      id: 1,
-      title: t('webDevelopment'),
-      link: '#',
-      icon: <TbWorldWww />,
+      icon: languageBasics.src,
       delay: 0.2
     },
     {
-      id: 2,
-      title: t('mobileDevelopment'),
-      link: '#',
-      icon: <CiMobile3 />,
+      icon: intermediateJapanese.src,
       delay: 0.3
     },
     {
-      id: 3,
-      title: t('softwareDevelopment'),
-      link: '#',
-      icon: <RiComputerLine />,
+      icon: advancedJapanese.src,
       delay: 0.4
     },
     {
-      id: 4,
-      title: t('satisfiedClients'),
-      link: '#',
-      icon: <IoMdHappy />,
+      icon: japaneseCulture.src,
       delay: 0.5
     },
     {
-      id: 5,
-      title: t('seoOptimization'),
-      link: '#',
-      icon: <IoPulseOutline />,
+      icon: jLPTPreparation.src,
       delay: 0.6
     },
     {
-      id: 6,
-      title: t('support'),
-      link: '#',
-      icon: <BiSupport />,
+      icon: japaneseForTravel.src,
       delay: 0.7
     }
   ]
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const res: { data: { message: Category[] } } = await http.get(`categories`)
+        setCategory(res.data.message)
+      } catch (error: any) {
+        const message = error?.response?.data?.error || error.message || t('error')
+        dispatch(failPopUp(message))
+      }
+    }
+    fetchProfile()
+  }, [dispatch, t])
 
   const SlideLeft = (delay: number) => {
     return {
@@ -79,17 +82,19 @@ const Services = () => {
       <div className='container pb-14 pt-16'>
         <h1 className='text-4xl font-bold text-left pb-10'>{t('title')}</h1>
         <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-8'>
-          {ServicesData.map((service, index) => (
+          {category?.map((category, index) => (
             <motion.div
               key={index}
-              variants={SlideLeft(service.delay)}
+              variants={SlideLeft(ServicesData[index].delay)}
               initial='initial'
               whileInView={'animate'}
               viewport={{ once: true }}
               className='bg-[#f4f4f4] rounded-2xl flex flex-col gap-4 items-center justify-center p-4 py-7 hover:bg-white hover:scale-110 duration-300 hover:shadow-2xl dark:bg-dark dark:text-white'
             >
-              <div className='text-4xl mb-4'> {service.icon}</div>
-              <h1 className='text-lg font-semibold text-center px-3'>{service.title}</h1>
+              <div className='text-4xl mb-4'>
+                <Image src={ServicesData[index].icon} width={50} height={50} alt='icon' />
+              </div>
+              <h1 className='text-lg font-semibold text-center px-3'>{category?.name}</h1>
             </motion.div>
           ))}
         </div>
