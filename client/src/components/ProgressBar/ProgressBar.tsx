@@ -20,8 +20,8 @@ export function ProgressBar({ onComplete, isComplete, NoDataComponent }: Progres
   useEffect(() => {
     let loadingProgress = 0
     let increment = 10
-    let initialSpeed = 100
-    let decreaseSpeedAfter = 5000
+    const initialSpeed = 100
+    const decreaseSpeedAfter = 5000
 
     const interval = setInterval(() => {
       loadingProgress += increment

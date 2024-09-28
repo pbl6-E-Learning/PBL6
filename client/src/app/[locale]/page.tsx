@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import { useTranslations } from 'next-intl'
 import Hero from '../../components/Hero/Hero'
 import Services from '../../components/Services/Services'
 import Banner from '../../components/Banner/Banner'
@@ -14,7 +13,6 @@ export const metadata: Metadata = {
 }
 
 export default function Index() {
-  const t = useTranslations('index')
   return (
     <main className='overflow-x-hidden'>
       <Hero />

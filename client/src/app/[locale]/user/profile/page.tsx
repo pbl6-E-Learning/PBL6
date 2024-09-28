@@ -94,11 +94,11 @@ export default function Profile() {
     event.preventDefault()
 
     try {
-      const response = await http.patch('users/update_profile', {
+      await http.patch('users/update_profile', {
         user: { full_name: fullName, sex, bio, goals, image_url: imageAvatar }
       })
       dispatch(successPopUp(t('update_success')))
-    } catch (error) {
+    } catch {
       dispatch(failPopUp(t('update_failed')))
     }
   }

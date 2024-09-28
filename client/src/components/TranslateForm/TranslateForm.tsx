@@ -1,10 +1,9 @@
-import { useEffect, useState, useCallback } from 'react'
+import { useEffect, useState } from 'react'
 import { useTranslations } from 'next-intl'
 import useDebounce from '../../app/hooks/customs/useDebounce'
 import { Textarea } from '../ui/textarea'
 import { Badge } from '../ui/badge'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select'
-import debounce from 'lodash.debounce'
 
 interface TranslationResponse {
   responseData: {

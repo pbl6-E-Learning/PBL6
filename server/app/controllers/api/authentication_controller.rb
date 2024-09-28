@@ -1,5 +1,5 @@
 require "httparty"
-class AuthenticationController < ApplicationController
+class Api::AuthenticationController < Api::ApplicationController
   include Response
   include HTTParty
 

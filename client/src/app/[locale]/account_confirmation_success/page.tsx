@@ -2,7 +2,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
 import BGImage from '@/src/app/assets/login_bg.svg'
-import Loading from '@/src/app/assets/loading.svg'
 import Image from 'next/image'
 import http from '../../utils/http'
 import { failPopUp, successPopUp } from '../../hooks/features/popup.slice'

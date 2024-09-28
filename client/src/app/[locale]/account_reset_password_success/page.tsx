@@ -1,5 +1,5 @@
 'use client'
-import { FormEvent, useEffect, useMemo, useState } from 'react'
+import { FormEvent, useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import BGImage from '@/src/app/assets/login_bg.svg'
 import Image from 'next/image'
@@ -23,12 +23,12 @@ export default function ResetPassword() {
   const handleReset = async (event: FormEvent) => {
     event.preventDefault()
     try {
-      const response = await http.put(`accounts/reset_password/${token}`, {
+      await http.put(`accounts/reset_password/${token}`, {
         password
       })
       dispatch(successPopUp(t('password_reset_success')))
       router.push('/login')
-    } catch (error) {
+    } catch {
       dispatch(failPopUp(t('password_reset_failed')))
     }
   }

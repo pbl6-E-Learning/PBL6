@@ -1,8 +1,11 @@
 import { useTranslations } from 'next-intl'
-import { Separator } from '../ui/separator'
-const Sidebar = ({ activeItem }) => {
+interface SidebarProps {
+  activeItem: string
+}
+
+const Sidebar = ({ activeItem }: SidebarProps) => {
   const t = useTranslations('sidebar')
-  const getNavItemClass = (item) => {
+  const getNavItemClass = (item: string) => {
     const baseClasses = 'flex items-center w-full p-3 leading-tight transition-all rounded-lg outline-none text-start'
     const activeClasses = 'bg-primary text-white'
     const defaultClasses =
@@ -32,7 +35,7 @@ const Sidebar = ({ activeItem }) => {
           </div>
           {t('dashboard')}
         </div>
-        <div role='button' className={getNavItemClass('myCourse')}>
+        <a role='button' className={getNavItemClass('myCourse')} href='/user/mycourses'>
           <div className='grid mr-4 place-items-center'>
             <svg
               xmlns='http://www.w3.org/2000/svg'
@@ -49,7 +52,7 @@ const Sidebar = ({ activeItem }) => {
             </svg>
           </div>
           {t('myCourse')}
-        </div>
+        </a>
         <div role='button' className={getNavItemClass('inbox')}>
           <div className='grid mr-4 place-items-center'>
             <svg

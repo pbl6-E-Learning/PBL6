@@ -10,7 +10,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Label } from '../../../components/ui/label'
 import { Input } from '../../../components/ui/input'
 import { Button } from '../../../components/ui/button'
-import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google'
+import { CredentialResponse, GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google'
 import RImage from '@/src/app/assets/RImage.png'
 import SignUpImage from '@/src/app/assets/Sign_up_Image.png'
 import BGImage from '@/src/app/assets/login_bg.svg'
@@ -48,7 +48,11 @@ export default function SignUpPage() {
     const token = getCookie('authToken')
     if (token) {
       const role = getCookie('role')
-      role === 'admin' ? router.push('/admin') : router.push('/')
+      if (role === 'admin') {
+        router.push('/admin')
+      } else {
+        router.push('/')
+      }
       return
     }
   }, [router])
@@ -59,9 +63,12 @@ export default function SignUpPage() {
     console.log(role)
     setCookie('authToken', token)
     setCookie('role', role)
-    console.log(t('login_successful'))
     dispatch(successPopUp(t('login_successful')))
-    role === 'admin' ? router.push('/admin') : router.push('/')
+    if (role === 'admin') {
+      router.push('/admin')
+    } else {
+      router.push('/')
+    }
   }
 
   const handleRegister = async (event: FormEvent) => {
@@ -72,20 +79,17 @@ export default function SignUpPage() {
         account: { email, password, password_confirmation },
         user: { full_name: fullName, sex }
       })
-      const messenger = response.data.message
-      console.log(messenger)
       dispatch(successPopUp(t('check_mail')))
-    } catch (error) {
-      console.log(t('register_failed'))
+    } catch {
       dispatch(failPopUp(t('register_failed')))
     }
   }
 
-  const responseGoogle = async (response: any) => {
+  const responseGoogle = async (response: CredentialResponse) => {
     try {
-      const res: any = await http.post(`auth/google_oauth2`, { auth: { id_token: response.credential } })
+      const res = await http.post(`auth/google_oauth2`, { auth: { id_token: response.credential } })
       handleLoginSuccess(res.data)
-    } catch (error) {
+    } catch {
       console.log(t('login_failed'))
       dispatch(failPopUp(t('login_failed')))
     }

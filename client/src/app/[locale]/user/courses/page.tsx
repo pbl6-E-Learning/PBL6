@@ -9,7 +9,7 @@ import { useAppDispatch } from '../../../hooks/store'
 import { failPopUp } from '../../../hooks/features/popup.slice'
 import { Course } from '../../../types/course'
 import { useSearchParams } from 'next/navigation'
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '../../../../components/ui/card'
+import { Card, CardContent, CardFooter, CardHeader } from '../../../../components/ui/card'
 import Image from 'next/image'
 import { MdOutlinePlayLesson, MdSystemUpdateAlt } from 'react-icons/md'
 import { PiChalkboardTeacher } from 'react-icons/pi'
@@ -25,7 +25,6 @@ import Img_default from '@/src/app/assets/default_course_img.png'
 const CourseDetail = () => {
   const t = useTranslations('show_course')
   const [course, setCourse] = useState<Course>()
-  const router = useRouter()
   const searchParams = useSearchParams()
   const id = useMemo(() => searchParams.get('id') || '', [searchParams])
   const dispatch = useAppDispatch()

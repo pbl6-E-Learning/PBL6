@@ -1,5 +1,5 @@
 'use client'
-import React, { FormEvent, useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import TranslateForm from '@/src/components/TranslateForm'
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'

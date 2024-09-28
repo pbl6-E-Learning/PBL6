@@ -2,23 +2,23 @@
 import React, { FormEvent, useEffect, useState } from 'react'
 import http from '../../utils/http'
 import { useTranslations } from 'next-intl'
-import { deleteCookie, getCookie, hasCookie, setCookie } from 'cookies-next'
+import { getCookie, setCookie } from 'cookies-next'
 import { useRouter } from 'next/navigation'
-import { useAppDispatch, useAppSelector } from '../../hooks/store'
-import { failPopUp, resetPopUp, successPopUp } from '../../hooks/features/popup.slice'
+import { useAppDispatch } from '../../hooks/store'
+import { failPopUp, successPopUp } from '../../hooks/features/popup.slice'
 import Image from 'next/image'
-import { PasswordInput } from '../../../components/ui/password-input'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '../../../components/ui/card'
 import { Label } from '../../../components/ui/label'
 import { Input } from '../../../components/ui/input'
 import { Button } from '../../../components/ui/button'
-import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google'
+import { GoogleLogin, GoogleOAuthProvider, CredentialResponse } from '@react-oauth/google'
 import RImage from '@/src/app/assets/RImage.png'
 import LoginImage from '@/src/app/assets/login_img.png'
 import BGImage from '@/src/app/assets/login_bg.svg'
 import Link from 'next/link'
 import Flag_EN from '@/src/app/assets/england.png'
 import Flag_VI from '@/src/app/assets/vietnam.png'
+import { AuthenticationType } from '../../types/authentication.type'
 
 export default function LoginPage() {
   const t = useTranslations('login')
@@ -35,27 +35,33 @@ export default function LoginPage() {
     const token = getCookie('authToken')
     if (token) {
       const role = getCookie('role')
-      role === 'admin' ? router.push('/admin') : router.push('/')
+      if (role === 'admin') {
+        router.push('/admin')
+      } else {
+        router.push('/')
+      }
       return
     }
   }, [router])
 
-  const handleLoginSuccess = (response: any) => {
+  const handleLoginSuccess = (response: { message: AuthenticationType }) => {
     const token = response.message.jwt
-    const role = response.message.roles
-    console.log(role)
+    const role: string = response.message.roles
     setCookie('authToken', token)
     setCookie('role', role)
-    console.log(t('login_successful'))
     dispatch(successPopUp(t('login_successful')))
-    role === 'admin' ? router.push('/admin') : router.push('/')
+    if (role === 'admin') {
+      router.push('/admin')
+    } else {
+      router.push('/')
+    }
   }
 
   const handleLogin = async (event: FormEvent) => {
     event.preventDefault()
 
     try {
-      const response: any = await http.post('auth/login', { auth: { email: email, password: password } })
+      const response = await http.post('auth/login', { auth: { email: email, password: password } })
       handleLoginSuccess(response.data)
     } catch (error) {
       console.log(error)
@@ -63,12 +69,11 @@ export default function LoginPage() {
     }
   }
 
-  const responseGoogle = async (response: any) => {
+  const responseGoogle = async (response: CredentialResponse) => {
     try {
-      const res: any = await http.post(`auth/google_oauth2`, { auth: { id_token: response.credential } })
+      const res = await http.post(`auth/google_oauth2`, { auth: { id_token: response.credential } })
       handleLoginSuccess(res.data)
-    } catch (error) {
-      console.log(t('login_failed'))
+    } catch {
       dispatch(failPopUp(t('login_failed')))
     }
   }

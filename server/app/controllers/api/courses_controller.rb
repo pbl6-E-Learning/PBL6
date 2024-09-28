@@ -1,4 +1,4 @@
-class CoursesController < ApplicationController
+class Api::CoursesController < Api::ApplicationController
   include Response
   before_action :set_course, only: :show
 

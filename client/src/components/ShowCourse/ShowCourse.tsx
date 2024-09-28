@@ -1,6 +1,6 @@
 'use client'
 import { useTranslations } from 'next-intl'
-import { Fragment, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Category } from '@/src/app/types/category.type'
 import http from '@/src/app/utils/http'
 import { useAppDispatch } from '@/src/app/hooks/store'
