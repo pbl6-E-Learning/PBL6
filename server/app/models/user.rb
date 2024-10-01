@@ -10,4 +10,18 @@ class User < ApplicationRecord
   validates :full_name, presence: true,
                    length: {maximum: Settings.maximum_name_length}
   validates :sex, presence: true, inclusion: {in: sexes.keys}
+  delegate :email, to: :account
+  delegate :status, to: :account
+
+  scope :activated, ->{joins(:account).where(accounts: {activated: true})}
+
+  class << self
+    def ransackable_attributes _auth_object = nil
+      %w(full_name email created_at updated_at status)
+    end
+
+    def ransackable_associations _auth_object = nil
+      %w(account courses)
+    end
+  end
 end

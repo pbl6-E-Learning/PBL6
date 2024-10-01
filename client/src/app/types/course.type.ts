@@ -1,5 +1,5 @@
-import { Lesson } from './lesson'
-import { Teacher } from './teacher'
+import { Lesson } from './lesson.type'
+import { Teacher } from './teacher.type'
 import { Category } from './category'
 export interface Course {
   id?: number

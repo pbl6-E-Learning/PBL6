@@ -5,6 +5,7 @@ class Account < ApplicationRecord
   VALID_ATTRIBUTES_USER = %i(full_name sex).freeze
   VALID_ATTRIBUTES_USER_CHANGE = %i(full_name sex bio goals image_url).freeze
   enum roles: {user: 0, teacher: 1, admin: 2}
+  enum status: {active: 0, ban: 1}
 
   mail_regex = Regexp.new(Settings.VALID_EMAIL_REGEX)
   validates :email, presence: true,
@@ -43,5 +44,11 @@ class Account < ApplicationRecord
   def send_password_reset_email
     generate_reset_password_token
     AccountMailer.password_reset(self).deliver_now
+  end
+
+  class << self
+    def ransackable_attributes _auth_object = nil
+      %w(email status)
+    end
   end
 end

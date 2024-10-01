@@ -20,5 +20,11 @@ Rails.application.routes.draw do
       end
     end
     resources :categories, only: %i(index)
+    namespace :admin do
+      resources :users, only: %i(index)
+    end
+    namespace :admin do
+      resources :users, only: %i(index)
+    end
   end
 end

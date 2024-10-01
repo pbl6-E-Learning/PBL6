@@ -7,7 +7,7 @@ import http from '../../../utils/http'
 import moment from 'moment'
 import { useAppDispatch } from '../../../hooks/store'
 import { failPopUp } from '../../../hooks/features/popup.slice'
-import { Course } from '../../../types/course'
+import { Course } from '../../../types/course.type'
 import { useSearchParams } from 'next/navigation'
 import { Card, CardContent, CardFooter, CardHeader } from '../../../../components/ui/card'
 import Image from 'next/image'
@@ -67,15 +67,20 @@ const CourseDetail = () => {
       <div className='flex flex-col lg:flex-row gap-10 lg:gap-16 mx-auto max-w-7xl px-4 lg:px-8 mt-5'>
         <div className='lg:flex-1'>
           <div className='lg:ml-20'>
-            <h1 className='text-3xl font-extrabold mb-6'>{course.title}</h1>
-            <p className=' text-gray-600 leading-relaxed'>
-              {course.description?.split('\n').map((line, index) => (
-                <Fragment key={index}>
-                  {line}
-                  <br />
-                </Fragment>
-              ))}
-            </p>
+            <div className='p-4 rounded-lg'>
+              <h1 className='text-3xl font-extrabold truncate'>{course.title}</h1>
+            </div>
+
+            <div className='border border-gray-300 p-4 mt-6 rounded-lg bg-gray-100'>
+              <p className='text-gray-600 leading-loose'>
+                {course.description?.split('\n').map((line, index) => (
+                  <Fragment key={index}>
+                    {line}
+                    <br />
+                  </Fragment>
+                ))}
+              </p>
+            </div>
             <div className='flex justify-center w-full my-4'>
               <div className='flex flex-row gap-2 content-center'>
                 <Image src={LessonImg.src} height={40} width={40} alt='lesson icon' />
@@ -88,14 +93,14 @@ const CourseDetail = () => {
           </div>
         </div>
 
-        <div className='lg:flex-none lg:w-[400px] pt-10'>
+        <div className='lg:flex-none lg:w-[350px] pt-10'>
           <Card className='w-full shadow-lg rounded-lg sticky top-20'>
             <CardHeader className='p-0'>
               <Image
                 className='rounded-t-lg'
                 src={course.image_url || Img_default.src}
-                height={400}
-                width={400}
+                height={350}
+                width={350}
                 alt='course image'
               />
             </CardHeader>

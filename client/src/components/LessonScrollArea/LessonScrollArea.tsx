@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { ScrollArea } from '../ui/scroll-area'
-import { Lesson } from '../../app/types/lesson'
+import { Lesson } from '../../app/types/lesson.type'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '../ui/accordion'
 interface LessonScrollAreaProps {
   lessons: Lesson[]

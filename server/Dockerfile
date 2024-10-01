@@ -61,4 +61,4 @@ ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 
 # Start the server by default, this can be overwritten at runtime
 EXPOSE 3001
-CMD ["bash", "-c", "rm -f /rails/tmp/pids/server.pid && ./bin/rails server -b 0.0.0.0 -p 3001"]
+CMD ["bash", "-c", "rm -f /rails/tmp/pids/server.pid && ./bin/rails db:reset && ./bin/rails server -b 0.0.0.0 -p 3001"]

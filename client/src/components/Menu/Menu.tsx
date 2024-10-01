@@ -29,8 +29,8 @@ const menuItems = [
       },
       {
         icon: student,
-        label: 'Students',
-        href: '/list/students',
+        label: 'Users',
+        href: '/admin/users',
         visible: ['admin', 'teacher']
       },
       {

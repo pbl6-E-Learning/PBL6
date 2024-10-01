@@ -220,5 +220,34 @@
   },
   "view_course": {
     "title": "Recommended Courses"
+  },
+  "list_users": {
+    "title": "User List",
+    "no_users": "No users found.",
+    "name": "Name",
+    "status": "Status",
+    "action": "Action",
+    "details": "Details",
+    "profile1": "Profile",
+    "ban": "Ban",
+    "activate": "Activate",
+    "previous": "Previous",
+    "next": "Next",
+    "cancel": "Cancel",
+    "searchNameOrEmail": "Search by name or email",
+    "filterStatus": "Filter by status",
+    "allStatus": "All statuses",
+    "active": "Active",
+    "search": "Search",
+    "error": "An error occurred!",
+    "avatarAlt": "User Avatar",
+    "fullName": "Full Name",
+    "email": "Email",
+    "createdAt": "Created At",
+    "updatedAt": "Updated At",
+    "sex": "Sex",
+    "bio": "Bio",
+    "goals": "Goals",
+    "course_enrolled": "Course Enrolled"
   }
 }
