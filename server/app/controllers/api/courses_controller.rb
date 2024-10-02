@@ -3,6 +3,27 @@ class Api::CoursesController < Api::ApplicationController
   include Response
   before_action :set_course, only: :show
 
+  def index
+    courses_query = Course.by_category(params[:category_id])
+                          .sorted_by(params[:sort])
+                          .includes(:lessons, :teacher, :category)
+    @pagy, courses = pagy(courses_query)
+
+    json_response(
+      message: {
+        courses: courses.as_json(include: %i(lessons teacher category)),
+        pagy: {
+          count: @pagy.count,
+          pages: @pagy.pages,
+          current_page: @pagy.page,
+          next_page: @pagy.next,
+          prev_page: @pagy.prev
+        }
+      },
+      status: :ok
+    )
+  end
+
   def show
     course_with_lessons = @course.as_json(include: %i(lessons teacher category))
     if @course.present?

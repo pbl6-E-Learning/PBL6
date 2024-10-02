@@ -14,7 +14,7 @@ const CourseCard = ({ course }: CourseCardProps) => {
   const router = useRouter()
   const t = useTranslations('course_card')
   const handleViewDetails = () => {
-    router.push(`/user/courses?id=${course.id}`)
+    router.push(`/user/courses/${course.id}`)
   }
 
   return (
@@ -30,12 +30,10 @@ const CourseCard = ({ course }: CourseCardProps) => {
         <CardDescription className='overflow-hidden whitespace-nowrap text-ellipsis'>
           {course?.category?.name ? `${t('category')} : ${course?.category?.name}` : ''}
         </CardDescription>
-        <div>
+        <div className='w-full'>
           <Tooltip>
-            <TooltipTrigger>
-              <CardTitle className='text-lg uppercase font-bold overflow-hidden whitespace-nowrap text-ellipsis max-w-[50%]'>
-                {course?.title}
-              </CardTitle>
+            <TooltipTrigger className='w-full text-left'>
+              <CardTitle className='text-lg uppercase font-bold truncate'>{course?.title}</CardTitle>
             </TooltipTrigger>
             <TooltipContent side='top'>
               <p>{course?.title}</p>

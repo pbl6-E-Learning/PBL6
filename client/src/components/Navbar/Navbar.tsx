@@ -136,7 +136,7 @@ const Navbar = () => {
                           <Link
                             className='my-2 block border-b border-gray-100 py-1 font-semibold text-gray-500 hover:text-primary md:mx-2'
                             key={index}
-                            href={`${removeAccents(categories.name as string)}`}
+                            href={`/en/user/category/${categories.id}`}
                           >
                             {categories?.name}
                           </Link>

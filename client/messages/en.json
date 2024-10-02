@@ -250,5 +250,16 @@
     "goals": "Goals",
     "course_enrolled": "Course Enrolled",
     "update_fail": "Failed to update status"
-  }
+  },
+  "category": {
+    "title": "Course List",
+    "category": "Category",
+    "sort_by": "Sort by",
+    "sort_placeholder": "Sort By",
+    "sort_label": "Sort By",
+    "sort_default": "Default",
+    "sort_hot": "Hot",
+    "sort_new": "New",
+    "error": "An error occurred!"
+  }  
 }

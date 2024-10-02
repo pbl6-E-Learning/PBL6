@@ -21,11 +21,9 @@ class Api::UsersController < Api::ApplicationController
   end
 
   def enrolled_courses
-    enrolled_courses = current_user.courses.preload(:teacher,
-                                                    :category).as_json(
-                                                      include: %i(teacher
-                                                                  category)
-                                                    )
+    enrolled_courses = current_user.courses
+                                   .preload(:teacher, :category)
+                                   .as_json(include: %i(teacher category))
     json_response(message: {courses: enrolled_courses}, status: :ok)
   end
 
