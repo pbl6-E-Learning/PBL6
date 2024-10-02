@@ -244,6 +244,7 @@
     "sex": "Giới tính",
     "bio": "Giới thiệu",
     "goals": "Mục tiêu",
-    "course_enrolled": "Khóa học đã tham gia"
+    "course_enrolled": "Khóa học đã tham gia",
+    "update_fail": "Cập nhật trạng thái thất bại"
   }
 }
