@@ -1,4 +1,4 @@
-import { Course } from './course'
+import { Course } from './course.type'
 
 export interface Category {
   id?: number

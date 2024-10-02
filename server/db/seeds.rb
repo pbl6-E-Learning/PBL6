@@ -106,7 +106,8 @@ Account.create!(
   account = Account.create!(
     email: Faker::Internet.unique.email,
     password: "password",
-    roles: 0
+    roles: 0,
+    activated: true
   )
 
   account.create_user!(

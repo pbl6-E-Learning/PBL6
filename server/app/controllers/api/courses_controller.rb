@@ -1,4 +1,5 @@
 class Api::CoursesController < Api::ApplicationController
+  authorize_resource
   include Response
   before_action :set_course, only: :show
 

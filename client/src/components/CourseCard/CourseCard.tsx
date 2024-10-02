@@ -4,7 +4,7 @@ import { Tooltip, TooltipTrigger, TooltipContent } from '../ui/tooltip'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
-import { Course } from '@/src/app/types/course'
+import { Course } from '@/src/app/types/course.type'
 import Img_default from '@/src/app/assets/default_course_img.png'
 interface CourseCardProps {
   course: Course

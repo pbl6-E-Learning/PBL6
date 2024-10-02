@@ -1,4 +1,8 @@
 class Api::ApplicationController < ActionController::API
+  include Response
+  include CanCan::ControllerAdditions
+  include Pagy::Backend
+
   def logged_in?
     !!current_user
   end
@@ -10,10 +14,32 @@ class Api::ApplicationController < ActionController::API
     @current_user ||= account&.user if account&.user
   end
 
+  def current_account
+    return unless auth_present?
+
+    @current_account = Account.find_by(id: auth["payload"]["account"])
+  end
+
+  def current_ability
+    @current_ability ||= Ability.new current_account
+  end
+
+  def admin?
+    return if current_account&.admin?
+
+    error_response(message: "Bạn không có quyền truy cập vào tài nguyên này.",
+                   status: :forbidden) and return
+  end
+
   def authenticate
     return if logged_in?
 
     render json: {error: "unauthorized"}, status: :unauthorized
+  end
+
+  rescue_from CanCan::AccessDenied do |exception|
+    render error_response(message: exception.message,
+                          status: :forbidden) and return
   end
 
   private

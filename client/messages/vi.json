@@ -216,5 +216,34 @@
   },
   "view_course": {
     "title": "Các khóa học được đề xuất"
+  },
+  "list_users": {
+    "title": "Danh sách người dùng",
+    "no_users": "Không có người dùng nào.",
+    "name": "Tên",
+    "action": "Hành động",
+    "details": "Chi tiết",
+    "profile1": "Hồ sơ",
+    "activate": "Kích hoạt",
+    "cancel": "Hủy",
+    "searchNameOrEmail": "Tìm theo tên hoặc email",
+    "filterStatus": "Lọc theo trạng thái",
+    "allStatus": "Tất cả trạng thái",
+    "active": "Hoạt động",
+    "ban": "Cấm",
+    "search": "Tìm kiếm",
+    "previous": "Trước",
+    "next": "Tiếp theo",
+    "status": "Trạng thái",
+    "error": "Đã xảy ra lỗi!",
+    "avatarAlt": "Ảnh đại diện người dùng",
+    "fullName": "Họ và tên",
+    "email": "Email",
+    "createdAt": "Ngày tạo",
+    "updatedAt": "Ngày cập nhật",
+    "sex": "Giới tính",
+    "bio": "Giới thiệu",
+    "goals": "Mục tiêu",
+    "course_enrolled": "Khóa học đã tham gia"
   }
 }

@@ -7,6 +7,11 @@ class Api::AuthenticationController < Api::ApplicationController
     account = Account.find_by(email: auth_params[:email])
 
     if account&.authenticate(auth_params[:password])
+      unless account.activated
+        return error_response(message: "Account not activated",
+                              status: :unauthorized)
+      end
+
       jwt = Auth.issue(payload: {account: account.id})
       json_response(message: {jwt:, roles: account.roles}, status: :ok)
     else

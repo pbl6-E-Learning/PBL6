@@ -1,7 +1,6 @@
 class Api::UsersController < Api::ApplicationController
+  authorize_resource
   include Response
-  before_action :authenticate, only: %i(enrolled_courses update)
-
   def show
     user_profile = current_user.as_json(include: {account: {only: [:email]}})
     json_response(message: {profile: user_profile}, status: :ok)
@@ -22,9 +21,11 @@ class Api::UsersController < Api::ApplicationController
   end
 
   def enrolled_courses
-    enrolled_courses = current_user.courses.as_json(
-      include: %i(teacher category)
-    )
+    enrolled_courses = current_user.courses.preload(:teacher,
+                                                    :category).as_json(
+                                                      include: %i(teacher
+                                                                  category)
+                                                    )
     json_response(message: {courses: enrolled_courses}, status: :ok)
   end
 

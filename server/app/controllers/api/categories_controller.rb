@@ -1,8 +1,9 @@
 class Api::CategoriesController < Api::ApplicationController
+  # authorize_resource
   include Response
 
   def index
-    categories = Category.all
+    categories = Category.includes(courses: :teacher).all
 
     json_response(
       message: categories.as_json(
