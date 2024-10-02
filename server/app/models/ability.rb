@@ -32,10 +32,11 @@ class Ability
 
     can :read, Course
     can :read, Lesson
-    can :create, Comment, user_id: account.id
-    can :create, Follow, user_id: account.id
+    can :create, Comment, user_id: account&.user&.id
+    can :create, Follow, user_id: account&.user&.id
     can :read, Teacher
     can :read, Category
-    can :manage, User, id: account.id
+    can :manage, User, account_id: account.id
+    can :manage, Account, id: account.id
   end
 end

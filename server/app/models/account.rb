@@ -46,6 +46,10 @@ class Account < ApplicationRecord
     AccountMailer.password_reset(self).deliver_now
   end
 
+  def toggle_status
+    active? ? ban! : active!
+  end
+
   class << self
     def ransackable_attributes _auth_object = nil
       %w(email status)

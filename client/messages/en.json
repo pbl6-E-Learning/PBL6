@@ -248,6 +248,7 @@
     "sex": "Sex",
     "bio": "Bio",
     "goals": "Goals",
-    "course_enrolled": "Course Enrolled"
+    "course_enrolled": "Course Enrolled",
+    "update_fail": "Failed to update status"
   }
 }

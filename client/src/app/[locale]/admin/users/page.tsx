@@ -1,5 +1,4 @@
 'use client'
-import { failPopUp } from '@/src/app/hooks/features/popup.slice'
 import { useAppDispatch } from '@/src/app/hooks/store'
 import { Pagy } from '@/src/app/types/pagy.type'
 import { User } from '@/src/app/types/user.type'
@@ -27,6 +26,7 @@ import {
   SelectTrigger,
   SelectValue
 } from '@/src/components/ui/select'
+import { failPopUp, successPopUp } from '@/src/app/hooks/features/popup.slice'
 
 const ListUsers = () => {
   const t = useTranslations('list_users')
@@ -71,7 +71,22 @@ const ListUsers = () => {
     }
   }
 
-  const handleBanActivate = (user: User) => {}
+  const handleBanActivate = async (user: User) => {
+    try {
+      const res: { message: string } = await http.patch(`/admin/accounts/${user.account_id}/update_status`)
+      dispatch(successPopUp(res.message))
+      setUsers((prevUsers) =>
+        prevUsers.map((u) =>
+          u.account_id === user.account_id
+            ? { ...u, account: { ...u.account, status: u.account?.status === 'active' ? 'ban' : 'active' } }
+            : u
+        )
+      )
+    } catch (error: any) {
+      const message = error?.response?.data?.error || error.message || t('update_fail')
+      dispatch(failPopUp(message))
+    }
+  }
 
   const handleSearch = () => {
     setCurrentPage(1)
