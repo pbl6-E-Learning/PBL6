@@ -37,17 +37,17 @@ RUN bundle exec bootsnap precompile app/ lib/
 RUN chmod +x bin/* && \
     sed -i "s/\r$//g" bin/* && \
     sed -i 's/ruby\.exe$/ruby/' bin/*
-    
-    
-    
+
+
+
     # Final stage for app image
     FROM base
-    
+
     # Install packages needed for deployment
     RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y curl default-mysql-client libvips && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
-    
+
     # Copy built artifacts: gems, application
     COPY --from=build /usr/local/bundle /usr/local/bundle
 COPY --from=build /rails /rails
