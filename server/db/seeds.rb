@@ -119,5 +119,5 @@ Account.create!(
   )
 end
 
-CourseAssignment.create!(user: User.last, course: Course.first, assigned_at: Time.now, accepted: true)
-CourseAssignment.create!(user: User.last, course: Course.second, assigned_at: Time.now, accepted: true)
+CourseAssignment.create!(user: User.last, course: Course.first, assigned_at: Time.now, status: :accepted)
+CourseAssignment.create!(user: User.last, course: Course.second, assigned_at: Time.now, status: :accepted)

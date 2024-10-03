@@ -76,7 +76,11 @@
     "update": "Update",
     "level": "Level",
     "enroll": "Enroll",
-    "list_lessons": "List Lessons"
+    "list_lessons": "List Lessons",
+    "assign_success": "Assignment request sent, waiting for teacher approval",
+    "assign_fail": "Assignment request failed",
+    "pending": "Pending...",
+    "accepted": "Accepted"
   },
   "nodata": {
     "no_data_title": "No result found",
@@ -261,5 +265,5 @@
     "sort_hot": "Hot",
     "sort_new": "New",
     "error": "An error occurred!"
-  }  
+  }
 }

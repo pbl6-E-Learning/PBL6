@@ -1,14 +1,12 @@
 'use client'
 import * as React from 'react'
-import { useRouter } from 'next/router'
-import { useEffect, useState, useMemo, Fragment } from 'react'
+import { useEffect, useState, Fragment } from 'react'
 import { useTranslations } from 'next-intl'
 import http from '../../../../utils/http'
 import moment from 'moment'
 import { useAppDispatch } from '../../../../hooks/store'
-import { failPopUp } from '../../../../hooks/features/popup.slice'
+import { failPopUp, successPopUp } from '../../../../hooks/features/popup.slice'
 import { Course } from '../../../../types/course.type'
-import { useSearchParams } from 'next/navigation'
 import { Card, CardContent, CardFooter, CardHeader } from '../../../../../components/ui/card'
 import Image from 'next/image'
 import { MdOutlinePlayLesson, MdSystemUpdateAlt } from 'react-icons/md'
@@ -22,22 +20,33 @@ import { ProgressBar } from '@/src/components/ProgressBar/ProgressBar'
 import Nodata from '@/src/components/Nodata/Nodata'
 import Img_default from '@/src/app/assets/default_course_img.png'
 
+type AssignCourse = {
+  course_id: number
+  status: string
+}
+
+type StatusCourse = {
+  course?: Course
+  status?: string
+  is_assigned?: boolean
+}
+
 const CourseDetail = ({ params }: { params: { id: string } }) => {
   const t = useTranslations('show_course')
-  const [course, setCourse] = useState<Course>()
-  const searchParams = useSearchParams()
+  const [course, setCourse] = useState<StatusCourse>()
   const dispatch = useAppDispatch()
   const [dataLoaded, setDataLoaded] = useState(false)
   useEffect(() => {
     document.title = t('title')
   })
+
   useEffect(() => {
     if (params.id) {
       const getCourse = async (id: string | string[]) => {
         try {
-          const res: { data: { message: { course: Course } } } = await http.get(`courses/${id}`)
+          const res: { data: { message: StatusCourse } } = await http.get(`courses/${id}`)
           const data = res.data.message
-          setCourse(data.course)
+          setCourse(data)
           setDataLoaded(true)
         } catch (error: any) {
           const message = error?.response?.data?.error || error.message || t('error')
@@ -47,6 +56,20 @@ const CourseDetail = ({ params }: { params: { id: string } }) => {
       getCourse(params.id)
     }
   }, [dispatch, t, params.id])
+
+  const handleAssignCourse = async () => {
+    if (params.id) {
+      try {
+        const res: { data: { message: AssignCourse } } = await http.post(`courses/${params.id}/assign`)
+        const data = res.data.message
+        setCourse((prevCourse) => ({ ...prevCourse, status: data.status }))
+        dispatch(successPopUp(t('assign_success')))
+      } catch (e: any) {
+        setCourse((prevCourse) => ({ ...prevCourse, status: e.response.data.error.status }))
+        dispatch(failPopUp(t('assign_fail')))
+      }
+    }
+  }
 
   if (!course) {
     return (
@@ -70,12 +93,12 @@ const CourseDetail = ({ params }: { params: { id: string } }) => {
         <div className='lg:flex-1'>
           <div className='lg:ml-20'>
             <div className='p-4 rounded-lg'>
-              <h1 className='text-3xl font-extrabold truncate'>{course.title}</h1>
+              <h1 className='text-3xl font-extrabold truncate'>{course?.course?.title}</h1>
             </div>
 
             <div className='border border-gray-300 p-4 mt-6 rounded-lg bg-gray-100'>
               <p className='text-gray-600 leading-loose'>
-                {course.description?.split('\n').map((line, index) => (
+                {course?.course?.description?.split('\n').map((line, index) => (
                   <Fragment key={index}>
                     {line}
                     <br />
@@ -90,7 +113,7 @@ const CourseDetail = ({ params }: { params: { id: string } }) => {
               </div>
             </div>
             <div>
-              <LessonScrollArea lessons={course?.lessons || []} />
+              <LessonScrollArea lessons={course?.course?.lessons || []} />
             </div>
           </div>
         </div>
@@ -100,7 +123,7 @@ const CourseDetail = ({ params }: { params: { id: string } }) => {
             <CardHeader className='p-0'>
               <Image
                 className='rounded-t-lg'
-                src={course.image_url || Img_default.src}
+                src={course?.course?.image_url || Img_default.src}
                 height={350}
                 width={350}
                 alt='course image'
@@ -113,7 +136,7 @@ const CourseDetail = ({ params }: { params: { id: string } }) => {
                   <span className='text-lg font-medium'>{t('lesson')}</span>
                 </div>
                 <span className='text-lg font-bold'>
-                  {course.lessons?.length || 0} {t('lesson')}
+                  {course?.course?.lessons?.length || 0} {t('lesson')}
                 </span>
               </div>
               <Separator className='my-4' />
@@ -122,7 +145,7 @@ const CourseDetail = ({ params }: { params: { id: string } }) => {
                   <PiChalkboardTeacher size={24} className='text-primary' />
                   <span className='text-lg font-medium'>{t('teacher')}</span>
                 </div>
-                <span className='text-lg font-bold'>{course.teacher?.name}</span>
+                <span className='text-lg font-bold'>{course?.course?.teacher?.name}</span>
               </div>
               <Separator className='my-4' />
               <div className='flex justify-between items-center mb-4'>
@@ -130,7 +153,7 @@ const CourseDetail = ({ params }: { params: { id: string } }) => {
                   <LiaLevelUpAltSolid size={24} className='text-primary' />
                   <span className='text-lg font-medium'>{t('level')}</span>
                 </div>
-                <span className='text-lg font-bold'>{course.level}</span>
+                <span className='text-lg font-bold'>{course?.course?.level}</span>
               </div>
               <Separator className='my-4' />
               <div className='flex justify-between items-center'>
@@ -138,11 +161,18 @@ const CourseDetail = ({ params }: { params: { id: string } }) => {
                   <MdSystemUpdateAlt size={24} className='text-primary' />
                   <span className='text-lg font-medium'>{t('update')}</span>
                 </div>
-                <span className='text-lg font-bold'>{moment(course.updated_at).format('D MMMM YYYY')}</span>
+                <span className='text-lg font-bold'>{moment(course?.course?.updated_at).format('D MMMM YYYY')}</span>
               </div>
             </CardContent>
             <CardFooter className='px-6'>
-              <Button className='w-full py-3 text-lg font-semibold rounded'>{t('enroll')}</Button>
+              <Button
+                className='w-full py-3 text-lg font-semibold rounded'
+                onClick={handleAssignCourse}
+                disabled={['accepted', 'pending'].includes(course?.status as string)}
+              >
+                {course.is_assigned || course.status === 'pending' ? t('pending') : t('enroll')}
+                {course.status === 'accepted' && t('enrolled')}
+              </Button>
             </CardFooter>
           </Card>
         </div>

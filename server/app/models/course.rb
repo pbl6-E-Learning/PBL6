@@ -27,4 +27,8 @@ class Course < ApplicationRecord
       default_order
     end
   }
+
+  def assignment_exists_for_user? user
+    user.course_assignments.exists?(course_id: id)
+  end
 end
