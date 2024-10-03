@@ -1,50 +1,52 @@
 'use client'
 import * as React from 'react'
-import { useRouter } from 'next/navigation'
+import { useRouter } from 'next/router'
 import { useEffect, useState, useMemo, Fragment } from 'react'
 import { useTranslations } from 'next-intl'
-import http from '../../../utils/http'
+import http from '../../../../utils/http'
 import moment from 'moment'
-import { useAppDispatch } from '../../../hooks/store'
-import { failPopUp } from '../../../hooks/features/popup.slice'
-import { Course } from '../../../types/course.type'
+import { useAppDispatch } from '../../../../hooks/store'
+import { failPopUp } from '../../../../hooks/features/popup.slice'
+import { Course } from '../../../../types/course.type'
 import { useSearchParams } from 'next/navigation'
-import { Card, CardContent, CardFooter, CardHeader } from '../../../../components/ui/card'
+import { Card, CardContent, CardFooter, CardHeader } from '../../../../../components/ui/card'
 import Image from 'next/image'
 import { MdOutlinePlayLesson, MdSystemUpdateAlt } from 'react-icons/md'
 import { PiChalkboardTeacher } from 'react-icons/pi'
 import { LiaLevelUpAltSolid } from 'react-icons/lia'
-import LessonImg from '../../../assets/lesson.png'
-import { Separator } from '../../../../components/ui/separator'
-import { Button } from '../../../../components/ui/button'
-import { LessonScrollArea } from '../../../../components/LessonScrollArea/LessonScrollArea'
-import { ProgressBar } from '../../../../components/ProgressBar/ProgressBar'
+import LessonImg from '@/src/app/assets/lesson.png'
+import { Separator } from '@/src/components/ui/separator'
+import { Button } from '@/src/components/ui/button'
+import { LessonScrollArea } from '@/src/components/LessonScrollArea/LessonScrollArea'
+import { ProgressBar } from '@/src/components/ProgressBar/ProgressBar'
 import Nodata from '@/src/components/Nodata/Nodata'
 import Img_default from '@/src/app/assets/default_course_img.png'
 
-const CourseDetail = () => {
+const CourseDetail = ({ params }: { params: { id: string } }) => {
   const t = useTranslations('show_course')
   const [course, setCourse] = useState<Course>()
   const searchParams = useSearchParams()
-  const id = useMemo(() => searchParams.get('id') || '', [searchParams])
   const dispatch = useAppDispatch()
   const [dataLoaded, setDataLoaded] = useState(false)
   useEffect(() => {
     document.title = t('title')
   })
   useEffect(() => {
-    const getCourse = async (id: string | string[]) => {
-      try {
-        const res: { data: { message: { course: Course } } } = await http.get(`courses/${id}`)
-        setCourse(res.data.message.course)
-        setDataLoaded(true)
-      } catch (error: any) {
-        const message = error?.response?.data?.error || error.message || t('error')
-        dispatch(failPopUp(message))
+    if (params.id) {
+      const getCourse = async (id: string | string[]) => {
+        try {
+          const res: { data: { message: { course: Course } } } = await http.get(`courses/${id}`)
+          const data = res.data.message
+          setCourse(data.course)
+          setDataLoaded(true)
+        } catch (error: any) {
+          const message = error?.response?.data?.error || error.message || t('error')
+          dispatch(failPopUp(message))
+        }
       }
+      getCourse(params.id)
     }
-    getCourse(id)
-  }, [dispatch, t, id])
+  }, [dispatch, t, params.id])
 
   if (!course) {
     return (

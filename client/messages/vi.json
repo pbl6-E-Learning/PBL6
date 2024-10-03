@@ -246,5 +246,16 @@
     "goals": "Mục tiêu",
     "course_enrolled": "Khóa học đã tham gia",
     "update_fail": "Cập nhật trạng thái thất bại"
+  },
+  "category": {
+    "title": "Danh Sách Khóa Học",
+    "category": "Danh Mục",
+    "sort_by": "Sắp Xếp Theo",
+    "sort_placeholder": "Sắp Xếp",
+    "sort_label": "Sắp Xếp Theo",
+    "sort_default": "Mặc Định",
+    "sort_hot": "Nổi Bật",
+    "sort_new": "Mới",
+    "error": "Đã xảy ra lỗi!"
   }
 }
