@@ -1,6 +1,8 @@
 class Api::UsersController < Api::ApplicationController
   authorize_resource
   include Response
+  before_action :authenticate
+
   def show
     user_profile = current_user.as_json(include: {account: {only: [:email]}})
     json_response(message: {profile: user_profile}, status: :ok)

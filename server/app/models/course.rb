@@ -27,4 +27,8 @@ class Course < ApplicationRecord
       default_order
     end
   }
+
+  def assignment_for_user user
+    course_assignments.find_by(user_id: user.id)
+  end
 end

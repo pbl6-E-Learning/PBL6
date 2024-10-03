@@ -30,7 +30,7 @@ class Ability
   def set_user_permissions account
     return unless account.user?
 
-    can :read, Course
+    can :manage, Course
     can :read, Lesson
     can :create, Comment, user_id: account&.user&.id
     can :create, Follow, user_id: account&.user&.id
