@@ -43,7 +43,7 @@ categories_data.each do |category|
   categories_map[category["id"]] = created_category.id
 end
 
-levels = %w(Beginner Intermediate Advanced)
+levels = %w(N1 N2 N3 N4 N5)
 category_ids = Category.pluck(:id)
 courses_map = {}
 
@@ -119,5 +119,5 @@ Account.create!(
   )
 end
 
-CourseAssignment.create!(user: User.last, course: Course.first, assigned_at: Time.now, status: :1)
-CourseAssignment.create!(user: User.last, course: Course.second, assigned_at: Time.now, status: :1)
+CourseAssignment.create!(user: User.last, course: Course.first, assigned_at: Time.now, status: 1)
+CourseAssignment.create!(user: User.last, course: Course.second, assigned_at: Time.now, status: 1)

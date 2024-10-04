@@ -4,6 +4,9 @@ Rails.application.routes.draw do
     post "auth/google_oauth2", to: "authentication#login_oauth_google"
     resources :courses, only: %i(show index) do
       post 'assign', on: :member
+      collection do
+        get 'search'
+      end
     end
     get "up" => "rails/health#show", as: :rails_health_check
     post "accounts", to: "account#create", as: "create_account"

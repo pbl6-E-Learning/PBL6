@@ -1,5 +1,5 @@
 class Api::CategoriesController < Api::ApplicationController
-  # authorize_resource
+  authorize_resource
   include Response
 
   def index

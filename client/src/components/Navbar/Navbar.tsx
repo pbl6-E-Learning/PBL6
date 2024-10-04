@@ -27,8 +27,19 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger
 } from '../ui/dropdown-menu'
-import { Category } from '@/src/app/types/category.type'
-
+import { Category } from '@/src/app/types/category'
+import { Input } from '../ui/input'
+import { FaSearch } from 'react-icons/fa'
+import { useCategories } from '@/src/app/context/CategoriesContext'
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectGroup,
+  SelectLabel,
+  SelectItem
+} from '@radix-ui/react-select'
 const NavbarMenu = [
   {
     id: 1,
@@ -38,11 +49,11 @@ const NavbarMenu = [
   {
     id: 2,
     key: 'translate',
-    path: 'user/translate'
+    path: 'translate'
   },
   {
     id: 3,
-    key: 'list_courses',
+    key: 'category',
     path: '#'
   }
 ]
@@ -51,39 +62,25 @@ const Navbar = () => {
   const pathname = usePathname()
   const searchParams = useSearchParams()
   const t = useTranslations('navbar')
+  const category = useCategories()
   const [token, setToken] = useState<CookieValueTypes>()
   const [profile, setProfile] = useState<Profile>()
   const [isOpen, setIsOpen] = useState<boolean>(false)
-  const [category, setCategory] = useState<Category[]>([])
+  const [searchTerm, setSearchTerm] = useState('')
   const dispatch = useAppDispatch()
 
-  const removeAccents = (str: string) => {
-    return str
-      .toLowerCase()
-      .normalize('NFD')
-      .replace(/[\u0300-\u036f]/g, '')
-      .replace(/ /g, '')
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      if (searchTerm.trim() === '') return
+      router.push(`/user/courses?query=${searchTerm}`)
+    }
   }
-
   useEffect(() => {
     if (hasCookie('authToken')) {
       setToken(getCookie('authToken'))
       return
     }
   }, [])
-
-  useEffect(() => {
-    const fetchProfile = async () => {
-      try {
-        const res: { data: { message: Category[] } } = await http.get(`categories`)
-        setCategory(res.data.message)
-      } catch (error: any) {
-        const message = error?.response?.data?.error || error.message || t('error')
-        dispatch(failPopUp(message))
-      }
-    }
-    fetchProfile()
-  }, [dispatch, t])
 
   const handleNavigation = (href: string) => {
     router.push(href)
@@ -114,21 +111,33 @@ const Navbar = () => {
         animate={{ opacity: 1, y: 0 }}
         className='container pt-10 flex justify-between items-center'
       >
-        <div>
+        <div className='flex'>
           <Link href='/' className='font-bold text-4xl cursor-pointer'>
             {t('logo')}
           </Link>
+        </div>
+        <div className='relative'>
+          <Input
+            type='search'
+            placeholder={t('search_placeholder')}
+            className='w-80 rounded-full mr-10 px-5 pl-10'
+            onChange={(e) => setSearchTerm(e.target.value)}
+            onKeyDown={handleKeyDown}
+          />
+          <span className='absolute inset-y-0 left-0 flex items-center pl-3'>
+            <FaSearch className='text-gray-500' />
+          </span>
         </div>
         <div className='hidden lg:block'>
           <ul className='flex items-center gap-3'>
             {NavbarMenu?.map((menu) => (
               <li key={menu.id}>
-                {menu.key === 'list_courses' ? (
+                {menu.key === 'category' ? (
                   <div>
                     <div className='group relative cursor-pointer'>
                       <div className='inline-block py-2 px-3 hover:text-secondary relative group dark:text-dark'>
                         <div className='w-2 h-2 bg-secondary absolute mt-4 rounded-full left-1/2 -translate-x-1/2 top-1/2 bottom-0 group-hover:block hidden cursor-pointer'></div>
-                        {t('list_courses')}
+                        {t('category')}
                       </div>
 
                       <div className='invisible absolute z-50 flex flex-col w-60 bg-white py-1 px-4 text-gray-800 shadow-xl group-hover:visible rounded-lg'>
@@ -155,6 +164,7 @@ const Navbar = () => {
                 )}
               </li>
             ))}
+
             <ModeToggle />
             <Link href={switchLanguage('en', pathname, queryString)}>
               <Image src={Flag_EN} alt='Flag EN' className='w-9 h-7' />

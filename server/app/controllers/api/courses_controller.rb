@@ -13,13 +13,7 @@ class Api::CoursesController < Api::ApplicationController
     json_response(
       message: {
         courses: courses.as_json(include: %i(lessons teacher category)),
-        pagy: {
-          count: @pagy.count,
-          pages: @pagy.pages,
-          current_page: @pagy.page,
-          next_page: @pagy.next,
-          prev_page: @pagy.prev
-        }
+        pagy: pagy_res(@pagy)
       },
       status: :ok
     )
@@ -44,6 +38,26 @@ class Api::CoursesController < Api::ApplicationController
     else
       create_and_assign_new_course
     end
+  end
+
+  def search
+    @q = Course.ransack(
+      title_or_description_cont: params[:q],
+      level_eq: params[:level],
+      category_id_eq: params[:category],
+      teacher_id_eq: params[:teacher]
+    )
+    @pagy, courses = pagy @q.result
+                            .sorted_by(params[:sort])
+                            .includes(:lessons, :teacher, :category)
+
+    json_response(
+      message: {
+        courses: courses.as_json(include: %i(lessons teacher category)),
+        pagy: pagy_res(@pagy)
+      },
+      status: :ok
+    )
   end
 
   private

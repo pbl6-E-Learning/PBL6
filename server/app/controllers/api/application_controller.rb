@@ -55,4 +55,14 @@ class Api::ApplicationController < ActionController::API
   def auth_present?
     request.headers["Authorization"]&.match?(/Bearer/)
   end
+
+  def pagy_res pagy
+    {
+      count: pagy.count,
+      pages: pagy.pages,
+      current_page: pagy.page,
+      next_page: pagy.next,
+      prev_page: pagy.prev
+    }
+  end
 end

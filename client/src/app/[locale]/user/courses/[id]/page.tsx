@@ -1,6 +1,6 @@
 'use client'
 import * as React from 'react'
-import { useEffect, useState, Fragment } from 'react'
+import { useEffect, useState, useMemo, Fragment } from 'react'
 import { useTranslations } from 'next-intl'
 import http from '../../../../utils/http'
 import moment from 'moment'
@@ -95,9 +95,9 @@ const CourseDetail = ({ params }: { params: { id: string } }) => {
   }
 
   return (
-    <div>
-      <div className='flex flex-col lg:flex-row gap-10 lg:gap-16 mx-auto max-w-7xl px-4 lg:px-8 mt-5'>
-        <div className='lg:flex-1'>
+    <div className='w-full max-w-full'>
+      <div className='flex flex-col lg:flex-row w-full max-w-full mt-5'>
+        <div className='lg:flex-1 w-2/3'>
           <div className='lg:ml-20'>
             <div className='p-4 rounded-lg'>
               <h1 className='text-3xl font-extrabold truncate'>{course?.course?.title}</h1>
@@ -125,8 +125,8 @@ const CourseDetail = ({ params }: { params: { id: string } }) => {
           </div>
         </div>
 
-        <div className='lg:flex-none lg:w-[350px] pt-10'>
-          <Card className='w-full shadow-lg rounded-lg sticky top-20'>
+        <div className='lg:flex-none w-1/3 pt-10 flex justify-center'>
+          <Card className='w-[350px] shadow-lg rounded-lg sticky top-20 h-[525px]'>
             <CardHeader className='p-0'>
               <Image
                 className='rounded-t-lg'
