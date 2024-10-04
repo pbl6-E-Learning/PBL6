@@ -72,7 +72,12 @@
     "update": "Cập nhật",
     "level": "Cấp độ",
     "enroll": "Đăng ký",
-    "list_lessons": "Danh sách bài học"
+    "list_lessons": "Danh sách bài học",
+    "assign_success": "Yêu cầu đăng ký đã được gửi, đang chờ sự chấp thuận của giáo viên",
+    "assign_fail": "Yêu cầu đăng ký thất bại",
+    "pending": "Đang chờ xử lý...",
+    "accepted": "Đã đăng ký",
+    "please_login": "Vui lòng đăng nhập để đăng ký khóa học này"
   },
   "nodata": {
     "no_data_title": "Không tìm thấy kết quả",

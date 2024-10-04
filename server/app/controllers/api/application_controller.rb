@@ -34,7 +34,7 @@ class Api::ApplicationController < ActionController::API
   def authenticate
     return if logged_in?
 
-    render json: {error: "unauthorized"}, status: :unauthorized
+    render json: {error: "unauthorized"}, status: :unauthorized and return
   end
 
   rescue_from CanCan::AccessDenied do |exception|
