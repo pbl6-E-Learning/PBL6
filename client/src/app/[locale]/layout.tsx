@@ -8,6 +8,7 @@ import { ThemeProvider } from '../../components/theme-provider'
 import '@/src/app/globals.css'
 import { NextIntlClientProvider } from 'next-intl'
 import { getMessages } from 'next-intl/server'
+import { CategoriesProvider } from '../context/CategoriesContext'
 
 const nunito = Nunito({ subsets: ['latin'] })
 
@@ -30,8 +31,10 @@ export default async function LocaleLayout({
         <ThemeProvider attribute='class' defaultTheme='system' enableSystem disableTransitionOnChange>
           <NextIntlClientProvider messages={messages}>
             <Providers>
-              {children}
-              <Popup />
+              <CategoriesProvider>
+                {children}
+                <Popup />
+              </CategoriesProvider>
             </Providers>
             <Toaster />
             <Loading />

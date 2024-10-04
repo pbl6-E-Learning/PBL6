@@ -108,8 +108,9 @@
     "logout": "Logout",
     "home": "Home",
     "translate": "Translate",
-    "list_courses": "List Courses",
-    "logo": "Return"
+    "category": "Category",
+    "logo": "Return",
+    "search_placeholder": "Search for courses"
   },
   "announcements": {
     "title": "Announcements",
@@ -266,5 +267,22 @@
     "sort_hot": "Hot",
     "sort_new": "New",
     "error": "An error occurred!"
+  },
+  "course_search": {
+    "title": "Search Course",
+    "filter": "Filter",
+    "select_level": "Select level",
+    "level": "Level",
+    "none": "None",
+    "select_category": "Select category",
+    "category1": "Category",
+    "sort_by": "Sort by",
+    "sort": "Sort",
+    "latest": "Latest",
+    "hot": "Popular",
+    "result_for": "Result for",
+    "error": "An error occurred",
+    "previous": "Previous",
+    "next": "Next"
   }
 }

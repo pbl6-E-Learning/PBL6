@@ -29,6 +29,16 @@ class Course < ApplicationRecord
   }
 
   def assignment_for_user user
-    course_assignments.find_by(user_id: user.id)
+    course_assignments.find_by user_id: user.id
+  end
+
+  class << self
+    def ransackable_attributes _auth_object = nil
+      %w(title level description created_at updated_at)
+    end
+
+    def ransackable_associations _auth_object = nil
+      %w(category teacher lessons course_assignments)
+    end
   end
 end

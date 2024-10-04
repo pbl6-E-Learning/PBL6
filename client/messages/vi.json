@@ -104,8 +104,9 @@
     "logout": "Đăng xuất",
     "home": "Trang chủ",
     "translate": "Dịch",
-    "list_courses": "Danh sách khóa học",
-    "logo": "Return"
+    "category": "Danh mục khóa học",
+    "logo": "Return",
+    "search_placeholder": "Tìm kiếm khóa học"
   },
   "announcements": {
     "title": "Thông báo",
@@ -262,5 +263,22 @@
     "sort_hot": "Nổi Bật",
     "sort_new": "Mới",
     "error": "Đã xảy ra lỗi!"
+  },
+  "course_search": {
+    "title": "Tìm kiếm khóa học",
+    "filter": "Bộ lọc",
+    "select_level": "Chọn cấp độ",
+    "level": "Cấp độ",
+    "none": "Không có",
+    "select_category": "Chọn danh mục",
+    "category1": "Danh mục",
+    "sort_by": "Sắp xếp theo",
+    "sort": "Sắp xếp",
+    "latest": "Mới nhất",
+    "hot": "Phổ biến",
+    "result_for": "Kết quả cho",
+    "error": "Đã xảy ra lỗi",
+    "previous": "Trang trước",
+    "next": "Trang sau"
   }
 }

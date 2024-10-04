@@ -14,13 +14,7 @@ class Api::Admin::UsersController < Api::Admin::ApplicationController
                                 account: {only: [:email, :created_at, :status]},
                                 courses: {only: [:id, :name]}
                               }),
-        pagy: {
-          count: @pagy.count,
-          pages: @pagy.pages,
-          current_page: @pagy.page,
-          next_page: @pagy.next,
-          prev_page: @pagy.prev
-        }
+        pagy: pagy_res(@pagy)
       },
       status: :ok
     )
