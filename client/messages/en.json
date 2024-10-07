@@ -284,5 +284,40 @@
     "error": "An error occurred",
     "previous": "Previous",
     "next": "Next"
+  },
+  "list_course": {
+    "title": "Course List",
+    "searchCourse": "Search Course",
+    "searchTeacher": "Search Teacher",
+    "filterCategory": "Filter by Category",
+    "filterLevel": "Filter by Level",
+    "categories": "Categories",
+    "status": "Level",
+    "N1": "N1",
+    "N2": "N2",
+    "N3": "N3",
+    "N4": "N4",
+    "N5": "N5",
+    "search": "Search",
+    "previous": "Previous",
+    "next": "Next",
+    "error": "Error occurred"
+  },
+  "courses_table": {
+    "title": "Title",
+    "accepted": "Accepted",
+    "pending": "Pending",
+    "rejected": "Rejected",
+    "level": "Level",
+    "view_course": "View Course",
+    "view_details_course": "Course Profile",
+    "avatarAlt": "Course Image",
+    "category": "Category",
+    "teacher": "Teacher",
+    "createdAt": "Created At",
+    "updatedAt": "Updated At",
+    "cancel": "Cancel",
+    "no_data": "No Data Available",
+    "action": "Action"
   }
 }

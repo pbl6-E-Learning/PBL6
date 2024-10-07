@@ -27,19 +27,9 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger
 } from '../ui/dropdown-menu'
-import { Category } from '@/src/app/types/category'
 import { Input } from '../ui/input'
 import { FaSearch } from 'react-icons/fa'
 import { useCategories } from '@/src/app/context/CategoriesContext'
-import {
-  Select,
-  SelectTrigger,
-  SelectValue,
-  SelectContent,
-  SelectGroup,
-  SelectLabel,
-  SelectItem
-} from '@radix-ui/react-select'
 const NavbarMenu = [
   {
     id: 1,

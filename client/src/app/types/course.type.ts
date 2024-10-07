@@ -1,6 +1,12 @@
+import { Category } from './category.type'
 import { Lesson } from './lesson.type'
 import { Teacher } from './teacher.type'
-import { Category } from './category'
+
+type AssignmentsCount = {
+  pending: number
+  accepted: number
+  rejected: number
+}
 export interface Course {
   id?: number
   category_id?: number
@@ -14,4 +20,5 @@ export interface Course {
   lessons?: Lesson[]
   teacher?: Teacher
   category?: Category
+  assignments_count?: AssignmentsCount
 }

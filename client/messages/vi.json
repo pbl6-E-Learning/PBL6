@@ -280,5 +280,40 @@
     "error": "Đã xảy ra lỗi",
     "previous": "Trang trước",
     "next": "Trang sau"
+  },
+  "list_course": {
+    "title": "Danh sách khóa học",
+    "searchCourse": "Tìm kiếm khóa học",
+    "searchTeacher": "Tìm kiếm giáo viên",
+    "filterCategory": "Lọc theo danh mục",
+    "filterLevel": "Lọc theo cấp độ",
+    "categories": "Danh mục",
+    "status": "Cấp độ",
+    "N1": "N1",
+    "N2": "N2",
+    "N3": "N3",
+    "N4": "N4",
+    "N5": "N5",
+    "search": "Tìm kiếm",
+    "previous": "Trước",
+    "next": "Sau",
+    "error": "Có lỗi xảy ra"
+  },
+  "courses_table": {
+    "title": "Tiêu đề",
+    "accepted": "Đã chấp nhận",
+    "pending": "Chờ xử lý",
+    "rejected": "Bị từ chối",
+    "level": "Cấp độ",
+    "view_course": "Xem khóa học",
+    "view_details_course": "Thông tin khóa học",
+    "avatarAlt": "Hình ảnh khóa học",
+    "category": "Danh mục",
+    "teacher": "Giáo viên",
+    "createdAt": "Ngày tạo",
+    "updatedAt": "Ngày cập nhật",
+    "cancel": "Hủy bỏ",
+    "no_data": "Không có dữ liệu",
+    "action": "Hành động"
   }
 }

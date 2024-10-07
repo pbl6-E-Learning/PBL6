@@ -12,7 +12,6 @@ import Flag_VI from '@/src/app/assets/vietnam.png'
 const NavbarAdmin = () => {
   const pathname = usePathname()
   const searchParams = useSearchParams()
-
   const queryString = searchParams.toString()
 
   return (

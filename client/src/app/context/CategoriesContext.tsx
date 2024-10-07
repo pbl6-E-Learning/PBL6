@@ -2,10 +2,10 @@
 import { createContext, useContext, ReactNode } from 'react'
 import { useEffect, useState } from 'react'
 import { useTranslations } from 'next-intl'
-import { Category } from '../types/category'
 import { useAppDispatch } from '../hooks/store'
 import { failPopUp } from '../hooks/features/popup.slice'
 import http from '../utils/http'
+import { Category } from '../types/category.type'
 
 const CategoriesContext = createContext<Category[] | undefined>(undefined)
 
