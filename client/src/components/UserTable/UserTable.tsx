@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { User } from '@/src/app/types/user.type'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/src/components/ui/table'
 import { Badge } from '@/src/components/ui/badge'
@@ -12,7 +11,6 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger
 } from '@/src/components/ui/alert-dialog'
-import { Button } from '@/src/components/ui/button'
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 import avtDefault from '@/src/app/assets/avtDefault.png'

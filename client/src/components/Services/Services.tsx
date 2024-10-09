@@ -1,11 +1,7 @@
 'use client'
 import { motion } from 'framer-motion'
 import { useTranslations } from 'next-intl'
-import { useEffect, useState } from 'react'
-import { Category } from '@/src/app/types/category.type'
-import http from '@/src/app/utils/http'
 import { useAppDispatch } from '@/src/app/hooks/store'
-import { failPopUp } from '@/src/app/hooks/features/popup.slice'
 import intermediateJapanese from '@/src/app/assets/intermediateJapanese.png'
 import advancedJapanese from '@/src/app/assets/advancedJapanese.png'
 import jLPTPreparation from '@/src/app/assets/jLPTPreparation.png'
@@ -13,10 +9,11 @@ import japaneseCulture from '@/src/app/assets/japaneseCulture.png'
 import languageBasics from '@/src/app/assets/languageBasics.png'
 import japaneseForTravel from '@/src/app/assets/japaneseForTravel.png'
 import Image from 'next/image'
+import { useCategories } from '@/src/app/context/CategoriesContext'
 
 const Services = () => {
   const t = useTranslations('services')
-  const [category, setCategory] = useState<Category[]>([])
+  const category = useCategories()
   const dispatch = useAppDispatch()
 
   const ServicesData = [
@@ -45,19 +42,6 @@ const Services = () => {
       delay: 0.7
     }
   ]
-
-  useEffect(() => {
-    const fetchProfile = async () => {
-      try {
-        const res: { data: { message: Category[] } } = await http.get(`categories`)
-        setCategory(res.data.message)
-      } catch (error: any) {
-        const message = error?.response?.data?.error || error.message || t('error')
-        dispatch(failPopUp(message))
-      }
-    }
-    fetchProfile()
-  }, [dispatch, t])
 
   const SlideLeft = (delay: number) => {
     return {

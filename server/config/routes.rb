@@ -30,6 +30,7 @@ Rails.application.routes.draw do
     end
     namespace :admin do
       resources :users, only: %i(index)
+      resources :courses, only: %i(index)
       resources :accounts do
         patch :update_status, on: :member
       end

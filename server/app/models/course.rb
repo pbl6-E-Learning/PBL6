@@ -27,6 +27,8 @@ class Course < ApplicationRecord
       default_order
     end
   }
+  delegate :pending_count, :accepted_count, :rejected_count,
+           to: :course_assignments_scopes
 
   def assignment_for_user user
     course_assignments.find_by user_id: user.id
@@ -34,11 +36,17 @@ class Course < ApplicationRecord
 
   class << self
     def ransackable_attributes _auth_object = nil
-      %w(title level description created_at updated_at)
+      %w(title level description created_at updated_at category_id teacher_id)
     end
 
     def ransackable_associations _auth_object = nil
       %w(category teacher lessons course_assignments)
     end
+  end
+
+  private
+
+  def course_assignments_scopes
+    CourseAssignmentScopes.new self
   end
 end
