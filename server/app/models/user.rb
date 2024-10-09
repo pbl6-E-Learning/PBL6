@@ -4,6 +4,8 @@ class User < ApplicationRecord
   has_many :course_assignments, dependent: :destroy
   has_many :courses, through: :course_assignments
   has_many :follows, dependent: :destroy
+  has_many :progresses, dependent: :destroy
+  has_many :lessons, through: :progresses
 
   enum sex: {male: 0, female: 1, other: 2}
 

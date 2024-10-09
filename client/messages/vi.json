@@ -336,5 +336,23 @@
     "register": "Đăng ký",
     "cancel": "Hủy",
     "list_course": "Danh sách khóa học"
+  },
+  "progress": {
+    "title": "Tổng Quan Về Tiến Độ",
+    "total_course": "Tổng Số Khóa Học",
+    "total_assignments": "Tổng Số Đăng Kí",
+    "total_complete_lesson": "Số Bài Học Đã Hoàn Thành",
+    "total_inprogress_lesson": "Số Bài Học Đang Học",
+    "course_progess": "Tiến Độ Khóa Học",
+    "general_analysis": "Phân Tích Tổng Hợp",
+    "completed": "Hoàn Thành",
+    "inProgress": "Đang Học",
+    "notStarted": "Chưa Học",
+    "assignments": "Danh sách nhiệm vụ",
+    "course_title": "Tiêu đề khóa học",
+    "status": "Trạng thái",
+    "create_at": "Ngày tạo",
+    "previous": "Trước",
+    "next": "Tiếp theo"
   }
 }

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_10_02_154717) do
+ActiveRecord::Schema[7.1].define(version: 2024_10_07_050538) do
   create_table "accounts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "email", null: false
     t.string "password_digest", null: false
@@ -104,6 +104,18 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_02_154717) do
     t.index ["course_id"], name: "index_lessons_on_course_id"
   end
 
+  create_table "progresses", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "lesson_id", null: false
+    t.integer "status", default: 0
+    t.datetime "started_at"
+    t.datetime "completed_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["lesson_id"], name: "index_progresses_on_lesson_id"
+    t.index ["user_id"], name: "index_progresses_on_user_id"
+  end
+
   create_table "teachers", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "account_id", null: false
     t.text "bio"
@@ -139,6 +151,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_02_154717) do
   add_foreign_key "follows", "users"
   add_foreign_key "kanjis", "lessons"
   add_foreign_key "lessons", "courses"
+  add_foreign_key "progresses", "lessons"
+  add_foreign_key "progresses", "users"
   add_foreign_key "teachers", "accounts"
   add_foreign_key "users", "accounts"
 end

@@ -68,6 +68,7 @@ const ListUsers = () => {
   const handlePageChange = (page: number) => {
     if (page >= 1 && page <= totalPages) {
       setCurrentPage(page)
+      setSearchTriggered(true)
     }
   }
 
@@ -146,7 +147,9 @@ const ListUsers = () => {
           )}
           {currentPage < totalPages && (
             <PaginationItem>
-              <PaginationLink href='#'>{totalPages}</PaginationLink>
+              <PaginationLink href='#' onClick={() => handlePageChange(totalPages)}>
+                {totalPages}
+              </PaginationLink>
             </PaginationItem>
           )}
 

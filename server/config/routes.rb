@@ -2,15 +2,24 @@ Rails.application.routes.draw do
   namespace :api do
     post "auth/login", to: "authentication#login"
     post "auth/google_oauth2", to: "authentication#login_oauth_google"
+    
     resources :courses, only: %i(show index) do
       post 'assign', on: :member
       collection do
         get 'search'
       end
     end
+
     get "up" => "rails/health#show", as: :rails_health_check
-    post "accounts", to: "account#create", as: "create_account"
-    get "activate/:token", to: "account#activate", as: "activate_user"
+
+    resource :accounts, only: %i(create) do
+      collection do
+        post "forgot_password"
+        put "reset_password/:token", to: "accounts#reset_password"
+        get "activate/:token", to: "accounts#activate", as: "activate"
+      end
+    end
+
     resources :users do
       collection do
         get "profile", to: "users#show"
@@ -18,16 +27,14 @@ Rails.application.routes.draw do
         get "enrolled_courses", to: "users#enrolled_courses"
       end
     end
-    resource :accounts do
-      collection do
-        post "forgot_password", to: "account#forgot_password"
-        put "reset_password/:token", to: "account#reset_password"
-      end
-    end
+
     resources :categories, only: %i(index)
     resources :teachers, only: %i(show)
-    namespace :admin do
-      resources :users, only: %i(index)
+
+    resources :progress do
+      collection do
+        get "myprogress", to: "progress#user_progress"
+      end
     end
     namespace :admin do
       resources :users, only: %i(index)
