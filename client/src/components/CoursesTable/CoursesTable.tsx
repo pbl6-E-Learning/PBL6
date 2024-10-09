@@ -8,6 +8,7 @@ import { Course } from '@/src/app/types/course.type'
 import {
   AlertDialog,
   AlertDialogAction,
+  AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
   AlertDialogFooter,
@@ -18,14 +19,34 @@ import {
 import { DocumentMagnifyingGlassIcon } from '@heroicons/react/24/solid'
 import avtDefault from '@/src/app/assets/avtDefault.png'
 import { BsTrashFill } from 'react-icons/bs'
+import { Button } from '@/src/components/ui/button'
+import http from '@/src/app/utils/http'
+import { useAppDispatch } from '@/src/app/hooks/store'
+import { failPopUp, successPopUp } from '@/src/app/hooks/features/popup.slice'
+import { Dispatch, SetStateAction } from 'react'
 
 interface UserTableProps {
   courses: Course[]
   dataLoaded: boolean
+  setCourses: Dispatch<SetStateAction<Course[]>>
 }
 
-const CoursesTable: React.FC<UserTableProps> = ({ courses, dataLoaded }) => {
+const CoursesTable: React.FC<UserTableProps> = ({ courses, dataLoaded, setCourses }) => {
   const t = useTranslations('courses_table')
+  const dispatch = useAppDispatch()
+
+  const handleDeleteCourse = async (id_course: number) => {
+    try {
+      await http.delete(`admin/courses/${id_course}`)
+      dispatch(successPopUp(t('delete_success')))
+      setCourses((prevCourses) => {
+        const updatedCourses = prevCourses.filter((course) => course.id !== id_course)
+        return updatedCourses
+      })
+    } catch {
+      dispatch(failPopUp(t('delete_fail')))
+    }
+  }
 
   return (
     <div className='w-[98%] flex justify-center rounded-lg shadow-xl m-5'>
@@ -51,6 +72,12 @@ const CoursesTable: React.FC<UserTableProps> = ({ courses, dataLoaded }) => {
                 </TableCell>
                 <TableCell>
                   <Skeleton className='w-24 h-6 mx-auto' />
+                </TableCell>
+                <TableCell>
+                  <Skeleton className='w-16 h-6 mx-auto' />
+                </TableCell>
+                <TableCell>
+                  <Skeleton className='w-16 h-6 mx-auto' />
                 </TableCell>
                 <TableCell>
                   <Skeleton className='w-16 h-6 mx-auto' />
@@ -93,7 +120,35 @@ const CoursesTable: React.FC<UserTableProps> = ({ courses, dataLoaded }) => {
                 </TableCell>
                 <TableCell>
                   <div className='flex items-center justify-center cursor-pointer'>
-                    <BsTrashFill color='red' size={25} />
+                    <AlertDialog>
+                      <AlertDialogTrigger asChild>
+                        <Button variant='link'>
+                          <BsTrashFill color='red' size={25} />
+                        </Button>
+                      </AlertDialogTrigger>
+                      <AlertDialogContent>
+                        <AlertDialogHeader>
+                          <AlertDialogTitle>{t('confirm_delete')}</AlertDialogTitle>
+                          <AlertDialogDescription>
+                            {t('content_delete_course')} <strong>{course?.title}</strong>?
+                          </AlertDialogDescription>
+                        </AlertDialogHeader>
+                        <AlertDialogFooter>
+                          <AlertDialogCancel>{t('cancel')}</AlertDialogCancel>
+                          <AlertDialogAction>
+                            {' '}
+                            <Button
+                              type='submit'
+                              onClick={() => {
+                                handleDeleteCourse(course?.id as number)
+                              }}
+                            >
+                              {t('delete')}
+                            </Button>
+                          </AlertDialogAction>
+                        </AlertDialogFooter>
+                      </AlertDialogContent>
+                    </AlertDialog>
                   </div>
                 </TableCell>
                 <TableCell className='cursor-pointer'>
