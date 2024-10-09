@@ -318,6 +318,11 @@
     "updatedAt": "Updated At",
     "cancel": "Cancel",
     "no_data": "No Data Available",
-    "action": "Action"
+    "action": "Action",
+    "confirm_delete": "Confirm Deletion",
+    "content_delete_course": "This action cannot be undone. Are you sure you want to delete the course",
+    "delete": "Delete",
+    "delete_success": "Delete successfully",
+    "delete_fail": "Delete failed"
   }
 }
