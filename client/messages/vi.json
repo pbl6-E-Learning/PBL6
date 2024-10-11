@@ -314,6 +314,11 @@
     "updatedAt": "Ngày cập nhật",
     "cancel": "Hủy bỏ",
     "no_data": "Không có dữ liệu",
-    "action": "Hành động"
+    "action": "Hành động",
+    "confirm_delete": "Xác nhận xóa",
+    "content_delete_course": "Sau khi xóa hành động này không thể khôi phục dữ liệu. Bạn có chắc chắn muốn xóa khóa học",
+    "delete": "Xóa",
+    "delete_success": "Xóa thành công",
+    "delete_fail": "Xóa thất bại"
   }
 }

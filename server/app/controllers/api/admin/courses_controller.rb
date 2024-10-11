@@ -1,6 +1,7 @@
 class Api::Admin::CoursesController < Api::Admin::ApplicationController
   authorize_resource
   include Response
+  before_action :set_course, only: :destroy
 
   def index
     @q = Course.ransack(params[:q])
@@ -15,7 +16,31 @@ class Api::Admin::CoursesController < Api::Admin::ApplicationController
     )
   end
 
+  def destroy
+    unless @course.destroy
+      return error_response(
+        message: "Failed to delete course",
+        status: :unprocessable_entity
+      )
+    end
+
+    json_response(
+      message: "Course deleted successfully",
+      status: :ok
+    )
+  end
+
   private
+
+  def set_course
+    @course = Course.find_by id: params[:id]
+    return if @course
+
+    error_response(
+      message: "Course not found",
+      status: :not_found
+    )
+  end
 
   def formatted_courses
     @courses.map do |course|
