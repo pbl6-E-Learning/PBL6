@@ -324,5 +324,21 @@
     "delete": "Delete",
     "delete_success": "Delete successfully",
     "delete_fail": "Delete failed"
+  },
+  "profile_teacher": {
+    "title": "Teacher Profile",
+    "error": "An error occurred.",
+    "follower": "followers",
+    "course": "courses",
+    "more": "More",
+    "introduce": "Introduction",
+    "channel_details": "Channel Details",
+    "participated": "Participated since",
+    "job_title": "Job Title",
+    "all": "All",
+    "unsubscribe": "Unsubscribe",
+    "register": "Register",
+    "cancel": "Cancel",
+    "list_course": "List Course"
   }
 }

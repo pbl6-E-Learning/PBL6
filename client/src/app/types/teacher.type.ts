@@ -1,3 +1,8 @@
+import { Course } from './course.type'
+
+type resEmail = {
+  email?: string
+}
 export interface Teacher {
   id?: number
   account_id?: number
@@ -8,4 +13,6 @@ export interface Teacher {
   updated_at?: string
   job_title?: string
   name?: string
+  courses?: Course[]
+  account?: resEmail
 }

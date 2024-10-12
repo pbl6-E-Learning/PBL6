@@ -20,6 +20,7 @@ teachers_data.each do |teacher|
   account = Account.create!(
     email: Faker::Internet.unique.email,
     password: "password",
+    activated: true,
     roles: 1
   )
 

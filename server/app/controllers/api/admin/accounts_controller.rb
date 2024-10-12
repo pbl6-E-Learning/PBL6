@@ -12,7 +12,7 @@ class Api::Admin::AccountsController < Api::Admin::ApplicationController
 
   private
   def load_account
-    @account = Account.find_by(id: params[:id])
+    @account = Account.find_by id: params[:id]
     return if @account
 
     error_response message: "Không tìm thấy tài khoản",

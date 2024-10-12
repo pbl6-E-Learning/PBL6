@@ -25,6 +25,7 @@ Rails.application.routes.draw do
       end
     end
     resources :categories, only: %i(index)
+    resources :teachers, only: %i(show)
     namespace :admin do
       resources :users, only: %i(index)
     end
