@@ -78,7 +78,7 @@ const SearchCourse = () => {
   }
 
   return (
-    <div className='py-8 w-full mt-4 mx-12'>
+    <div className='py-8 w-full mt-4 px-12'>
       <div className='flex w-full'>
         <div className='w-1/5 p-4 border-r pr-8'>
           <div className='mb-6'>
@@ -156,7 +156,7 @@ const SearchCourse = () => {
                 ))}
               </div>
             ) : (
-              <div className='my-10 w-full flex justify-center'>
+              <div className='my-10 flex justify-center'>
                 <Nodata />
               </div>
             )}

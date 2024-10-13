@@ -1,4 +1,5 @@
 import { useTranslations } from 'next-intl'
+import Link from 'next/link'
 interface SidebarProps {
   activeItem: string
 }
@@ -17,7 +18,7 @@ const Sidebar = ({ activeItem }: SidebarProps) => {
   return (
     <div className='flex h-auto w-full max-w-64 flex-col bg-clip-border p-4 sticky fixed top-20 '>
       <nav className='flex min-w-[240px] flex-col gap-1 p-2 font-sans text-base font-normal text-blue-gray-700'>
-        <div role='button' className={getNavItemClass('dashboard')}>
+        <Link className={getNavItemClass('dashboard')} href='/user/progress'>
           <div className='grid mr-4 place-items-center'>
             <svg
               xmlns='http://www.w3.org/2000/svg'
@@ -34,8 +35,8 @@ const Sidebar = ({ activeItem }: SidebarProps) => {
             </svg>
           </div>
           {t('dashboard')}
-        </div>
-        <a role='button' className={getNavItemClass('myCourse')} href='/user/mycourses'>
+        </Link>
+        <Link role='button' className={getNavItemClass('myCourse')} href='/user/mycourses'>
           <div className='grid mr-4 place-items-center'>
             <svg
               xmlns='http://www.w3.org/2000/svg'
@@ -52,7 +53,7 @@ const Sidebar = ({ activeItem }: SidebarProps) => {
             </svg>
           </div>
           {t('myCourse')}
-        </a>
+        </Link>
         <div role='button' className={getNavItemClass('inbox')}>
           <div className='grid mr-4 place-items-center'>
             <svg

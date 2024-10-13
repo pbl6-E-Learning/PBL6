@@ -63,9 +63,9 @@ export default function LoginPage() {
     try {
       const response = await http.post('auth/login', { auth: { email: email, password: password } })
       handleLoginSuccess(response.data)
-    } catch (error) {
-      console.log(error)
-      dispatch(failPopUp(t('login_failed')))
+    } catch (error: any) {
+      const message = error?.response?.data?.error || error.message || t('error')
+      dispatch(failPopUp(message))
     }
   }
 
@@ -73,8 +73,9 @@ export default function LoginPage() {
     try {
       const res = await http.post(`auth/google_oauth2`, { auth: { id_token: response.credential } })
       handleLoginSuccess(res.data)
-    } catch {
-      dispatch(failPopUp(t('login_failed')))
+    } catch (error: any) {
+      const message = error?.response?.data?.error || error.message || t('error')
+      dispatch(failPopUp(message))
     }
   }
 

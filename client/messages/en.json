@@ -340,5 +340,23 @@
     "register": "Register",
     "cancel": "Cancel",
     "list_course": "List Course"
+  },
+  "progress": {
+    "title": "Progress Overview",
+    "total_course": "Total Courses",
+    "total_assignments": "Total Assignments",
+    "total_complete_lesson": "Total Completed Lessons",
+    "total_inprogress_lesson": "Total In-Progress Lessons",
+    "course_progess": "Course Progress",
+    "general_analysis": "General Analysis",
+    "completed": "Completed",
+    "inProgress": "In Progress",
+    "notStarted": "Not Started",
+    "assignments": "Assignments List",
+    "course_title": "Course Title",
+    "status": "Status",
+    "create_at": "Created At",
+    "previous": "Previous",
+    "next": "Next"
   }
 }

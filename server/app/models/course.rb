@@ -3,6 +3,7 @@ class Course < ApplicationRecord
   belongs_to :teacher
 
   has_many :lessons, dependent: :destroy
+  has_many :progresses, through: :lessons
   has_many :course_assignments, dependent: :destroy
   has_many :users, through: :course_assignments
 

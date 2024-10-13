@@ -1,12 +1,7 @@
 import { Category } from './category.type'
 import { Lesson } from './lesson.type'
 import { Teacher } from './teacher.type'
-
-type AssignmentsCount = {
-  pending: number
-  accepted: number
-  rejected: number
-}
+import { AssignmentsCount } from './assignmentsCount.type'
 export interface Course {
   id?: number
   category_id?: number
