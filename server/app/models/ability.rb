@@ -25,6 +25,8 @@ class Ability
     can :manage, Comment, lesson: {teacher_id: account.id}
     can :manage, Flashcard, lesson: {teacher_id: account.id}
     can :read, User
+    can :edit, Teacher, id: account.id
+    can :manage, Account, id: account.id
   end
 
   def set_user_permissions account

@@ -27,8 +27,8 @@ export default function ShowCourse() {
                   <Carousel className='w-full'>
                     <CarouselContent className='-ml-4 md:-ml-1'>
                       {category?.courses?.map((course) => (
-                        <CarouselItem key={course?.id} className='pl-4 md:basis-1/2 lg:basis-1/4'>
-                          <div className='p-1'>
+                        <CarouselItem key={course?.id} className='pl-4 mb-6 md:basis-1/2 lg:basis-1/4'>
+                          <div className='mt-3 h-full'>
                             <CourseCard course={course} />
                           </div>
                         </CarouselItem>

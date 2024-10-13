@@ -94,7 +94,7 @@ class Api::CoursesController < Api::ApplicationController
   def handle_existing_assignment course_assignment
     return already_assigned unless course_assignment.status != "rejected"
 
-    course_assignment.update(status: :pending)
+    course_assignment.update(status: :pending, assigned_at: Time.zone.now)
     json_response(
       message: {
         course_id: @course.id,
@@ -106,6 +106,7 @@ class Api::CoursesController < Api::ApplicationController
 
   def create_and_assign_new_course
     course_assignment = create_course_assignment
+    course_assignment.assigned_at = Time.zone.now
     return assignment_failed unless course_assignment.save
 
     json_response(

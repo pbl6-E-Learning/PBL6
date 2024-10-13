@@ -8,9 +8,10 @@ import { Course } from '@/src/app/types/course.type'
 import Img_default from '@/src/app/assets/default_course_img.png'
 interface CourseCardProps {
   course: Course
+  teacher?: string
 }
 
-const CourseCard = ({ course }: CourseCardProps) => {
+const CourseCard = ({ course, teacher }: CourseCardProps) => {
   const router = useRouter()
   const t = useTranslations('course_card')
   const handleViewDetails = () => {
@@ -18,7 +19,7 @@ const CourseCard = ({ course }: CourseCardProps) => {
   }
 
   return (
-    <Card className='w-[300px] max-w-sm mx-auto flex flex-col h-full transition-transform duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg'>
+    <Card className='w-[300px] max-w-sm mx-auto flex flex-col h-full transition-transform duration-300 ease-in-out transform hover:scale-105'>
       <CardHeader className='pb-2'>
         <Image
           src={course?.image_url || Img_default.src}
@@ -61,7 +62,14 @@ const CourseCard = ({ course }: CourseCardProps) => {
             />
             <path d='M21.4 15V9' stroke='currentColor' strokeWidth='1.5' strokeLinecap='round' strokeLinejoin='round' />
           </svg>
-          <p className='font-medium'>{course?.teacher?.name || ''}</p>
+          <p
+            className='font-medium cursor-pointer'
+            onClick={() => {
+              router.push(`/user/teacher/${course?.teacher_id}`)
+            }}
+          >
+            {course?.teacher?.name ? course?.teacher?.name : teacher || ''}
+          </p>
         </div>
 
         <div className='flex items-center space-x-2'>

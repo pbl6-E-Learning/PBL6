@@ -320,5 +320,21 @@
     "delete": "Xóa",
     "delete_success": "Xóa thành công",
     "delete_fail": "Xóa thất bại"
+  },
+  "profile_teacher": {
+    "title": "Hồ Sơ Giáo Viên",
+    "error": "Đã xảy ra lỗi.",
+    "follower": "người theo dõi",
+    "course": "khóa học",
+    "more": "Xem thêm",
+    "introduce": "Giới thiệu",
+    "channel_details": "Chi tiết Kênh",
+    "participated": "Tham gia từ",
+    "job_title": "Chức danh",
+    "all": "Tất cả",
+    "unsubscribe": "Hủy đăng ký",
+    "register": "Đăng ký",
+    "cancel": "Hủy",
+    "list_course": "Danh sách khóa học"
   }
 }
