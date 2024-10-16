@@ -66,6 +66,8 @@ export default function SignUpPage() {
     dispatch(successPopUp(t('login_successful')))
     if (role === 'admin') {
       router.push('/admin')
+    } else if (role === 'teacher') {
+      router.push('/teacher')
     } else {
       router.push('/')
     }

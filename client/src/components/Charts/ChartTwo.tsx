@@ -11,6 +11,7 @@ import {
   PaginationPrevious
 } from '@/src/components/ui/pagination'
 import dynamic from 'next/dynamic'
+import { CourseProgress } from '@/src/app/types/courseProgress.type'
 
 const ReactApexChart = dynamic(() => import('react-apexcharts'), {
   ssr: false

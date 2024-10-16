@@ -43,5 +43,10 @@ Rails.application.routes.draw do
         patch :update_status, on: :member
       end
     end
+
+    namespace :teacher do
+      resources :request_courses, only: %i(create)
+      resources :courses, only: %i(index destroy)
+    end
   end
 end

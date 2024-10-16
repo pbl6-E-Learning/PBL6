@@ -21,6 +21,7 @@ import ChartThree from '@/src/components/Charts/ChartThree'
 import { CourseAssignment } from '@/src/app/types/assignment.type'
 import ChartOne from '@/src/components/Charts/ChartOne'
 import Nodata from '@/src/components/Nodata/Nodata'
+import { CourseProgress } from '@/src/app/types/courseProgress.type'
 
 type UserProgressResponse = {
   data: {

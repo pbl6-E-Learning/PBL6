@@ -301,7 +301,20 @@
     "search": "Search",
     "previous": "Previous",
     "next": "Next",
-    "error": "Error occurred"
+    "error": "Error occurred",
+    "add_course": "Create Request",
+    "course_title": "Course Title",
+    "select_category": "Select Category",
+    "course_description": "Course Description",
+    "image_url": "Image URL",
+    "create_request_title": "Create Add Course Request",
+    "cover_img": "Cover Image",
+    "upload": "Upload",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "upload_success": "Upload Image successfully",
+    "update_success": "Create request successfully",
+    "update_failed": "Create request failed"
   },
   "courses_table": {
     "title": "Title",

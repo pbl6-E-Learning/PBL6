@@ -29,15 +29,16 @@ interface UserTableProps {
   courses: Course[]
   dataLoaded: boolean
   setCourses: Dispatch<SetStateAction<Course[]>>
+  role: string
 }
 
-const CoursesTable: React.FC<UserTableProps> = ({ courses, dataLoaded, setCourses }) => {
+const CoursesTable: React.FC<UserTableProps> = ({ courses, dataLoaded, setCourses, role }) => {
   const t = useTranslations('courses_table')
   const dispatch = useAppDispatch()
 
   const handleDeleteCourse = async (id_course: number) => {
     try {
-      await http.delete(`admin/courses/${id_course}`)
+      await http.delete(`${role}/courses/${id_course}`)
       dispatch(successPopUp(t('delete_success')))
       setCourses((prevCourses) => {
         const updatedCourses = prevCourses.filter((course) => course.id !== id_course)

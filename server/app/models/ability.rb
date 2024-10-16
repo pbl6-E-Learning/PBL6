@@ -20,13 +20,14 @@ class Ability
   end
 
   def set_teacher_permissions account
-    can :read, Course
-    can :manage, Lesson, teacher_id: account.id
-    can :manage, Comment, lesson: {teacher_id: account.id}
-    can :manage, Flashcard, lesson: {teacher_id: account.id}
+    can :manage, Course, teacher_id: account&.teacher&.id
+    can :read, Category
+    can :manage, Lesson, teacher_id: account&.teacher&.id
+    can :manage, Flashcard, lesson: {teacher_id: account&.teacher&.id}
     can :read, User
-    can :edit, Teacher, id: account.id
+    can :edit, Teacher, id: account&.teacher&.id
     can :manage, Account, id: account.id
+    can :create, RequestCourse
   end
 
   def set_user_permissions account

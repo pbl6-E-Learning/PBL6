@@ -31,6 +31,13 @@ class Api::ApplicationController < ActionController::API
                    status: :forbidden) and return
   end
 
+  def teacher?
+    return if current_account&.teacher?
+
+    error_response(message: "Bạn không có quyền truy cập vào tài nguyên này.",
+                   status: :forbidden) and return
+  end
+
   def authenticate
     return if logged_in?
 
