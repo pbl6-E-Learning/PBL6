@@ -297,7 +297,20 @@
     "search": "Tìm kiếm",
     "previous": "Trước",
     "next": "Sau",
-    "error": "Có lỗi xảy ra"
+    "error": "Có lỗi xảy ra",
+    "add_course": "Tạo yêu cầu",
+    "course_title": "Tiêu đề khóa học",
+    "select_category": "Chọn danh mục",
+    "course_description": "Mô tả khóa học",
+    "image_url": "URL hình ảnh",
+    "create_request_title": "Tạo yêu cầu thêm khóa học",
+    "cover_img": "Ảnh khóa học",
+    "upload": "Tải lên",
+    "submit": "Tạo yêu cầu",
+    "cancel": "Hủy",
+    "upload_success": "Tải ảnh lên thành công",
+    "update_success": "Tạo yêu cầu thành công",
+    "update_failed": "Tạo yêu cầu thất bại"
   },
   "courses_table": {
     "title": "Tiêu đề",

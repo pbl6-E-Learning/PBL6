@@ -5,7 +5,7 @@ class Api::TeachersController < Api::ApplicationController
 
   def show
     follower_count = Follow.count_for_teacher @teacher.id
-    teacher_profile = @teacher.includes(courses: :category).as_json(
+    teacher_profile = @teacher.as_json(
       include: {
         courses: {
           include: {
@@ -24,7 +24,7 @@ class Api::TeachersController < Api::ApplicationController
   private
 
   def set_teacher
-    @teacher = Teacher.find_by id: params[:id]
+    @teacher = Teacher.includes(courses: :category).find_by id: params[:id]
     return if @teacher
 
     error_response({message: "Teacher not found"}, :not_found)

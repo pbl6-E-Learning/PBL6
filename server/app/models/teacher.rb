@@ -3,6 +3,7 @@ class Teacher < ApplicationRecord
 
   has_many :courses, dependent: :destroy
   has_many :follows, dependent: :destroy
+  has_many :request_courses, dependent: :destroy
 
   class << self
     def ransackable_attributes _auth_object = nil

@@ -155,7 +155,7 @@ export default function CoursesPage() {
           {t('search')}
         </Button>
       </div>
-      <CoursesTable courses={courses} dataLoaded={dataLoaded} setCourses={setCourses} />
+      <CoursesTable courses={courses} dataLoaded={dataLoaded} setCourses={setCourses} role='admin' />
       <Pagination>
         <PaginationContent>
           {currentPage > 1 && (

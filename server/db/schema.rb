@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_10_07_050538) do
+ActiveRecord::Schema[7.1].define(version: 2024_10_15_094223) do
   create_table "accounts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "email", null: false
     t.string "password_digest", null: false
@@ -114,6 +114,18 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_07_050538) do
     t.datetime "updated_at", null: false
     t.index ["lesson_id"], name: "index_progresses_on_lesson_id"
     t.index ["user_id"], name: "index_progresses_on_user_id"
+  end
+
+  create_table "request_courses", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "teacher_id"
+    t.bigint "category_id"
+    t.string "title"
+    t.string "level"
+    t.text "description"
+    t.string "image_url"
+    t.integer "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "teachers", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|

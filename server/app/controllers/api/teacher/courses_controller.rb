@@ -1,5 +1,4 @@
-class Api::Admin::CoursesController < Api::Admin::ApplicationController
-  authorize_resource
+class Api::Teacher::CoursesController < Api::Teacher::ApplicationController
   before_action :set_course, only: :destroy
 
   def index

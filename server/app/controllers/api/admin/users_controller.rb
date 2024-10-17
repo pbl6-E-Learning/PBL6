@@ -1,6 +1,5 @@
 class Api::Admin::UsersController < Api::Admin::ApplicationController
   authorize_resource
-  include Response
 
   def index
     @q = User.ransack(params[:q])

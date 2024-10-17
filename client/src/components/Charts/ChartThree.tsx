@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import { useTranslations } from 'next-intl'
 import dynamic from 'next/dynamic'
+import { CourseProgress } from '@/src/app/types/courseProgress.type'
 
 const ReactApexChart = dynamic(() => import('react-apexcharts'), {
   ssr: false
