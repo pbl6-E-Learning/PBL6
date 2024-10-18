@@ -348,7 +348,11 @@
     "unsubscribe": "Hủy đăng ký",
     "register": "Đăng ký",
     "cancel": "Hủy",
-    "list_course": "Danh sách khóa học"
+    "list_course": "Danh sách khóa học",
+    "subscribed": "Đã đăng kí",
+    "unsubscribed": "Hủy đăng ký",
+    "subscribe": "Đăng kí",
+    "login_need": "Đăng nhập để tiếp tục"
   },
   "progress": {
     "title": "Tổng Quan Về Tiến Độ",

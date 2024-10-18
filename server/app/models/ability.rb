@@ -36,7 +36,7 @@ class Ability
     can :manage, Course
     can :read, Lesson
     can :create, Comment, user_id: account&.user&.id
-    can :create, Follow, user_id: account&.user&.id
+    can :manage, Follow, user_id: account&.user&.id
     can :read, Teacher
     can :read, Category
     can :manage, User, account_id: account.id

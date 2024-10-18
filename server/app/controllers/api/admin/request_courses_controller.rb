@@ -26,11 +26,9 @@ module Api::Admin
         end
 
         if status == "approved"
-          @request_course.approve_request
-          json_response(message: "Request approved successfully")
+          handle_approved_status
         else
-          @request_course.reject_request
-          json_response(message: "Request rejected successfully", status: :ok)
+          handle_rejected_status
         end
       end
     rescue ActiveRecord::Rollback => e
@@ -49,6 +47,17 @@ module Api::Admin
 
     def update_request_status status
       @request_course.update(status:)
+    end
+
+    def handle_approved_status
+      @request_course.approve_request
+      @request_course.teacher.notify_followers_of_new_course(@request_course)
+      json_response(message: "Request approved successfully")
+    end
+
+    def handle_rejected_status
+      @request_course.reject_request
+      json_response(message: "Request rejected successfully", status: :ok)
     end
   end
 end
