@@ -371,5 +371,31 @@
     "create_at": "Created At",
     "previous": "Previous",
     "next": "Next"
+  },
+  "list_requests": {
+    "title": "List of Requests",
+    "searchTitle": "Search by Title",
+    "filterStatus": "Filter by Status",
+    "status": "Status",
+    "allStatus": "All",
+    "approved": "Approved",
+    "pending": "Pending",
+    "rejected": "Rejected",
+    "search": "Search",
+    "previous": "Previous",
+    "next": "Next",
+    "error": "An error occurred",
+    "update_fail": "Update failed",
+    "teacher": "Teacher",
+    "level": "Level",
+    "action": "Action",
+    "details": "Details",
+    "resolved": "Resolved",
+    "request_details": "Request Details",
+    "avatarAlt": "Avatar",
+    "category": "Category",
+    "createdAt": "Created At",
+    "cancel": "Cancel",
+    "req_title": "Title"
   }
 }

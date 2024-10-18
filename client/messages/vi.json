@@ -367,5 +367,31 @@
     "create_at": "Ngày tạo",
     "previous": "Trước",
     "next": "Tiếp theo"
+  },
+  "list_requests": {
+    "title": "Danh sách yêu cầu",
+    "searchTitle": "Tìm kiếm theo tiêu đề",
+    "filterStatus": "Lọc theo trạng thái",
+    "status": "Trạng thái",
+    "allStatus": "Tất cả",
+    "approved": "Đã phê duyệt",
+    "pending": "Đang chờ",
+    "rejected": "Đã từ chối",
+    "search": "Tìm kiếm",
+    "previous": "Trước",
+    "next": "Tiếp theo",
+    "error": "Đã xảy ra lỗi",
+    "update_fail": "Cập nhật thất bại",
+    "teacher": "Giáo viên",
+    "level": "Cấp độ",
+    "action": "Hành động",
+    "details": "Chi tiết",
+    "resolved": "Đã xử lý",
+    "request_details": "Chi tiết yêu cầu",
+    "avatarAlt": "Hình đại diện",
+    "category": "Danh mục",
+    "createdAt": "Ngày tạo",
+    "cancel": "Hủy",
+    "req_title": "Khóa học"
   }
 }
