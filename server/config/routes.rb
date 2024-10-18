@@ -36,6 +36,10 @@ Rails.application.routes.draw do
         get "myprogress", to: "progress#user_progress"
       end
     end
+
+    resources :follows, only: %i(create)
+    delete 'follows', to: 'follows#destroy'
+
     namespace :admin do
       resources :users, only: %i(index)
       resources :courses, only: %i(index destroy)

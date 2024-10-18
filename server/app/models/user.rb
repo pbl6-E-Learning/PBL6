@@ -4,6 +4,7 @@ class User < ApplicationRecord
   has_many :course_assignments, dependent: :destroy
   has_many :courses, through: :course_assignments
   has_many :follows, dependent: :destroy
+  has_many :teachers, through: :follows
   has_many :progresses, dependent: :destroy
   has_many :lessons, through: :progresses
 

@@ -3,8 +3,16 @@ class Teacher < ApplicationRecord
 
   has_many :courses, dependent: :destroy
   has_many :follows, dependent: :destroy
+  has_many :followers, through: :follows, source: :user
   has_many :request_courses, dependent: :destroy
   delegate :email, to: :account
+
+  def notify_followers_of_new_course course
+    followers.each do |follower|
+      UserMailer.with(user: follower, teacher: self,
+                      course:).new_course_notification.deliver_later
+    end
+  end
 
   class << self
     def ransackable_attributes _auth_object = nil
