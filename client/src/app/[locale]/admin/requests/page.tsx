@@ -14,7 +14,6 @@ import {
   PaginationNext,
   PaginationPrevious
 } from '@/src/components/ui/pagination'
-import UserTable from '@/src/components/UserTable'
 import { Input } from '@/src/components/ui/input'
 import { Button } from '@/src/components/ui/button'
 import {
@@ -27,10 +26,21 @@ import {
   SelectValue
 } from '@/src/components/ui/select'
 import { failPopUp, successPopUp } from '@/src/app/hooks/features/popup.slice'
+import { RequestCourse } from '@/src/app/types/requestCourse.type'
+import RequestTable from '@/src/components/RequestTable'
 
-const ListUsers = () => {
-  const t = useTranslations('list_users')
-  const [users, setUsers] = useState<User[]>([])
+type ResponseRequests = {
+  data: {
+    message: {
+      request_courses: RequestCourse[]
+      pagy: Pagy
+    }
+  }
+}
+
+const ListRequests = () => {
+  const t = useTranslations('list_requests')
+  const [requests, setRequests] = useState<RequestCourse[]>([])
   const [dataLoaded, setDataLoaded] = useState(false)
   const [currentPage, setCurrentPage] = useState(1)
   const [totalPages, setTotalPages] = useState(1)
@@ -45,23 +55,24 @@ const ListUsers = () => {
 
   useEffect(() => {
     if (searchTriggered) {
-      const getListUsers = async () => {
+      const getListRequests = async () => {
         try {
           const queryParam = filterStatus === 'all' ? '' : filterStatus
-          const res: { data: { message: { users: User[]; pagy: Pagy } } } = await http.get(
-            `admin/users?page=${currentPage}&q[full_name_or_account_email_cont]=${searchTerm}&q[account_status_eq]=${filterStatus}`
+          const res: ResponseRequests = await http.get(
+            `admin/request_courses?page=${currentPage}&q[title_cont]=${searchTerm}&q[status_eq]=${queryParam}`
           )
+          const data = res.data.message
           setDataLoaded(true)
-          setUsers(res.data.message.users)
-          setTotalPages(res.data.message.pagy.pages ?? 1)
-          setCurrentPage(res.data.message.pagy.current_page ?? 1)
+          setRequests(data.request_courses)
+          setTotalPages(data.pagy.pages ?? 1)
+          setCurrentPage(data.pagy.current_page ?? 1)
         } catch (error: any) {
           setDataLoaded(true)
           const message = error?.response?.data?.error || error.message || t('error')
           dispatch(failPopUp(message))
         }
       }
-      getListUsers()
+      getListRequests()
       setSearchTriggered(false)
     }
   }, [currentPage, searchTriggered, dispatch, t, searchTerm, filterStatus])
@@ -73,17 +84,15 @@ const ListUsers = () => {
     }
   }
 
-  const handleBanActivate = async (user: User) => {
+  const handleAcceptReject = async (request: RequestCourse, status: 'approved' | 'rejected') => {
     try {
-      const res: { message: string } = await http.patch(`/admin/accounts/${user.account_id}/update_status`)
+      const res: { message: string } = await http.patch(`/admin/request_courses/${request.id}/update_status`, {
+        status
+      })
+
       dispatch(successPopUp(res.message))
-      setUsers((prevUsers) =>
-        prevUsers.map((u) =>
-          u.account_id === user.account_id
-            ? { ...u, account: { ...u.account, status: u.account?.status === 'active' ? 'ban' : 'active' } }
-            : u
-        )
-      )
+
+      setRequests((prevRequests) => prevRequests.map((r) => (r.id === request.id ? { ...r, status } : r)))
     } catch (error: any) {
       const message = error?.response?.data?.error || error.message || t('update_fail')
       dispatch(failPopUp(message))
@@ -100,7 +109,7 @@ const ListUsers = () => {
       <div className='flex mb-4 ml-5'>
         <Input
           type='text'
-          placeholder={t('searchNameOrEmail')}
+          placeholder={t('searchTitle')}
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           className='mr-2 w-72 p-[19px]'
@@ -117,8 +126,9 @@ const ListUsers = () => {
             <SelectGroup>
               <SelectLabel>{t('status')}</SelectLabel>
               <SelectItem value='all'>{t('allStatus')}</SelectItem>
-              <SelectItem value='0'>{t('active')}</SelectItem>
-              <SelectItem value='1'>{t('ban')}</SelectItem>
+              <SelectItem value='1'>{t('approved')}</SelectItem>
+              <SelectItem value='0'>{t('pending')}</SelectItem>
+              <SelectItem value='2'>{t('rejected')}</SelectItem>
             </SelectGroup>
           </SelectContent>
         </Select>
@@ -126,7 +136,7 @@ const ListUsers = () => {
           {t('search')}
         </Button>
       </div>
-      <UserTable users={users} dataLoaded={dataLoaded} handleBanActivate={handleBanActivate} />
+      <RequestTable requests={requests} dataLoaded={dataLoaded} handleAcceptReject={handleAcceptReject} />
       <Pagination>
         <PaginationContent>
           {currentPage > 1 && (
@@ -167,4 +177,4 @@ const ListUsers = () => {
   )
 }
 
-export default ListUsers
+export default ListRequests

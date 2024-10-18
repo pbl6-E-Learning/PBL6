@@ -8,4 +8,38 @@ class RequestCourse < ApplicationRecord
   validates :title, presence: true
   validates :level, presence: true
   validates :description, presence: true
+
+  scope :recent_first, ->{order(created_at: :desc)}
+
+  def create_course
+    Course.create!(
+      title:,
+      description:,
+      level:,
+      category_id:,
+      teacher_id:,
+      image_url:
+    )
+  end
+
+  def approve_request
+    update(status: "approved")
+    RequestMailer.request_approved(self).deliver_later
+    create_course
+  end
+
+  def reject_request
+    update(status: "rejected")
+    RequestMailer.request_rejected(self).deliver_later
+  end
+
+  class << self
+    def ransackable_attributes _auth_object = nil
+      %w(created_at description image_url level status title)
+    end
+
+    def ransackable_associations _auth_object = nil
+      %w(teacher category)
+    end
+  end
 end

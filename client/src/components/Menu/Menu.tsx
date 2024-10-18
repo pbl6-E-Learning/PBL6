@@ -7,7 +7,7 @@ import lesson from '@/src/app/assets/levelMenu.png'
 import profile from '@/src/app/assets/profile.png'
 import setting from '@/src/app/assets/setting.png'
 import logout from '@/src/app/assets/logout.png'
-import calendar from '@/src/app/assets/calendar.png'
+import list from '@/src/app/assets/list.png'
 
 const menuItems = [
   {
@@ -34,9 +34,9 @@ const menuItems = [
         href: '/admin/courses'
       },
       {
-        icon: calendar,
-        label: 'Events',
-        href: '/list/events'
+        icon: list,
+        label: 'Requests',
+        href: '/admin/requests'
       }
     ]
   },
