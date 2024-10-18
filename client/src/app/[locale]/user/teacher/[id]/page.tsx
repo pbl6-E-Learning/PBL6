@@ -7,7 +7,7 @@ import Image from 'next/image'
 import { Avatar, AvatarImage } from '@/src/components/ui/avatar'
 import http from '@/src/app/utils/http'
 import { useAppDispatch } from '@/src/app/hooks/store'
-import { failPopUp } from '@/src/app/hooks/features/popup.slice'
+import { failPopUp, successPopUp } from '@/src/app/hooks/features/popup.slice'
 import { Button } from '@/src/components/ui/button'
 import { CldUploadButton } from 'next-cloudinary'
 import UploadButton from '@/src/components/ui/uploadButton'
@@ -36,6 +36,7 @@ import SkeletonCourse from '@/src/components/SkeletonCourse/SkeletonCourse'
 type resProfileTeacher = {
   profile: Teacher
   follower_count: number
+  is_following: boolean
 }
 
 export default function ProfileTeacher({ params }: { params: { id: string } }) {
@@ -45,8 +46,9 @@ export default function ProfileTeacher({ params }: { params: { id: string } }) {
   const [profileTeacher, setProfileTeacher] = useState<resProfileTeacher>()
   const [imageAvatar, setImageAvatar] = useState<string>('')
   const [coverImage, setCoverImage] = useState<string>('')
-  const [position, setPosition] = useState('Đã đăng ký')
+  const [position, setPosition] = useState<boolean>(false)
   const [loading, setLoading] = useState<boolean>(true)
+  const [followerCount, setFollowerCount] = useState<number>(0)
   const dispatch = useAppDispatch()
 
   useEffect(() => {
@@ -65,6 +67,8 @@ export default function ProfileTeacher({ params }: { params: { id: string } }) {
       try {
         const res: { data: { message: resProfileTeacher } } = await http.get(`teachers/${teacherId}`)
         setProfileTeacher(res.data.message)
+        setPosition(res.data.message.is_following)
+        setFollowerCount(res.data.message.follower_count)
       } catch (error: any) {
         const message = error?.response?.data?.error || error.message || t('error')
         dispatch(failPopUp(message))
@@ -76,6 +80,32 @@ export default function ProfileTeacher({ params }: { params: { id: string } }) {
 
     return
   }, [dispatch, teacherId, t])
+
+  const followTeacher = async () => {
+    try {
+      const res: { message: string } = await http.post(`follows?teacher_id=${teacherId}`)
+
+      dispatch(successPopUp(res.message))
+      setPosition(true)
+      setFollowerCount(followerCount + 1)
+    } catch (error: any) {
+      const message = error?.response?.data?.error || error.message || t('update_fail')
+      dispatch(failPopUp(message))
+    }
+  }
+
+  const unfollowTeacher = async () => {
+    try {
+      const res: { message: string } = await http.delete(`follows?teacher_id=${teacherId}`)
+
+      dispatch(successPopUp(res.message))
+      setPosition(false)
+      setFollowerCount(followerCount - 1)
+    } catch (error: any) {
+      const message = error?.response?.data?.error || error.message || t('update_fail')
+      dispatch(failPopUp(message))
+    }
+  }
 
   return (
     <div className='flex flex-row'>
@@ -150,26 +180,29 @@ export default function ProfileTeacher({ params }: { params: { id: string } }) {
                     <h2 className='flex gap-3 mt-1 text-gray'>
                       @{profileTeacher?.profile?.account?.email}
                       <p className='text-sm'>•</p>
-                      {profileTeacher?.follower_count} {t('follower')}
+                      {followerCount} {t('follower')}
                     </h2>
                     <div className='mt-2'>
-                      {position === 'Đã đăng ký' ? (
+                      {position ? (
                         <DropdownMenu>
                           <DropdownMenuTrigger asChild>
                             <Button variant='outline' className='rounded-full bg-gray-300'>
                               <>
                                 <LuBellRing className='mr-2' />
-                                {position}
+                                {t('subscribed')}
                               </>
                             </Button>
                           </DropdownMenuTrigger>
                           <DropdownMenuContent className='w-56'>
-                            <DropdownMenuRadioGroup value={position} onValueChange={setPosition}>
-                              <DropdownMenuRadioItem value='Đã đăng ký'>
+                            <DropdownMenuRadioGroup
+                              value={position ? 'subscribed' : 'unsubscribed'}
+                              onValueChange={() => unfollowTeacher()}
+                            >
+                              <DropdownMenuRadioItem value='subscribed'>
                                 <LuBellRing className='mr-2' />
                                 {t('all')}
                               </DropdownMenuRadioItem>
-                              <DropdownMenuRadioItem value='Hủy đăng ký'>
+                              <DropdownMenuRadioItem value='unsubscribed'>
                                 <AiOutlineUserDelete className='mr-2' />
                                 {t('unsubscribe')}
                               </DropdownMenuRadioItem>
@@ -177,7 +210,9 @@ export default function ProfileTeacher({ params }: { params: { id: string } }) {
                           </DropdownMenuContent>
                         </DropdownMenu>
                       ) : (
-                        <Button>{t('register')}</Button>
+                        <Button onClick={() => followTeacher()} variant='outline' className='rounded-full bg-gray-300'>
+                          {t('subscribe')}
+                        </Button>
                       )}
                     </div>
                   </Fragment>

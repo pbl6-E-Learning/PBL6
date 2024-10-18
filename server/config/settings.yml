@@ -7,5 +7,6 @@ maximum_name_length: 255
 constant_2: 2
 reset_password_url: "http://localhost:3000/account_reset_password_success?token="
 account_confirmation_url: "http://localhost:3000/account_confirmation_success?token="
+course_url: "http://localhost:3000/user/course"
 in_progress: in_progress
 completed: completed
