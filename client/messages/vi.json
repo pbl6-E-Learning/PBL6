@@ -414,5 +414,51 @@
     "video": "Video",
     "flashcard": "Thẻ ghi nhớ",
     "kanji": "Kanji"
+  },
+  "list_teacher": {
+    "title": "Danh sách giáo viên",
+    "searchNameOrEmail": "Tìm kiếm theo tên hoặc email",
+    "search": "Tìm kiếm",
+    "previous": "Trang trước",
+    "next": "Trang sau",
+    "error": "Đã có lỗi xảy ra. Vui lòng thử lại sau.",
+    "name": "Tên",
+    "course_count": "Số khóa học",
+    "student_count": "Số học viên",
+    "follower_count": "Số người theo dõi",
+    "action": "Hành động",
+    "view_teacher": "Xem giáo viên",
+    "confirm_delete": "Xác nhận xóa",
+    "content_delete_teacher": "Bạn có chắc chắn muốn xóa giáo viên",
+    "delete": "Xóa",
+    "cancel": "Hủy",
+    "view_details_teacher": "Xem chi tiết giáo viên",
+    "avatarAlt": "Hình đại diện",
+    "email": "Email",
+    "job_title": "Chức vụ",
+    "experience": "Kinh nghiệm",
+    "bio": "Tiểu sử",
+    "delete_success": "Xóa giáo viên thành công",
+    "delete_fail": "Xóa giáo viên không thành công"
+  },
+  "teacher_profile": {
+    "title": "Hồ Sơ Giáo Viên",
+    "description": "Quản lý hồ sơ cá nhân và thông tin chi tiết của bạn.",
+    "no_profile": {
+      "title": "Không Tìm Thấy Hồ Sơ",
+      "description": "Có vẻ như thông tin hồ sơ của bạn bị thiếu. Vui lòng cập nhật hồ sơ của bạn."
+    },
+    "name": "Họ Tên",
+    "job_title": "Chức Danh",
+    "created_at": "Ngày Tạo",
+    "updated_at": "Ngày Cập Nhật",
+    "email": "Email",
+    "bio": "Tiểu Sử",
+    "experience": "Kinh Nghiệm",
+    "update": "Cập Nhật Hồ Sơ",
+    "update_success": "Cập nhật hồ sơ thành công!",
+    "update_failed": "Cập nhật hồ sơ thất bại. Vui lòng thử lại.",
+    "login_first": "Vui lòng đăng nhập trước.",
+    "error": "Đã xảy ra lỗi"
   }
 }

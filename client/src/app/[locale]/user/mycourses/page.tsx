@@ -41,6 +41,8 @@ const MyCourses = () => {
       } catch (error: any) {
         const message = error?.response?.data?.error || error.message || t('error')
         dispatch(failPopUp(message))
+      } finally {
+        setDataLoaded(true)
       }
     }
     fetchCourses()

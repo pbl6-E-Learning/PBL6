@@ -1,4 +1,4 @@
-class Api::Teacher::ApplicationController < Api::ApplicationController
+class Api::Instructor::ApplicationController < Api::ApplicationController
   authorize_resource
   before_action :teacher?
 

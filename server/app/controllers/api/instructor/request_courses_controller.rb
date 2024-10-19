@@ -1,4 +1,4 @@
-module Api::Teacher
+module Api::Instructor
   class RequestCoursesController < ApplicationController
     def create
       request_course = RequestCourse.new request_course_params
