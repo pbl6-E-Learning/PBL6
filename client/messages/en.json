@@ -81,7 +81,8 @@
     "assign_fail": "Assignment request failed",
     "pending": "Pending...",
     "accepted": "Accepted",
-    "please_login": "Please login to enroll this course"
+    "please_login": "Please login to enroll this course",
+    "enrolled": "Go to"
   },
   "nodata": {
     "no_data_title": "No result found",
@@ -401,5 +402,21 @@
     "createdAt": "Created At",
     "cancel": "Cancel",
     "req_title": "Title"
+  },
+  "lesson_page": {
+    "select_one_lesson": "Please select a lesson.",
+    "follower": "followers",
+    "all": "All",
+    "unsubscribe": "Unsubscribe",
+    "register": "Register",
+    "lesson_details": "Lesson Details",
+    "create_day": "Created on",
+    "update_date": "Updated on",
+    "subscribe": "Subscribe"
+  },
+  "lesson_page_scroll": {
+    "video": "Video",
+    "flashcard": "Flashcard",
+    "kanji": "Kanji"
   }
 }

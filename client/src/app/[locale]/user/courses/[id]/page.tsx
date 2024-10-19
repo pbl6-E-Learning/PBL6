@@ -62,15 +62,19 @@ const CourseDetail = ({ params }: { params: { id: string } }) => {
     }
   }, [dispatch, t, params.id])
 
-  const handleAssignCourse = async () => {
+  const handleAssignCourse = async (teacher_id: number) => {
     if (token && params.id) {
-      try {
-        const res: { data: { message: AssignCourse } } = await http.post(`courses/${params.id}/assign`)
-        const data = res.data.message
-        setCourse((prevCourse) => ({ ...prevCourse, status: data.status }))
-        dispatch(successPopUp(t('assign_success')))
-      } catch {
-        dispatch(failPopUp(t('assign_fail')))
+      if (course?.status === 'accepted') {
+        router.push(`/user/lesson/${params.id}/?id_teacher=${teacher_id}`)
+      } else {
+        try {
+          const res: { data: { message: AssignCourse } } = await http.post(`courses/${params.id}/assign`)
+          const data = res.data.message
+          setCourse((prevCourse) => ({ ...prevCourse, status: data.status }))
+          dispatch(successPopUp(t('assign_success')))
+        } catch {
+          dispatch(failPopUp(t('assign_fail')))
+        }
       }
     } else {
       router.push('/login')
@@ -119,8 +123,8 @@ const CourseDetail = ({ params }: { params: { id: string } }) => {
                 <span className='font-semibold py-3'>{t('list_lessons')}</span>
               </div>
             </div>
-            <div>
-              <LessonScrollArea lessons={course?.course?.lessons || []} />
+            <div className='flex justify-center'>
+              <LessonScrollArea lessons={course?.course?.lessons || []} hidden={true} />
             </div>
           </div>
         </div>
@@ -174,11 +178,14 @@ const CourseDetail = ({ params }: { params: { id: string } }) => {
             <CardFooter className='px-6'>
               <Button
                 className='w-full py-3 text-lg font-semibold rounded'
-                onClick={handleAssignCourse}
-                disabled={['accepted', 'pending'].includes(course?.status as string)}
+                onClick={() => handleAssignCourse(course?.course?.teacher_id as number)}
+                disabled={['pending'].includes(course?.status as string)}
               >
-                {course.is_assigned || course.status === 'pending' ? t('pending') : t('enroll')}
-                {course.status === 'accepted' && t('enrolled')}
+                {course.is_assigned && course.status === 'pending'
+                  ? t('pending')
+                  : course.is_assigned && course.status === 'accepted'
+                    ? t('enrolled')
+                    : t('enroll')}
               </Button>
             </CardFooter>
           </Card>

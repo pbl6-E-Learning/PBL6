@@ -2,8 +2,9 @@ Rails.application.routes.draw do
   namespace :api do
     post "auth/login", to: "authentication#login"
     post "auth/google_oauth2", to: "authentication#login_oauth_google"
-    
+
     resources :courses, only: %i(show index) do
+      resources :lessons, only: :index
       post 'assign', on: :member
       collection do
         get 'search'
@@ -31,7 +32,7 @@ Rails.application.routes.draw do
     resources :categories, only: %i(index)
     resources :teachers, only: %i(show)
 
-    resources :progress do
+    resources :progress, only: %i(create update) do
       collection do
         get "myprogress", to: "progress#user_progress"
       end

@@ -77,7 +77,8 @@
     "assign_fail": "Yêu cầu đăng ký thất bại",
     "pending": "Đang chờ xử lý...",
     "accepted": "Đã đăng ký",
-    "please_login": "Vui lòng đăng nhập để đăng ký khóa học này"
+    "please_login": "Vui lòng đăng nhập để đăng ký khóa học này",
+    "enrolled": "Vào học ngay"
   },
   "nodata": {
     "no_data_title": "Không tìm thấy kết quả",
@@ -397,5 +398,21 @@
     "createdAt": "Ngày tạo",
     "cancel": "Hủy",
     "req_title": "Khóa học"
+  },
+  "lesson_page": {
+    "select_one_lesson": "Vui lòng chọn một bài học.",
+    "follower": "người theo dõi",
+    "all": "Tất cả",
+    "unsubscribe": "Hủy đăng ký",
+    "register": "Đăng ký",
+    "lesson_details": "Chi tiết bài học",
+    "create_day": "Ngày tạo",
+    "update_date": "Ngày cập nhật",
+    "subscribe": "Đăng kí"
+  },
+  "lesson_page_scroll": {
+    "video": "Video",
+    "flashcard": "Thẻ ghi nhớ",
+    "kanji": "Kanji"
   }
 }

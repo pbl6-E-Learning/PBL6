@@ -84,14 +84,32 @@ courses_data.each do |course|
   puts "Created course with ID #{course["id"]} and DB ID #{created_course.id}"
 end
 
+# id = 1
+# lectures_data.each do |course_id, lectures|
+#   lectures.each_with_index do |lecture_title, index|
+#     Lesson.create!(
+#       course_id: id,
+#       title: lecture_title,
+#       content: Faker::Lorem.paragraph(sentence_count: 10),
+#       video_url: "https://res.cloudinary.com/di5rvdf9r/video/upload/v1727915432/Introduction_-_Japanese_Lesson_1_ice1va.mp4"
+#     )
+#   end
+#   id += 1
+# end
+
 id = 1
+video_urls = [
+  "https://res.cloudinary.com/di5rvdf9r/video/upload/v1727915432/Introduction_-_Japanese_Lesson_1_ice1va.mp4",
+  "https://res.cloudinary.com/di5rvdf9r/video/upload/v1729158442/%E3%81%BF%E3%81%8B%E3%82%93_%E6%89%8B%E4%BD%9C%E3%82%8A%E3%83%8F%E3%83%B3%E3%83%90%E3%83%BC%E3%82%B0_%E7%AC%AC2%E8%A9%B1_%E3%81%82%E3%81%9F%E3%81%97%E3%83%B3%E3%81%A1NEXT_ENG_sub_dbepxy.mp4"
+]
+
 lectures_data.each do |course_id, lectures|
   lectures.each_with_index do |lecture_title, index|
     Lesson.create!(
       course_id: id,
       title: lecture_title,
       content: Faker::Lorem.paragraph(sentence_count: 10),
-      video_url: "https://youtu.be/rGrBHiuPlT0?list=PL4071737C12790477"
+      video_url: video_urls[index % video_urls.size]
     )
   end
   id += 1
@@ -122,3 +140,4 @@ end
 
 CourseAssignment.create!(user: User.last, course: Course.first, assigned_at: Time.now, status: 1)
 CourseAssignment.create!(user: User.last, course: Course.second, assigned_at: Time.now, status: 1)
+Account.update_all(activated: 1)
