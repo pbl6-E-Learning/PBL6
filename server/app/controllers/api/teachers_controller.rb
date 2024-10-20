@@ -1,10 +1,9 @@
 class Api::TeachersController < Api::ApplicationController
-  authorize_resource
   include Response
   before_action :set_teacher, only: :show
 
   def show
-    follower_count = Follow.count_for_teacher @teacher.id
+    follower_count = Follow.count_for_teacher(@teacher.id)
     teacher_profile = @teacher.as_json(
       include: {
         courses: {
@@ -16,8 +15,19 @@ class Api::TeachersController < Api::ApplicationController
       }
     )
 
+    user_following = if logged_in?
+                       current_user.follows.exists?(teacher: @teacher)
+                     else
+                       false
+                     end
+
     json_response(
-      message: {profile: teacher_profile, follower_count:}, status: :ok
+      message: {
+        profile: teacher_profile,
+        follower_count:,
+        is_following: user_following
+      },
+      status: :ok
     )
   end
 

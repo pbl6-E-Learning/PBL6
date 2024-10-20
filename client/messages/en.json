@@ -352,7 +352,11 @@
     "unsubscribe": "Unsubscribe",
     "register": "Register",
     "cancel": "Cancel",
-    "list_course": "List Course"
+    "list_course": "List Course",
+    "subscribed": "Subscribed",
+    "unsubscribed": "Unsubscribed",
+    "subscribe": "Subscribe",
+    "login_need": "Please login to continue"
   },
   "progress": {
     "title": "Progress Overview",
