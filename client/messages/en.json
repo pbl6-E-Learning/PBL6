@@ -464,5 +464,24 @@
     "update_failed": "Failed to update profile. Please try again.",
     "login_first": "Please log in first.",
     "error": "An error occurred"
+  },
+  "edit_course": {
+    "title": "Course",
+    "description": "Update your course information.",
+    "update_success": "Update successful!",
+    "update_failed": "Update failed!",
+    "login_first": "You need to log in before performing this action.",
+    "level": "Level",
+    "choose_level": "Choose level",
+    "N1": "N1",
+    "N2": "N2",
+    "N3": "N3",
+    "N4": "N4",
+    "N5": "N5",
+    "category": "Category",
+    "created_at": "Created At",
+    "updated_at": "Updated At",
+    "goals": "Goals",
+    "changeProfile": "Update Course"
   }
 }
