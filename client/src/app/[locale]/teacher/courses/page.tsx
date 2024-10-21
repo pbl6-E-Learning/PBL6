@@ -27,17 +27,6 @@ import { failPopUp, successPopUp } from '@/src/app/hooks/features/popup.slice'
 import { Course } from '@/src/app/types/course.type'
 import CoursesTable from '@/src/components/CoursesTable'
 import { useCategories } from '@/src/app/context/CategoriesContext'
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger
-} from '@/src/components/ui/alert-dialog'
 import { Textarea } from '@/src/components/ui/textarea'
 import { Label } from '@/src/components/ui/label'
 import { CldUploadButton } from 'next-cloudinary'
@@ -59,7 +48,6 @@ export default function CoursesPage() {
   const [currentPage, setCurrentPage] = useState(1)
   const [totalPages, setTotalPages] = useState(1)
   const [searchCourse, setSearchCourse] = useState('')
-  const [searchTeacher, setSearchTeacher] = useState('')
   const [filterCategory, setFilterCategory] = useState('')
   const [filterLevel, setFilterLevel] = useState('')
   const [searchTriggered, setSearchTriggered] = useState(true)
@@ -96,7 +84,7 @@ export default function CoursesPage() {
       getListCourses()
       setSearchTriggered(false)
     }
-  }, [currentPage, searchTriggered, dispatch, t, searchCourse, filterLevel, filterCategory, searchTeacher])
+  }, [currentPage, searchTriggered, dispatch, t, searchCourse, filterLevel, filterCategory])
 
   const handlePageChange = (page: number | 'next' | 'prev') => {
     setCurrentPage((prevPage) => {
@@ -115,6 +103,7 @@ export default function CoursesPage() {
     setCurrentPage(1)
     setSearchTriggered(true)
   }
+
   const resetForm = () => {
     setTitle('')
     setCategoryId(1)

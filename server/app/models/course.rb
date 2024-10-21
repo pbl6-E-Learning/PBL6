@@ -7,6 +7,9 @@ class Course < ApplicationRecord
   has_many :course_assignments, dependent: :destroy
   has_many :users, through: :course_assignments
 
+  VALID_ATTRIBUTES_COURSE = %i(title level description category_id
+                              image_url).freeze
+
   scope :hot, (lambda do
     left_joins(:course_assignments)
       .group("courses.id")

@@ -494,5 +494,24 @@
     "profile": "Hồ sơ",
     "settings": "Cài đặt",
     "logout": "Đăng xuất"
+  },
+  "edit_course": {
+    "title": "Khóa học",
+    "description": "Cập nhật thông tin khóa học của bạn.",
+    "update_success": "Cập nhật thành công!",
+    "update_failed": "Cập nhật không thành công!",
+    "login_first": "Bạn cần đăng nhập trước khi thực hiện hành động này.",
+    "level":"Cấp độ",
+    "choose_level": "Chọn cấp độ",
+    "N1": "N1",
+    "N2": "N2",
+    "N3": "N3",
+    "N4": "N4",
+    "N5": "N5",
+    "category": "Danh mục",
+    "created_at": "Ngày tạo",
+    "updated_at": "Ngày cập nhật",
+    "goals": "Mục tiêu",
+    "changeProfile": "Cập nhật khóa học"
   }
 }
