@@ -25,7 +25,8 @@ class Ability
     can :manage, Lesson, teacher_id: account&.teacher&.id
     can :manage, Flashcard, lesson: {teacher_id: account&.teacher&.id}
     can :read, User
-    can :edit, Teacher, id: account&.teacher&.id
+    can :read, Teacher
+    can :manage, Teacher, id: account&.teacher&.id
     can :manage, Account, id: account.id
     can :create, RequestCourse
   end

@@ -418,5 +418,51 @@
     "video": "Video",
     "flashcard": "Flashcard",
     "kanji": "Kanji"
+  },
+  "list_teacher": {
+    "title": "Teachers List",
+    "searchNameOrEmail": "Search by name or email",
+    "search": "Search",
+    "previous": "Previous",
+    "next": "Next",
+    "error": "An error occurred. Please try again later.",
+    "name": "Name",
+    "course_count": "Course",
+    "student_count": "Student",
+    "follower_count": "Follower",
+    "action": "Action",
+    "view_teacher": "View Teacher",
+    "confirm_delete": "Confirm Delete",
+    "content_delete_teacher": "Are you sure you want to delete the teacher",
+    "delete": "Delete",
+    "cancel": "Cancel",
+    "view_details_teacher": "View Teacher Details",
+    "avatarAlt": "Avatar",
+    "email": "Email",
+    "job_title": "Job Title",
+    "experience": "Experience",
+    "bio": "Bio",
+    "delete_success": "Teacher deleted successfully",
+    "delete_fail": "Failed to delete teacher"
+  },
+  "teacher_profile": {
+    "title": "Teacher Profile",
+    "description": "Manage your personal profile and details.",
+    "no_profile": {
+      "title": "No Profile Found",
+      "description": "It seems like your profile information is missing. Please update your profile."
+    },
+    "name": "Full Name",
+    "job_title": "Job Title",
+    "created_at": "Created At",
+    "updated_at": "Updated At",
+    "email": "Email",
+    "bio": "Biography",
+    "experience": "Experience",
+    "update": "Update Profile",
+    "update_success": "Profile updated successfully!",
+    "update_failed": "Failed to update profile. Please try again.",
+    "login_first": "Please log in first.",
+    "error": "An error occurred"
   }
 }

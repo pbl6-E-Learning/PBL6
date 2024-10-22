@@ -80,7 +80,7 @@ export default function CoursesPage() {
       const getListCourses = async () => {
         try {
           const res: ResponseCourses = await http.get(
-            `teacher/courses?page=${currentPage}&q[title_cont]=${searchCourse}&q[level_eq]=${filterLevel}&q[category_name_cont]=${filterCategory}`
+            `instructor/courses?page=${currentPage}&q[title_cont]=${searchCourse}&q[level_eq]=${filterLevel}&q[category_name_cont]=${filterCategory}`
           )
           const data = res.data.message
           setDataLoaded(true)
@@ -134,7 +134,7 @@ export default function CoursesPage() {
       }
     }
     try {
-      await http.post('teacher/request_courses', requestData)
+      await http.post('instructor/request_courses', requestData)
       dispatch(successPopUp(t('update_success')))
     } catch {
       dispatch(failPopUp(t('update_failed')))
