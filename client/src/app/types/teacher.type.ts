@@ -1,5 +1,13 @@
 import { Course } from './course.type'
 
+export type resProfileTeacher = {
+  message: {
+    profile: Teacher
+    follower_count?: number
+    is_following?: boolean
+  }
+}
+
 type resEmail = {
   email?: string
 }

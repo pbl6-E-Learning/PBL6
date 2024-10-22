@@ -5,7 +5,6 @@ import CoverImage from '@/src/app/assets/CoverImage.jpg'
 import avtDefault from '@/src/app/assets/avtDefault.png'
 import Image from 'next/image'
 import { Avatar, AvatarImage } from '@/src/components/ui/avatar'
-import http from '@/src/app/utils/http'
 import { useAppDispatch } from '@/src/app/hooks/store'
 import { failPopUp, successPopUp } from '@/src/app/hooks/features/popup.slice'
 import { Button } from '@/src/components/ui/button'
@@ -24,7 +23,6 @@ import { AiOutlineUserDelete } from 'react-icons/ai'
 import { TooltipProvider } from '@/src/components/ui/tooltip'
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/src/components/ui/carousel'
 import CourseCard from '@/src/components/CourseCard'
-import { Teacher } from '@/src/app/types/teacher.type'
 import { MdSlowMotionVideo } from 'react-icons/md'
 import { BsJournalBookmarkFill } from 'react-icons/bs'
 import { TbInfoSquareRounded } from 'react-icons/tb'
@@ -32,30 +30,31 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/src
 import { TiBusinessCard } from 'react-icons/ti'
 import { Skeleton } from '@/src/components/ui/skeleton'
 import SkeletonCourse from '@/src/components/SkeletonCourse/SkeletonCourse'
+import { useGetTeacherInfoQuery } from '@/src/app/hooks/service/teacher_infor.service'
 import { useRouter } from 'next/navigation'
-
-type resProfileTeacher = {
-  profile: Teacher
-  follower_count: number
-  is_following: boolean
-}
+import http from '@/src/app/utils/http'
 
 export default function ProfileTeacher({ params }: { params: { id: string } }) {
   const t = useTranslations('profile_teacher')
   const teacherId = params.id
   const [role, setRole] = useState<CookieValueTypes>()
-  const [profileTeacher, setProfileTeacher] = useState<resProfileTeacher>()
   const [imageAvatar, setImageAvatar] = useState<string>('')
   const [coverImage, setCoverImage] = useState<string>('')
   const [position, setPosition] = useState<boolean>(false)
-  const [loading, setLoading] = useState<boolean>(true)
   const [followerCount, setFollowerCount] = useState<number>(0)
   const dispatch = useAppDispatch()
   const router = useRouter()
 
+  const { data, isFetching, isError } = useGetTeacherInfoQuery(teacherId)
+
   useEffect(() => {
     document.title = t('title')
   }, [t])
+
+  useEffect(() => {
+    setPosition(data?.message?.is_following as boolean)
+    setFollowerCount(data?.message?.follower_count as number)
+  }, [data?.message?.follower_count, data?.message?.is_following])
 
   useEffect(() => {
     if (hasCookie('role')) {
@@ -64,25 +63,9 @@ export default function ProfileTeacher({ params }: { params: { id: string } }) {
     }
   }, [])
 
-  useEffect(() => {
-    const fetchProfileTeacher = async () => {
-      try {
-        const res: { data: { message: resProfileTeacher } } = await http.get(`teachers/${teacherId}`)
-        const data = res.data.message
-        setProfileTeacher(data)
-        setPosition(data.is_following)
-        setFollowerCount(data.follower_count)
-      } catch (error: any) {
-        const message = error?.response?.data?.error || error.message || t('error')
-        dispatch(failPopUp(message))
-      } finally {
-        setLoading(false)
-      }
-    }
-    fetchProfileTeacher()
-
-    return
-  }, [dispatch, teacherId, t])
+  if (isError) {
+    dispatch(failPopUp(t('error')))
+  }
 
   const followTeacher = async () => {
     if (!checklogin()) return
@@ -125,7 +108,7 @@ export default function ProfileTeacher({ params }: { params: { id: string } }) {
     <div className='flex flex-row'>
       <div className='container mx-auto my-8'>
         <div className='relative'>
-          {loading ? (
+          {isFetching ? (
             <Skeleton className='h-[125px] w-full rounded-xl' />
           ) : (
             <div className='relative'>
@@ -153,14 +136,20 @@ export default function ProfileTeacher({ params }: { params: { id: string } }) {
             </div>
           )}
           <div className='flex flex-col lg:flex-row mt-7'>
-            {loading ? (
+            {isFetching ? (
               <Skeleton className='h-36 w-36 rounded-full' />
             ) : (
               <div className='rounded-full bg-primary border-white h-36 w-36'>
                 <div className='relative'>
                   <Avatar className='h-36 w-36'>
                     <AvatarImage
-                      src={profileTeacher?.profile?.image_url ? profileTeacher?.profile?.image_url : avtDefault.src}
+                      src={
+                        imageAvatar
+                          ? imageAvatar
+                          : data?.message?.profile?.image_url
+                            ? data?.message?.profile?.image_url
+                            : avtDefault.src
+                      }
                     />
                   </Avatar>
                   {role === 'teacher' ? (
@@ -181,7 +170,7 @@ export default function ProfileTeacher({ params }: { params: { id: string } }) {
             )}
             <div className='flex items-center ml-4'>
               <div className='flex-row'>
-                {loading ? (
+                {isFetching ? (
                   <div className='space-y-2'>
                     <Skeleton className='h-4 w-[250px]' />
                     <Skeleton className='h-4 w-[200px]' />
@@ -190,9 +179,9 @@ export default function ProfileTeacher({ params }: { params: { id: string } }) {
                   </div>
                 ) : (
                   <Fragment>
-                    <h1 className='text-4xl font-black'>{profileTeacher?.profile?.name}</h1>
+                    <h1 className='text-4xl font-black'>{data?.message?.profile?.name}</h1>
                     <h2 className='flex gap-3 mt-1 text-gray'>
-                      @{profileTeacher?.profile?.account?.email}
+                      @{data?.message?.profile?.account?.email}
                       <p className='text-sm'>•</p>
                       {followerCount} {t('follower')}
                     </h2>
@@ -237,7 +226,7 @@ export default function ProfileTeacher({ params }: { params: { id: string } }) {
         </div>
         <div className='mt-6'>
           <Card>
-            {loading ? (
+            {isFetching ? (
               <div className='space-y-2 m-5'>
                 <Skeleton className='h-4 w-2/5 my-1' />
                 <Skeleton className='h-4 w-1/3 my-1' />
@@ -250,28 +239,28 @@ export default function ProfileTeacher({ params }: { params: { id: string } }) {
               <Fragment>
                 <CardHeader>
                   <CardTitle>{t('introduce')}</CardTitle>
-                  <CardDescription>{profileTeacher?.profile?.bio}</CardDescription>
+                  <CardDescription>{data?.message?.profile?.bio}</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <h1 className='text-lg font-black'>{t('channel_details')}</h1>
                   <div className='flex mt-3'>
                     <TiBusinessCard size={25} className='mr-2 ml-1' />
-                    {profileTeacher?.profile?.job_title}
+                    {data?.message?.profile?.job_title}
                   </div>
                   <div className='flex mt-3 ml-1'>
                     <MdSlowMotionVideo size={25} className='mr-2' />
-                    {profileTeacher?.profile?.courses?.length} {t('course')}
+                    {data?.message?.profile?.courses?.length} {t('course')}
                   </div>
                   <div className='flex mt-3'>
                     <BsJournalBookmarkFill size={25} className='mr-2 ml-1' />
-                    {profileTeacher?.profile?.experience}
+                    {data?.message?.profile?.experience}
                   </div>
                   <div className='flex mt-3'>
                     <TbInfoSquareRounded size={25} className='mr-2 ml-1' />
                     {t('participated')}
                     {'  '}
-                    {profileTeacher?.profile?.created_at
-                      ? new Date(profileTeacher?.profile?.created_at).toISOString().split('T')[0]
+                    {data?.message?.profile?.created_at
+                      ? new Date(data?.message?.profile?.created_at).toISOString().split('T')[0]
                       : 'N/A'}
                   </div>
                 </CardContent>
@@ -280,7 +269,7 @@ export default function ProfileTeacher({ params }: { params: { id: string } }) {
           </Card>
         </div>
         <h1 className='text-4xl font-black my-10'>{t('list_course')}</h1>
-        {loading ? (
+        {isFetching ? (
           <div className='flex gap-20 justify-center'>
             <SkeletonCourse />
             <SkeletonCourse />
@@ -294,10 +283,10 @@ export default function ProfileTeacher({ params }: { params: { id: string } }) {
                 <TooltipProvider>
                   <Carousel className='w-full'>
                     <CarouselContent className='-ml-4 md:-ml-1'>
-                      {profileTeacher?.profile.courses?.map((course, index) => (
+                      {data?.message?.profile.courses?.map((course, index) => (
                         <CarouselItem key={index} className='pl-4 mb-6 md:basis-1/2 lg:basis-1/4'>
                           <div className='mt-3 h-full'>
-                            <CourseCard course={course} teacher={profileTeacher?.profile?.name} />
+                            <CourseCard course={course} teacher={data?.message?.profile?.name} />
                           </div>
                         </CarouselItem>
                       ))}

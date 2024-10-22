@@ -1,5 +1,34 @@
 class Api::ProgressController < Api::ApplicationController
   before_action :authenticate
+  before_action :set_progress, only: %i(update)
+
+  def create
+    if current_user.progresses.exists?(lesson_id: progress_params[:lesson_id])
+      return error_response(message: "Your progress has been recorded",
+                            status: :forbidden)
+    end
+
+    progress = current_user.progresses.new(progress_params)
+
+    unless progress.save
+      return error_response(errors: progress.errors.full_messages,
+                            status: :forbidden)
+    end
+
+    json_response(message: "Progress saved successfully", status: :ok)
+  end
+
+  def update
+    unless @progress.update(progress_params)
+      return error_response(errors: @progress.errors.full_messages,
+                            status: :forbidden)
+    end
+
+    json_response(message: {
+                    success: "Progress updated successfully",
+                    progress: @progress
+                  }, status: :ok)
+  end
 
   def user_progress
     assignments = current_user.course_assignments.includes(:course)
@@ -15,6 +44,14 @@ class Api::ProgressController < Api::ApplicationController
   end
 
   private
+
+  def set_progress
+    @progress = current_user.progresses.find_by lesson_id: params[:id]
+  end
+
+  def progress_params
+    params.require(:progress).permit(Progress::VALID_ATTRIBUTES_PROGRESS)
+  end
 
   def calculate_progress assignments
     accepted_courses = filter_accepted_courses assignments
