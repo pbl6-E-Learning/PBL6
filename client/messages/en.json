@@ -464,5 +464,39 @@
     "update_failed": "Failed to update profile. Please try again.",
     "login_first": "Please log in first.",
     "error": "An error occurred"
+  },
+  "teacher_dashboard": {
+    "title": "Teacher Dashboard",
+    "followers_count": "Followers Count",
+    "student": "Students",
+    "total_course": "Total Courses",
+    "pending_course_requests": "Pending Create Course Requests",
+    "no_token_message": "No token found. Please log in.",
+    "error": "An error occurred",
+    "course_enroll_request": "Course Enrollment Requests",
+    "rejected": "Rejected",
+    "pending": "Pending",
+    "accepted": "Accepted",
+    "previous": "Previous",
+    "next": "Next",
+    "students_number": "Number of Students",
+    "others": "Others",
+    "course_requests": "Create Course Requests",
+    "course_title": "Course Title",
+    "status": "Status",
+    "create_at": "Created At",
+    "general_analysis": "General Analysis",
+    "approved": "Approved"
+  },
+  "menu_teacher": {
+    "MENU": "Menu",
+    "dashboard": "Dashboard",
+    "courses": "Courses",
+    "lesson": "Lesson",
+    "request": "Request",
+    "OTHER": "Other",
+    "profile": "Profile",
+    "settings": "Settings",
+    "logout": "Logout"
   }
 }
