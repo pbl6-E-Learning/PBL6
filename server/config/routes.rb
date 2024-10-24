@@ -7,7 +7,7 @@ Rails.application.routes.draw do
       resources :lessons, only: :index
       post 'assign', on: :member
       collection do
-        get 'search'
+        get "search"
       end
     end
 
@@ -39,7 +39,7 @@ Rails.application.routes.draw do
     end
 
     resources :follows, only: %i(create)
-    delete 'follows', to: 'follows#destroy'
+    delete "follows", to: "follows#destroy"
 
     namespace :admin do
       resources :users, only: %i(index)
@@ -62,6 +62,7 @@ Rails.application.routes.draw do
         get 'profile', to: 'teachers#profile'
         patch 'update_profile', to: 'teachers#update'
       end
+      get "dashboard", to: "courses#dashboard"
     end
   end
 end
