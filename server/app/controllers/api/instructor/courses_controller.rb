@@ -3,7 +3,7 @@ module Api::Instructor
     before_action :set_course, only: :destroy
 
     def index
-      @q = Course.ransack(params[:q])
+      @q = current_teacher.courses.ransack(params[:q])
       @pagy, @courses = pagy @q.result.includes(:category, :teacher)
 
       json_response(
@@ -27,6 +27,17 @@ module Api::Instructor
         message: "Course deleted successfully",
         status: :ok
       )
+    end
+
+    def dashboard
+      dashboard_data = {
+        followers_count:,
+        course_assignments:,
+        course_requests:,
+        total_accepted_assignments:
+      }
+
+      json_response(message: dashboard_data)
     end
 
     private
@@ -57,6 +68,35 @@ module Api::Instructor
         accepted: course.accepted_count,
         rejected: course.rejected_count
       }
+    end
+
+    def followers_count
+      current_teacher.follows.count
+    end
+
+    def course_assignments
+      current_teacher.courses.map do |course|
+        {
+          course_title: course.title,
+          pending: course.pending_count,
+          accepted: course.accepted_count,
+          rejected: course.rejected_count
+        }
+      end
+    end
+
+    def course_requests
+      current_teacher.request_courses.map do |request|
+        {
+          title: request.title,
+          status: request.status,
+          created_at: request.created_at
+        }
+      end
+    end
+
+    def total_accepted_assignments
+      current_teacher.courses.sum(&:accepted_count)
     end
   end
 end

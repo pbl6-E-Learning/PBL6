@@ -460,5 +460,39 @@
     "update_failed": "Cập nhật hồ sơ thất bại. Vui lòng thử lại.",
     "login_first": "Vui lòng đăng nhập trước.",
     "error": "Đã xảy ra lỗi"
+  },
+  "teacher_dashboard": {
+    "title": "Bảng Điều Khiển Giáo Viên",
+    "followers_count": "Số Lượng Người Theo Dõi",
+    "student": "Học Sinh",
+    "total_course": "Tổng Số Khóa Học",
+    "pending_course_requests": "Yêu Cầu Tạo Khóa Học Đang Chờ",
+    "no_token_message": "Không tìm thấy mã thông báo. Vui lòng đăng nhập.",
+    "error": "Đã xảy ra lỗi",
+    "course_enroll_request": "Yêu Cầu Ghi Danh Khóa Học",
+    "rejected": "Đã Từ Chối",
+    "pending": "Đang Chờ Xét",
+    "accepted": "Đã Chấp Nhận",
+    "previous": "Trước",
+    "next": "Tiếp Theo",
+    "students_number": "Số Lượng Học Sinh",
+    "others": "Khác",
+    "course_requests": "Yêu Cầu Tạo Khóa Học",
+    "course_title": "Tên Khóa Học",
+    "status": "Trạng Thái",
+    "create_at": "Ngày Tạo",
+    "general_analysis": "Phân Tích Chung",
+    "approved": "Đã Duyệt"
+  },
+  "menu_teacher": {
+    "MENU": "Menu",
+    "dashboard": "Bảng điều khiển",
+    "courses": "Khóa học",
+    "lesson": "Bài học",
+    "request": "Yêu cầu",
+    "OTHER": "Khác",
+    "profile": "Hồ sơ",
+    "settings": "Cài đặt",
+    "logout": "Đăng xuất"
   }
 }
