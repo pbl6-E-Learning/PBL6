@@ -27,17 +27,6 @@ import { failPopUp, successPopUp } from '@/src/app/hooks/features/popup.slice'
 import { Course } from '@/src/app/types/course.type'
 import CoursesTable from '@/src/components/CoursesTable'
 import { useCategories } from '@/src/app/context/CategoriesContext'
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger
-} from '@/src/components/ui/alert-dialog'
 import { Textarea } from '@/src/components/ui/textarea'
 import { Label } from '@/src/components/ui/label'
 import { CldUploadButton } from 'next-cloudinary'
@@ -115,6 +104,7 @@ export default function CoursesPage() {
     setCurrentPage(1)
     setSearchTriggered(true)
   }
+
   const resetForm = () => {
     setTitle('')
     setCategoryId(1)
@@ -307,7 +297,13 @@ export default function CoursesPage() {
           )}
         </div>
       </div>
-      <CoursesTable courses={courses} dataLoaded={dataLoaded} setCourses={setCourses} role='teacher' />
+      <CoursesTable
+        courses={courses}
+        dataLoaded={dataLoaded}
+        setCourses={setCourses}
+        role='teacher'
+        category={category}
+      />
       <Pagination>
         <PaginationContent>
           {currentPage > 1 && (
