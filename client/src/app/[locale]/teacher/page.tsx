@@ -24,6 +24,10 @@ const TeacherDashboard = () => {
   const [dataLoaded, setDataLoaded] = useState(false)
 
   useEffect(() => {
+    document.title = t('title')
+  }, [t])
+
+  useEffect(() => {
     const token = getCookie('authToken')
     if (!token) {
       router.push('/login')

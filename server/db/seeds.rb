@@ -141,3 +141,40 @@ end
 CourseAssignment.create!(user: User.last, course: Course.first, assigned_at: Time.now, status: 1)
 CourseAssignment.create!(user: User.last, course: Course.second, assigned_at: Time.now, status: 1)
 Account.update_all(activated: 1)
+
+require "roo"
+
+file_path = Rails.root.join("db", "Flashcard.xlsx")
+xlsx = Roo::Excelx.new(file_path)
+
+lessons = Lesson.all
+total_flashcards = xlsx.last_row - 1
+flashcards_per_lesson = 10
+
+flashcards = []
+lesson_index = 0
+
+xlsx.each_row_streaming(offset: 1) do |row|
+  front_text = row[0]&.cell_value.to_s
+  back_text = row[1]&.cell_value.to_s
+
+  next if front_text.blank? || back_text.blank?
+
+  flashcards << {
+    lesson_id: lessons[lesson_index].id,
+    front_text: front_text,
+    back_text: back_text,
+    created_at: Time.now,
+    updated_at: Time.now
+  }
+
+  if flashcards.size >= flashcards_per_lesson
+    Flashcard.insert_all(flashcards)
+    flashcards = []
+    lesson_index += 1 if lesson_index < lessons.size - 1
+  end
+end
+
+Flashcard.insert_all(flashcards) if flashcards.any?
+
+puts "Seeded flashcards into #{lessons.count} lessons!"

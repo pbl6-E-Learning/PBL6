@@ -404,6 +404,7 @@
     "req_title": "Title"
   },
   "lesson_page": {
+    "title": "Lesson",
     "select_one_lesson": "Please select a lesson.",
     "follower": "followers",
     "all": "All",
@@ -535,5 +536,17 @@
     "content": "Content",
     "list_kanji": "List of Kanji",
     "submit_add_lesson": "Submit"
+  },
+  "add_flashcard": {
+    "success_message": "Flashcard created successfully!",
+    "error_message": "An error occurred while creating the flashcard.",
+    "view_lessons_tooltip": "Create a new flashcard",
+    "create_flashcard_title": "Create a New Flashcard",
+    "create_flashcard_description": "Enter the front and back text for your flashcard.",
+    "front_text_placeholder": "Front Text",
+    "back_text_placeholder": "Back Text",
+    "cancel": "Cancel",
+    "submitting": "Submitting...",
+    "submit": "Submit"
   }
 }
