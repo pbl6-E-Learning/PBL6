@@ -44,7 +44,8 @@ class Api::LessonsController < Api::ApplicationController
 
     unless assignment
       return error_response(
-        message: "You have not registered for this course",
+        message: "You have not registered for" \
+                 "this course or it is having an error.",
         status: :not_found
       )
     end

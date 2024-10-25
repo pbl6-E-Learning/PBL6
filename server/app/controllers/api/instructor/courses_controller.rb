@@ -1,6 +1,7 @@
 module Api::Instructor
   class CoursesController < ApplicationController
-    before_action :set_course, only: :destroy
+    before_action :set_course, only: %i(destroy update show)
+    before_action :check_course_ownership, only: %i(update show)
 
     def index
       @q = current_teacher.courses.ransack(params[:q])
@@ -13,6 +14,31 @@ module Api::Instructor
         },
         status: :ok
       )
+    end
+
+    def show
+      json_response(
+        message: {
+          course: formatted_course(@course)
+        },
+        status: :ok
+      )
+    end
+
+    def update
+      if @course.update(course_params)
+        json_response(
+          message: {
+            course: formatted_course(@course)
+          },
+          status: :ok
+        )
+      else
+        error_response(
+          message: @course.errors.full_messages.to_sentence,
+          status: :unprocessable_entity
+        )
+      end
     end
 
     def destroy
@@ -52,6 +78,19 @@ module Api::Instructor
       )
     end
 
+    def check_course_ownership
+      return unless @course.nil? || @course.teacher_id != current_teacher.id
+
+      error_response(
+        message: "You are not authorized to access this course",
+        status: :forbidden
+      )
+    end
+
+    def course_params
+      params.require(:course).permit(Course::VALID_ATTRIBUTES_COURSE)
+    end
+
     def formatted_courses
       @courses.map do |course|
         course.as_json.merge(
@@ -60,6 +99,14 @@ module Api::Instructor
           assignments_count: assignments_count(course)
         )
       end
+    end
+
+    def formatted_course course
+      course.as_json.merge(
+        category: course.category,
+        teacher: course.teacher,
+        assignments_count: assignments_count(course)
+      )
     end
 
     def assignments_count course

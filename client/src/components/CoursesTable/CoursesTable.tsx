@@ -23,7 +23,10 @@ import { Button } from '@/src/components/ui/button'
 import http from '@/src/app/utils/http'
 import { useAppDispatch } from '@/src/app/hooks/store'
 import { failPopUp, successPopUp } from '@/src/app/hooks/features/popup.slice'
-import { Dispatch, SetStateAction } from 'react'
+import { Dispatch, SetStateAction, useState } from 'react'
+import { TbEdit } from 'react-icons/tb'
+import { Category } from '@/src/app/types/category.type'
+import { useRouter } from 'next/navigation'
 
 interface UserTableProps {
   courses: Course[]
@@ -35,6 +38,7 @@ interface UserTableProps {
 const CoursesTable: React.FC<UserTableProps> = ({ courses, dataLoaded, setCourses, role }) => {
   const t = useTranslations('courses_table')
   const dispatch = useAppDispatch()
+  const router = useRouter()
 
   const handleDeleteCourse = async (id_course: number) => {
     try {
@@ -121,35 +125,44 @@ const CoursesTable: React.FC<UserTableProps> = ({ courses, dataLoaded, setCourse
                 </TableCell>
                 <TableCell>
                   <div className='flex items-center justify-center cursor-pointer'>
-                    <AlertDialog>
-                      <AlertDialogTrigger asChild>
-                        <Button variant='link'>
-                          <BsTrashFill color='red' size={25} />
-                        </Button>
-                      </AlertDialogTrigger>
-                      <AlertDialogContent>
-                        <AlertDialogHeader>
-                          <AlertDialogTitle>{t('confirm_delete')}</AlertDialogTitle>
-                          <AlertDialogDescription>
-                            {t('content_delete_course')} <strong>{course?.title}</strong>?
-                          </AlertDialogDescription>
-                        </AlertDialogHeader>
-                        <AlertDialogFooter>
-                          <AlertDialogCancel>{t('cancel')}</AlertDialogCancel>
-                          <AlertDialogAction>
-                            {' '}
-                            <Button
-                              type='submit'
-                              onClick={() => {
-                                handleDeleteCourse(course?.id as number)
-                              }}
-                            >
-                              {t('delete')}
-                            </Button>
-                          </AlertDialogAction>
-                        </AlertDialogFooter>
-                      </AlertDialogContent>
-                    </AlertDialog>
+                    <div className='flex'>
+                      <AlertDialog>
+                        <AlertDialogTrigger asChild>
+                          <Button variant='link'>
+                            <BsTrashFill color='red' size={25} />
+                          </Button>
+                        </AlertDialogTrigger>
+                        <AlertDialogContent>
+                          <AlertDialogHeader>
+                            <AlertDialogTitle>{t('confirm_delete')}</AlertDialogTitle>
+                            <AlertDialogDescription>
+                              {t('content_delete_course')} <strong>{course?.title}</strong>?
+                            </AlertDialogDescription>
+                          </AlertDialogHeader>
+                          <AlertDialogFooter>
+                            <AlertDialogCancel>{t('cancel')}</AlertDialogCancel>
+                            <AlertDialogAction>
+                              {' '}
+                              <Button
+                                type='submit'
+                                onClick={() => {
+                                  handleDeleteCourse(course?.id as number)
+                                }}
+                              >
+                                {t('delete')}
+                              </Button>
+                            </AlertDialogAction>
+                          </AlertDialogFooter>
+                        </AlertDialogContent>
+                      </AlertDialog>
+                    </div>
+                    <div>
+                      <TbEdit
+                        size={25}
+                        color='lightblue'
+                        onClick={() => router.push(`/teacher/courses/edit_course/${course?.id}`)}
+                      />
+                    </div>
                   </div>
                 </TableCell>
                 <TableCell className='cursor-pointer'>
