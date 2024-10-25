@@ -11,6 +11,7 @@ import logout from '@/src/app/assets/logout.png'
 import calendar from '@/src/app/assets/calendar.png'
 import { deleteCookie } from 'cookies-next'
 import { useRouter } from 'next/navigation'
+import { useTranslations } from 'next-intl'
 
 const menuItems = [
   {
@@ -18,22 +19,22 @@ const menuItems = [
     items: [
       {
         icon: home,
-        label: 'Home',
-        href: '/'
+        label: 'dashboard',
+        href: '/teacher'
       },
       {
         icon: lesson,
-        label: 'Courses',
+        label: 'courses',
         href: '/teacher/courses'
       },
       {
         icon: student,
-        label: 'Lesson',
+        label: 'lesson',
         href: '/teacher/users'
       },
       {
         icon: calendar,
-        label: 'Request',
+        label: 'request',
         href: '/teacher/request'
       }
     ]
@@ -43,17 +44,17 @@ const menuItems = [
     items: [
       {
         icon: teacher,
-        label: 'Profile',
+        label: 'profile',
         href: '/teacher/profile'
       },
       {
         icon: setting,
-        label: 'Settings',
+        label: 'settings',
         href: '/settings'
       },
       {
         icon: logout,
-        label: 'Logout',
+        label: 'logout',
         href: '/logout'
       }
     ]
@@ -62,13 +63,17 @@ const menuItems = [
 
 const Menu = () => {
   const router = useRouter()
+  const t = useTranslations('menu_teacher')
+
   return (
     <div className='mt-4 text-sm dark:text-white'>
-      {menuItems.map((i) => (
-        <div className='flex flex-col gap-2' key={i.title}>
-          <span className='hidden lg:block text-gray-400 font-light my-4'>{i.title}</span>
-          {i.items.map((item) => {
-            if (item.label === 'Logout') {
+      {menuItems.map((section) => (
+        <div className='flex flex-col gap-2' key={section.title}>
+          <span className='hidden lg:block text-gray-400 font-light my-4'>{t(section.title)}</span>
+          {section.items.map((item) => {
+            const translatedLabel = t(item.label)
+
+            if (item.label === 'logout') {
               return (
                 <button
                   key={item.label}
@@ -80,7 +85,7 @@ const Menu = () => {
                   }}
                 >
                   <Image src={item.icon} alt='' width={20} height={20} />
-                  <span className='hidden lg:block'>{item.label}</span>
+                  <span className='hidden lg:block'>{translatedLabel}</span>
                 </button>
               )
             }
@@ -92,7 +97,7 @@ const Menu = () => {
                 className='flex items-center justify-center lg:justify-start gap-4 text-gray-500 py-2 md:px-2 rounded-md hover:bg-lamaSkyLight'
               >
                 <Image src={item.icon} alt='' width={20} height={20} />
-                <span className='hidden lg:block'>{item.label}</span>
+                <span className='hidden lg:block'>{translatedLabel}</span>
               </Link>
             )
           })}
