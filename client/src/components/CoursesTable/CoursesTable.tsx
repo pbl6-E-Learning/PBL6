@@ -25,8 +25,9 @@ import { useAppDispatch } from '@/src/app/hooks/store'
 import { failPopUp, successPopUp } from '@/src/app/hooks/features/popup.slice'
 import { Dispatch, SetStateAction, useState } from 'react'
 import { TbEdit } from 'react-icons/tb'
-import { Category } from '@/src/app/types/category.type'
 import { useRouter } from 'next/navigation'
+import { DocumentTextIcon } from '@heroicons/react/24/solid'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/src/components/ui/tooltip'
 
 interface UserTableProps {
   courses: Course[]
@@ -162,6 +163,21 @@ const CoursesTable: React.FC<UserTableProps> = ({ courses, dataLoaded, setCourse
                         color='lightblue'
                         onClick={() => router.push(`/teacher/courses/edit_course/${course?.id}`)}
                       />
+                    </div>
+                    <div className='mx-2'>
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger>
+                            <div
+                              className='flex items-center cursor-pointer'
+                              onClick={() => router.push(`/teacher/lessons/${course?.id}`)}
+                            >
+                              <DocumentTextIcon className='w-6 h-6 text-blue-500' />
+                            </div>
+                          </TooltipTrigger>
+                          <TooltipContent className='ml-[65%] w-full'>{t('view_lessons')}</TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
                     </div>
                   </div>
                 </TableCell>
