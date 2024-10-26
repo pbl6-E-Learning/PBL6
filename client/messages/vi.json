@@ -501,7 +501,7 @@
     "update_success": "Cập nhật thành công!",
     "update_failed": "Cập nhật không thành công!",
     "login_first": "Bạn cần đăng nhập trước khi thực hiện hành động này.",
-    "level":"Cấp độ",
+    "level": "Cấp độ",
     "choose_level": "Chọn cấp độ",
     "N1": "N1",
     "N2": "N2",
@@ -513,5 +513,23 @@
     "updated_at": "Ngày cập nhật",
     "goals": "Mục tiêu",
     "changeProfile": "Cập nhật khóa học"
+  },
+  "add_lesson": {
+    "title": "Thêm bài học mới",
+    "title_lesson": "Tiêu đề bài học cho ",
+    "add_lesson": "Thêm bài học cho",
+    "login_first": "Vui lòng đăng nhập trước.",
+    "error": "Có lỗi xảy ra, vui lòng thử lại.",
+    "update_success": "Thêm bài học thành công!",
+    "update_failed": "Thêm bài học thất bại.",
+    "write_content": "Viết nội dung tại đây...",
+    "write_list_kanji": "Nhập danh sách Kanji, cách nhau bằng dấu phẩy...",
+    "url_video": "Tải lên Video",
+    "upload": "Tải lên Video",
+    "upload_success": "Tải lên video thành công!",
+    "course": "Khóa học",
+    "content": "Nội dung",
+    "list_kanji": "Danh sách Kanji",
+    "submit_add_lesson": "Thêm bài học"
   }
 }

@@ -11,5 +11,5 @@ export interface Lesson {
   kanjis?: []
   flashcards?: []
   course?: Pick<Course, 'id' | 'teacher'>
-  progresses: [{ status: string }]
+  progresses?: [{ status: string }]
 }

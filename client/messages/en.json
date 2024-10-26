@@ -517,5 +517,23 @@
     "updated_at": "Updated At",
     "goals": "Goals",
     "changeProfile": "Update Course"
+  },
+  "add_lesson": {
+    "title": "Add new lesson",
+    "title_lesson": "Lesson title",
+    "add_lesson": "Add lesson for ",
+    "login_first": "Please log in first.",
+    "error": "An error occurred, please try again.",
+    "update_success": "Lesson added successfully!",
+    "update_failed": "Failed to add lesson.",
+    "write_content": "Write the content here...",
+    "write_list_kanji": "Enter Kanji list, separated by commas...",
+    "url_video": "Upload Video",
+    "upload": "Upload Video",
+    "upload_success": "Video uploaded successfully!",
+    "course": "Course",
+    "content": "Content",
+    "list_kanji": "List of Kanji",
+    "submit_add_lesson": "Submit"
   }
 }

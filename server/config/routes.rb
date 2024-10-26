@@ -57,7 +57,10 @@ Rails.application.routes.draw do
 
     namespace :instructor do
       resources :request_courses, only: %i(create)
-      resources :courses, only: %i(index show destroy update)
+      resources :courses, only: %i(index show destroy update) do
+        resources :lessons, only: %i(index create)
+      end
+      resources :lessons, only: %i(index)
       resource :teachers do
         get "profile", to: "teachers#profile"
         patch "update_profile", to: "teachers#update"

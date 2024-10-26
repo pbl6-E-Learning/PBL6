@@ -46,9 +46,8 @@ export default function EditCoursePage({ params }: { params: { id: string } }) {
   const [imageUrl, setImageUrl] = useState<string>('')
   const router = useRouter()
   const dispatch = useAppDispatch()
-  const listCategories = useCategories()
 
-  console.log(category)
+  const listCategories = useCategories()
 
   useEffect(() => {
     document.title = t('title')
@@ -102,6 +101,7 @@ export default function EditCoursePage({ params }: { params: { id: string } }) {
         image_url: imageUrl
       })
       setCourse(res.data.message.course)
+      router.push(`/teacher/courses`)
       dispatch(successPopUp(t('update_success')))
     } catch (e: any) {
       const message = e?.response?.data?.error || e.message || t('error')
