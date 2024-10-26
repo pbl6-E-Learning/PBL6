@@ -7,6 +7,7 @@ image_url).freeze
   has_many :follows, dependent: :destroy
   has_many :followers, through: :follows, source: :user
   has_many :request_courses, dependent: :destroy
+  has_many :lessons, through: :courses
   delegate :email, to: :account
 
   scope :with_courses_count, (lambda do
