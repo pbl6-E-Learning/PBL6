@@ -1,4 +1,5 @@
 import { Course } from './course.type'
+import { Flashcard } from './flashcard.type'
 
 export interface Lesson {
   id?: number
@@ -9,7 +10,7 @@ export interface Lesson {
   created_at?: string
   updated_at?: string
   kanjis?: []
-  flashcards?: []
+  flashcards?: Flashcard[]
   course?: Pick<Course, 'id' | 'teacher'>
   progresses?: [{ status: string }]
 }

@@ -25,6 +25,8 @@ import { TbInfoSquareRounded } from 'react-icons/tb'
 import { Lesson } from '@/src/app/types/lesson.type'
 import { ContentType } from '@/src/app/types/contentTypes.type'
 import { getCookie } from 'cookies-next'
+import FlashcardList from '@/src/components/FlashcardList/FlashcardList'
+import { Flashcard } from '@/src/app/types/flashcard.type'
 
 type ResLesson = {
   data: {
@@ -54,13 +56,23 @@ export default function PageLesson({ params }: { params: { id: string } }) {
   const { data, isFetching } = useGetTeacherInfoQuery(pramTeacherId.get('id_teacher') as string)
 
   useEffect(() => {
+    document.title = t('title')
+  }, [t])
+
+  useEffect(() => {
     setPosition(data?.message?.is_following as boolean)
     setFollowerCount(data?.message?.follower_count as number)
   }, [data?.message?.follower_count, data?.message?.is_following])
 
-  const handleContentClick = useCallback((type: 'video' | 'flashcard' | 'kanji', content: any) => {
-    setCurrentContent({ type, ...content })
-  }, [])
+  const handleContentClick = useCallback(
+    (
+      type: 'video' | 'flashcard' | 'kanji',
+      content: { url?: string; flashCardContent?: Flashcard[]; kanjiContent?: [] }
+    ) => {
+      setCurrentContent({ type, ...content })
+    },
+    []
+  )
 
   useEffect(() => {
     const token = getCookie('authToken')
@@ -178,9 +190,9 @@ export default function PageLesson({ params }: { params: { id: string } }) {
   }
 
   return (
-    <div className='grid grid-flow-row-dense grid-cols-1 lg:grid-cols-4'>
-      <div className='col-span-1 lg:col-span-3 h-full mt-10 flex justify-center'>
-        <div className='flex-col'>
+    <div className='grid grid-flow-row-dense grid-cols-1 lg:grid-cols-4 w-full'>
+      <div className='col-span-1 lg:col-span-3 h-full mt-10 flex justify-center w-full'>
+        <div className='flex-col w-full'>
           {currentContent.type === 'video' && currentContent.url ? (
             <div className='flex justify-center'>
               <video
@@ -193,7 +205,9 @@ export default function PageLesson({ params }: { params: { id: string } }) {
               />
             </div>
           ) : currentContent.type === 'flashcard' ? (
-            <div>{currentContent.flashCardContent?.map((item, index) => <div key={index}>{item}</div>)}</div>
+            <div className='w-full'>
+              <FlashcardList flashcards={currentContent.flashCardContent || []} />
+            </div>
           ) : currentContent.type === 'kanji' ? (
             <div>{currentContent.kanjiContent?.map((item, index) => <div key={index}>{item}</div>)}</div>
           ) : (

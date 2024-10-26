@@ -31,6 +31,7 @@ Rails.application.routes.draw do
 
     resources :categories, only: %i(index)
     resources :teachers, only: %i(show)
+    resources :flashcards, only: :create
 
     resources :progress, only: %i(create update) do
       collection do

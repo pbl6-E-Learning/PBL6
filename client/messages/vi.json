@@ -400,6 +400,7 @@
     "req_title": "Khóa học"
   },
   "lesson_page": {
+    "title": "Bài học",
     "select_one_lesson": "Vui lòng chọn một bài học.",
     "follower": "người theo dõi",
     "all": "Tất cả",
@@ -531,5 +532,17 @@
     "content": "Nội dung",
     "list_kanji": "Danh sách Kanji",
     "submit_add_lesson": "Thêm bài học"
+  },
+  "add_flashcard": {
+    "success_message": "Đã tạo thẻ flashcard thành công!",
+    "error_message": "Đã xảy ra lỗi khi tạo thẻ flashcard.",
+    "view_lessons_tooltip": "Tạo thẻ flashcard mới",
+    "create_flashcard_title": "Tạo Thẻ Flashcard Mới",
+    "create_flashcard_description": "Nhập nội dung phía trước và phía sau cho thẻ flashcard của bạn.",
+    "front_text_placeholder": "Nội dung phía trước",
+    "back_text_placeholder": "Nội dung phía sau",
+    "cancel": "Hủy",
+    "submitting": "Đang gửi...",
+    "submit": "Gửi"
   }
 }
