@@ -337,7 +337,8 @@
     "content_delete_course": "This action cannot be undone. Are you sure you want to delete the course",
     "delete": "Delete",
     "delete_success": "Delete successfully",
-    "delete_fail": "Delete failed"
+    "delete_fail": "Delete failed",
+    "view_lessons": "View List Lessons"
   },
   "profile_teacher": {
     "title": "Teacher Profile",
@@ -548,5 +549,28 @@
     "cancel": "Cancel",
     "submitting": "Submitting...",
     "submit": "Submit"
+  },
+  "lessons_table": {
+    "title": "Lessons",
+    "action": "Action",
+    "details": "Details",
+    "confirm_delete": "Confirm Deletion",
+    "content_delete_lesson": "Are you sure you want to delete the lesson titled",
+    "delete_success": "Lesson deleted successfully.",
+    "delete_fail": "Failed to delete the lesson.",
+    "view_details_lesson": "Lesson Details",
+    "close": "Close",
+    "content": "Content",
+    "createdAt": "Created At",
+    "video": "Lesson video",
+    "cancel": "Cancel",
+    "delete": "Delete"
+  },
+  "list_lesson": {
+    "title": "Lessons List",
+    "lessons_list_title": "List lessons of course",
+    "previous": "Previous",
+    "next": "Next",
+    "error": "An error occurred."
   }
 }

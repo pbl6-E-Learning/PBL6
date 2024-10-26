@@ -1,13 +1,15 @@
 module Api::Instructor
   class LessonsController < ApplicationController
-    before_action :set_course, except: :index
+    before_action :set_course, only: %i(index create)
+    before_action :set_lesson, only: :destroy
 
     def index
-      @q = current_teacher.lessons.ransack(params[:q])
+      @q = @course.lessons.ransack(params[:q])
       @pagy, @lessons = pagy(@q.result.includes(:course))
 
       json_response(
         message: {
+          course_title: @course.title,
           lessons: formatted_lessons,
           pagy: pagy_res(@pagy)
         },
@@ -38,10 +40,33 @@ module Api::Instructor
       end
     end
 
+    def destroy
+      unless @lesson
+        return error_response(message: "Lesson not found",
+                              status: :not_found)
+      end
+
+      if @lesson.destroy
+        json_response(
+          message: {id: @lesson.id, status: "deleted"},
+          status: :ok
+        )
+      else
+        error_response(
+          message: "Failed to delete the lesson",
+          status: :unprocessable_entity
+        )
+      end
+    end
+
     private
 
     def set_course
       @course = Course.find_by id: params[:course_id]
+    end
+
+    def set_lesson
+      @lesson = Lesson.find_by id: params[:id]
     end
 
     def lesson_params

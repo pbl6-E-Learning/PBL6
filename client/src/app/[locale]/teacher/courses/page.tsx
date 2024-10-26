@@ -296,7 +296,7 @@ export default function CoursesPage() {
           )}
         </div>
       </div>
-      <CoursesTable courses={courses} dataLoaded={dataLoaded} setCourses={setCourses} role='teacher' />
+      <CoursesTable courses={courses} dataLoaded={dataLoaded} setCourses={setCourses} role='instructor' />
       <Pagination>
         <PaginationContent>
           {currentPage > 1 && (

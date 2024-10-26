@@ -333,7 +333,8 @@
     "content_delete_course": "Sau khi xóa hành động này không thể khôi phục dữ liệu. Bạn có chắc chắn muốn xóa khóa học",
     "delete": "Xóa",
     "delete_success": "Xóa thành công",
-    "delete_fail": "Xóa thất bại"
+    "delete_fail": "Xóa thất bại",
+    "view_lessons": "Xem danh sách bài học"
   },
   "profile_teacher": {
     "title": "Hồ Sơ Giáo Viên",
@@ -544,5 +545,28 @@
     "cancel": "Hủy",
     "submitting": "Đang gửi...",
     "submit": "Gửi"
+  },
+  "lessons_table": {
+    "title": "Bài học",
+    "action": "Hành động",
+    "details": "Chi tiết",
+    "confirm_delete": "Xác nhận xóa",
+    "content_delete_lesson": "Bạn có chắc chắn muốn xóa bài học có tiêu đề",
+    "delete_success": "Xóa bài học thành công.",
+    "delete_fail": "Xóa bài học không thành công.",
+    "view_details_lesson": "Chi tiết bài học",
+    "close": "Đóng",
+    "content": "Nội dung",
+    "createdAt": "Ngày tạo",
+    "video": "Video bài học",
+    "cancel": "Thoát",
+    "delete": "Xóa"
+  },
+  "list_lesson": {
+    "title": "Danh sách bài học",
+    "lessons_list_title": "Danh sách bài học của khóa học",
+    "previous": "Trước",
+    "next": "Tiếp theo",
+    "error": "Đã xảy ra lỗi."
   }
 }
