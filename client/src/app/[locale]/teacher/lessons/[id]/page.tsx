@@ -15,6 +15,8 @@ import {
 import { failPopUp } from '@/src/app/hooks/features/popup.slice'
 import { Lesson } from '@/src/app/types/lesson.type'
 import LessonsTable from '@/src/components/LessonsTable'
+import { Button } from '@/src/components/ui/button'
+import { useRouter } from 'next/navigation'
 
 type ResponseLessons = {
   data: {
@@ -28,6 +30,7 @@ type ResponseLessons = {
 
 export default function LessonsPage({ params }: { params: { id: string } }) {
   const t = useTranslations('list_lesson')
+  const router = useRouter()
   const [lessons, setLessons] = useState<Lesson[]>([])
   const [course, setCourse] = useState<string>('')
   const [dataLoaded, setDataLoaded] = useState(false)
@@ -92,9 +95,14 @@ export default function LessonsPage({ params }: { params: { id: string } }) {
 
   return (
     <div className='h-full'>
-      <h1 className='text-xl font-bold mb-4'>
-        {t('lessons_list_title')}: {course}
-      </h1>
+      <div className='flex justify-between'>
+        <h1 className='text-xl font-bold mb-4'>
+          {t('lessons_list_title')}: {course}
+        </h1>
+        <Button onClick={() => router.push(`/teacher/lessons/add_lesson/${params.id}`)} className='mr-24'>
+          {t('add_course')}
+        </Button>
+      </div>
       <LessonsTable lessons={lessons} dataLoaded={dataLoaded} setLessons={setLessons} />
       <Pagination>
         <PaginationContent>

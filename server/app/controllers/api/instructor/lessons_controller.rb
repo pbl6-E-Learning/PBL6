@@ -1,7 +1,8 @@
 module Api::Instructor
   class LessonsController < ApplicationController
-    before_action :set_course, only: %i(index create)
-    before_action :set_lesson, only: :destroy
+    before_action :set_course, only: %i(index create update show)
+    before_action :set_lesson, only: %i(show destroy update)
+    before_action :authorized_teacher?, only: %i(create update show)
 
     def index
       @q = @course.lessons.ransack(params[:q])
@@ -18,24 +19,38 @@ module Api::Instructor
     end
 
     def create
-      unless @course.teacher_id == current_teacher.id
-        error_response(
-          message: "You are not authorized to add lessons to this course",
-          status: :forbidden
-        )
-        return
-      end
-
-      lesson = @course.lessons.new(lesson_params)
-
+      lesson = build_lesson
       if lesson.save
-        if params[:kanji].present?
-          create_kanjis_for_lesson(lesson, params[:kanji])
-        end
-
+        handle_kanjis(lesson)
         json_response(message: lesson, status: :ok)
       else
         error_response(message: lesson.errors.full_messages,
+                       status: :unprocessable_entity)
+      end
+    end
+
+    def show
+      if @lesson
+        json_response(
+          message: {
+            lesson: lesson_details(@lesson)
+          },
+          status: :ok
+        )
+      else
+        error_response(
+          message: "Lesson not found",
+          status: :not_found
+        )
+      end
+    end
+
+    def update
+      if @lesson.update(lesson_params)
+        handle_kanjis_update(@lesson)
+        json_response(message: @lesson, status: :ok)
+      else
+        error_response(message: @lesson.errors.full_messages,
                        status: :unprocessable_entity)
       end
     end
@@ -73,6 +88,25 @@ module Api::Instructor
       params.require(:lesson).permit(Lesson::VALID_ATTRIBUTES_LESSON)
     end
 
+    def lesson_details lesson
+      {
+        id: lesson.id,
+        title: lesson.title,
+        course_id: lesson.course_id,
+        content: lesson.content,
+        video_url: lesson.video_url,
+        created_at: lesson.created_at,
+        updated_at: lesson.updated_at,
+        progress_counts: lesson.progress_counts,
+        kanjis: kanji_characters(lesson),
+        course_title: @course.title
+      }
+    end
+
+    def kanji_characters lesson
+      lesson.kanjis.pluck(:character)
+    end
+
     def formatted_lessons
       @lessons.map do |lesson|
         {
@@ -95,6 +129,37 @@ module Api::Instructor
           image_url: nil
         )
       end
+    end
+
+    def handle_kanjis_update lesson
+      lesson.kanjis.destroy_all
+      return if params[:kanji].blank?
+
+      create_kanjis_for_lesson(lesson,
+                               params[:kanji])
+    end
+
+    def authorized_teacher?
+      if @course.teacher_id != current_teacher.id
+        error_response(
+          message: "You are not authorized to access this lesson",
+          status: :forbidden
+        )
+        false
+      else
+        true
+      end
+    end
+
+    def build_lesson
+      @course.lessons.new lesson_params
+    end
+
+    def handle_kanjis lesson
+      return if params[:kanji].blank?
+
+      create_kanjis_for_lesson(lesson,
+                               params[:kanji])
     end
   end
 end

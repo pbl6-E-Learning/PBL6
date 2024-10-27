@@ -258,7 +258,6 @@ export default function CoursesPage() {
                         setImageUrl(result?.info?.secure_url)
                       }}
                       onError={(error: any) => {
-                        console.error('Upload failed:', error)
                         dispatch(failPopUp('Upload failed, please try again'))
                       }}
                       uploadPreset='s2lo0hgq'

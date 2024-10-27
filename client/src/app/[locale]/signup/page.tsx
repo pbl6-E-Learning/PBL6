@@ -60,7 +60,6 @@ export default function SignUpPage() {
   const handleLoginSuccess = (response: { message: AuthenticationType }) => {
     const token = response.message.jwt
     const role = response.message.roles
-    console.log(role)
     setCookie('authToken', token)
     setCookie('role', role)
     dispatch(successPopUp(t('login_successful')))
@@ -92,7 +91,6 @@ export default function SignUpPage() {
       const res = await http.post(`auth/google_oauth2`, { auth: { id_token: response.credential } })
       handleLoginSuccess(res.data)
     } catch {
-      console.log(t('login_failed'))
       dispatch(failPopUp(t('login_failed')))
     }
   }

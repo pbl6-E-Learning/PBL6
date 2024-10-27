@@ -22,7 +22,6 @@ class Http {
         return config
       },
       (error) => {
-        console.log('Interceptor error:', error)
         return Promise.reject(error)
       }
     )
