@@ -24,7 +24,6 @@ export default function Activate() {
           const response = await http.get(`activate/${token}`)
           controller.abort()
           const messenger = response.data.message
-          console.log(messenger)
           setMessage(messenger)
           dispatch(successPopUp(messenger))
         } catch (error: any) {

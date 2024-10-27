@@ -13,25 +13,30 @@ import { Button } from '@/src/components/ui/button'
 import { CldUploadButton } from 'next-cloudinary'
 import { hasCookie } from 'cookies-next'
 import { useRouter } from 'next/navigation'
-import { Course } from '@/src/app/types/course.type'
+import { Lesson } from '@/src/app/types/lesson.type'
 
-type resCourse = {
+type resLesson = {
   data: {
     message: {
-      course: Course
+      lesson: Lesson
     }
   }
 }
 
-export default function AddLessonsPage({ params }: { params: { id: string } }) {
-  const t = useTranslations('add_lesson')
-  const [course, setCourse] = useState<Course>()
+export default function EditLessonsPage({ params }: { params: { params: Array<number> } }) {
+  const t = useTranslations('edit_lesson')
+  const [lesson, setLesson] = useState<Lesson>()
   const [title, setTitle] = useState<string>('')
   const [content, setContent] = useState('')
-  const [listKanji, setListKanji] = useState<string>('')
-  const [urlVideo, setUrlVideo] = useState<string>('')
+  const [listKanji, setListKanji] = useState<string[]>([])
+  const [urlVideo, setUrlVideo] = useState<string | null>(null)
+  const [newVideo, setNewVideo] = useState<string | null>(null)
   const router = useRouter()
   const dispatch = useAppDispatch()
+  const lessonId = params.params[0]
+  const courseId = params.params[1]
+
+  console.log(listKanji)
 
   useEffect(() => {
     document.title = t('title')
@@ -46,38 +51,46 @@ export default function AddLessonsPage({ params }: { params: { id: string } }) {
   }, [router, dispatch, t])
 
   useEffect(() => {
-    const fetchCourseDetail = async () => {
+    const fetchLessonDetail = async () => {
       try {
-        const res: resCourse = await http.get(`instructor/courses/${params.id}`)
-        setCourse(res.data.message.course)
+        const res: resLesson = await http.get(`instructor/courses/${courseId}/lessons/${lessonId}`)
+        setLesson(res.data.message.lesson)
       } catch (error: any) {
         const message = error?.response?.data?.error || error.message || t('error')
         dispatch(failPopUp(message))
       }
     }
-    fetchCourseDetail()
-  }, [dispatch, t, params.id])
+    fetchLessonDetail()
+  }, [dispatch, t, courseId, lessonId])
+
+  useEffect(() => {
+    setTitle(lesson?.title as string)
+    setContent(lesson?.content as string)
+    setListKanji(lesson?.kanjis as string[])
+    setUrlVideo(lesson?.video_url as string)
+  }, [lesson?.title, lesson?.content, lesson?.kanjis, lesson?.video_url])
 
   const handleSubmit = async () => {
     const requestData = {
       content,
       title,
-      video_url: urlVideo,
-      kanji: convertStringToKanjiArray(listKanji)
+      video_url: newVideo ? newVideo : urlVideo,
+      kanji: listKanji
     }
 
     try {
-      await http.post(`instructor/courses/${params.id}/lessons`, requestData)
+      await http.patch(`instructor/courses/${courseId}/lessons/${lessonId}`, requestData)
       dispatch(successPopUp(t('update_success')))
-      router.push(`/teacher/lessons`)
+      router.push(`/teacher/lessons/${courseId}`)
     } catch {
       dispatch(failPopUp(t('update_failed')))
     }
   }
 
-  const convertStringToKanjiArray = (listKanji: string) => {
-    const kanjiList = listKanji.split(',').map((item) => item.trim())
-    return kanjiList
+  const handleKanjiChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const value = e.target.value
+    const newListKanji = value.split(',').map((kanji) => kanji.trim())
+    setListKanji(newListKanji)
   }
 
   return (
@@ -88,7 +101,7 @@ export default function AddLessonsPage({ params }: { params: { id: string } }) {
             <div className='mb-16'>
               <h1 className='text-2xl font-bold mb-2'>{t('title')}</h1>
               <p className='mb-4'>
-                {t('add_lesson')} {course?.title}
+                {t('add_lesson')} {lesson?.course_title}
               </p>
             </div>
             <div>
@@ -122,7 +135,7 @@ export default function AddLessonsPage({ params }: { params: { id: string } }) {
                     id='text'
                     className='border-gray-200 cursor-not-allowed bg-gray-200'
                     placeholder={t('course')}
-                    value={course?.title}
+                    value={lesson?.course_title}
                   />
                 </div>
               </div>
@@ -151,9 +164,7 @@ export default function AddLessonsPage({ params }: { params: { id: string } }) {
                   rows={5}
                   placeholder={t('write_list_kanji')}
                   value={listKanji}
-                  onChange={(e) => {
-                    setListKanji(e.target.value)
-                  }}
+                  onChange={handleKanjiChange}
                 />
               </div>
               <div className='flex flex-col space-y-1.5 w-full z-auto justify-start mt-4'>
@@ -161,6 +172,7 @@ export default function AddLessonsPage({ params }: { params: { id: string } }) {
                 <CldUploadButton
                   options={{ maxFiles: 1 }}
                   onSuccess={(result: any) => {
+                    setNewVideo(result?.info?.secure_url)
                     setUrlVideo(result?.info?.secure_url)
                   }}
                   onError={(error: any) => {
@@ -183,7 +195,8 @@ export default function AddLessonsPage({ params }: { params: { id: string } }) {
                   </label>
                 </CldUploadButton>
 
-                {urlVideo && <p className='text-green-500 font-medium mt-2'>{t('upload_success')}</p>}
+                {urlVideo && !newVideo && <p className='text-yellow-500 font-medium mt-2'>{t('existing_video')}</p>}
+                {newVideo && <p className='text-green-500 font-medium mt-2'>{t('upload_success')}</p>}
               </div>
             </form>
             <div className='mt-8'>

@@ -571,6 +571,24 @@
     "lessons_list_title": "List lessons of course",
     "previous": "Previous",
     "next": "Next",
-    "error": "An error occurred."
+    "error": "An error occurred.",
+    "add_course": "Create request"
+  },
+  "edit_lesson": {
+    "title": "Edit Lesson",
+    "add_lesson": "Editing lesson for",
+    "title_lesson": "Lesson Title",
+    "course": "Course",
+    "content": "Content",
+    "write_content": "Write content...",
+    "list_kanji": "Kanji List",
+    "write_list_kanji": "Write Kanji separated by commas...",
+    "url_video": "Video URL",
+    "upload": "Upload Video",
+    "existing_video": "Existing video URL *(uploading a new video will replace the existing one)",
+    "upload_success": "Upload successful!",
+    "update_success": "Lesson updated successfully!",
+    "update_failed": "Failed to update lesson!",
+    "submit_add_lesson": "Submit"
   }
 }

@@ -567,6 +567,24 @@
     "lessons_list_title": "Danh sách bài học của khóa học",
     "previous": "Trước",
     "next": "Tiếp theo",
-    "error": "Đã xảy ra lỗi."
+    "error": "Đã xảy ra lỗi.",
+    "add_course": "Tạo yêu cầu"
+  },
+  "edit_lesson": {
+    "title": "Chỉnh sửa bài học",
+    "add_lesson": "Chỉnh sửa bài học cho",
+    "title_lesson": "Tiêu đề bài học",
+    "course": "Khóa học",
+    "content": "Nội dung",
+    "write_content": "Viết nội dung...",
+    "list_kanji": "Danh sách Kanji",
+    "write_list_kanji": "Viết Kanji cách nhau bằng dấu phẩy...",
+    "url_video": "URL Video",
+    "upload": "Tải video lên",
+    "existing_video": "URL video hiện có *(tải video mới lên sẽ thay thế video hiện có)",
+    "upload_success": "Tải lên thành công!",
+    "update_success": "Cập nhật bài học thành công!",
+    "update_failed": "Cập nhật bài học thất bại!",
+    "submit_add_lesson": "Gửi"
   }
 }

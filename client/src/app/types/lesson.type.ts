@@ -9,8 +9,9 @@ export interface Lesson {
   video_url?: string
   created_at?: string
   updated_at?: string
-  kanjis?: []
+  kanjis?: string[]
   flashcards?: Flashcard[]
-  course?: Pick<Course, 'id' | 'teacher'>
+  course?: Pick<Course, 'id' | 'teacher' | 'title'>
+  course_title?: string
   progresses?: [{ status: string }]
 }
