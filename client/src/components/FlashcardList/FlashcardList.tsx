@@ -102,10 +102,10 @@ const FlashcardItem: React.FC<{
         } ${direction === 'next' ? 'slide-next' : direction === 'previous' ? 'slide-previous' : ''}`}
       >
         <div className='absolute w-full h-full backface-hidden flex items-center justify-center border rounded-lg shadow-lg'>
-          <span className='text-center font-semibold text-2xl'>{flashcard.front_text}</span>
+          <span className='text-center font-semibold text-2xl'>{flashcard?.front_text}</span>
         </div>
         <div className='absolute w-full h-full backface-hidden flex items-center justify-center border rounded-lg shadow-lg rotate-x-180'>
-          <span className='text-center font-semibold text-2xl'>{flashcard.back_text}</span>
+          <span className='text-center font-semibold text-2xl'>{flashcard?.back_text}</span>
         </div>
       </div>
     </div>

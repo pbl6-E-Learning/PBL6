@@ -69,7 +69,7 @@ export default function AddLessonsPage({ params }: { params: { id: string } }) {
     try {
       await http.post(`instructor/courses/${params.id}/lessons`, requestData)
       dispatch(successPopUp(t('update_success')))
-      router.push(`/teacher/lessons`)
+      router.push(`/teacher/lessons/${params.id}`)
     } catch {
       dispatch(failPopUp(t('update_failed')))
     }

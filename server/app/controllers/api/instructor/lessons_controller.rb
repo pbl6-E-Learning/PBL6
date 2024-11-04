@@ -2,7 +2,8 @@ module Api::Instructor
   class LessonsController < ApplicationController
     before_action :set_course, only: %i(index create update show)
     before_action :set_lesson, only: %i(show destroy update)
-    before_action :authorized_teacher?, only: %i(create update show)
+    before_action :authorized_teacher?, only: %i(update destroy show)
+    before_action :permit?, only: :create
 
     def index
       @q = @course.lessons.ransack(params[:q])
@@ -10,7 +11,6 @@ module Api::Instructor
 
       json_response(
         message: {
-          course_title: @course.title,
           lessons: formatted_lessons,
           pagy: pagy_res(@pagy)
         },
@@ -30,29 +30,26 @@ module Api::Instructor
     end
 
     def show
-      if @lesson
-        json_response(
-          message: {
-            lesson: lesson_details(@lesson)
-          },
-          status: :ok
-        )
-      else
-        error_response(
-          message: "Lesson not found",
-          status: :not_found
-        )
+      unless @lesson
+        return error_response(message: "Lesson not found", status: :not_found)
       end
+
+      json_response(
+        message: {
+          lesson: lesson_details(@lesson)
+        },
+        status: :ok
+      )
     end
 
     def update
-      if @lesson.update(lesson_params)
-        handle_kanjis_update(@lesson)
-        json_response(message: @lesson, status: :ok)
-      else
-        error_response(message: @lesson.errors.full_messages,
-                       status: :unprocessable_entity)
+      unless @lesson.update lesson_params
+        return error_response(message: @lesson.errors.full_messages,
+                              status: :unprocessable_entity)
       end
+
+      handle_kanjis_update(@lesson)
+      json_response(message: @lesson, status: :ok)
     end
 
     def destroy
@@ -99,7 +96,7 @@ module Api::Instructor
         updated_at: lesson.updated_at,
         progress_counts: lesson.progress_counts,
         kanjis: kanji_characters(lesson),
-        course_title: @course.title
+        course_title: @lesson&.course&.title
       }
     end
 
@@ -124,10 +121,7 @@ module Api::Instructor
 
     def create_kanjis_for_lesson lesson, kanji_array
       kanji_array.each do |kanji_character|
-        lesson.kanjis.create(
-          character: kanji_character,
-          image_url: nil
-        )
+        lesson.kanjis.create(character: kanji_character, image_url: nil)
       end
     end
 
@@ -135,19 +129,26 @@ module Api::Instructor
       lesson.kanjis.destroy_all
       return if params[:kanji].blank?
 
-      create_kanjis_for_lesson(lesson,
-                               params[:kanji])
+      create_kanjis_for_lesson(lesson, params[:kanji])
     end
 
     def authorized_teacher?
-      if @course.teacher_id != current_teacher.id
-        error_response(
-          message: "You are not authorized to access this lesson",
-          status: :forbidden
-        )
-        false
-      else
+      if @lesson&.course&.teacher_id == current_teacher.id
         true
+      else
+        error_response(message: "You are not authorized to access this lesson",
+                       status: :forbidden)
+        false
+      end
+    end
+
+    def permit?
+      if @course&.teacher_id == current_teacher.id
+        true
+      else
+        error_response(message: "You are not authorized to access this lesson",
+                       status: :forbidden)
+        false
       end
     end
 
@@ -158,8 +159,7 @@ module Api::Instructor
     def handle_kanjis lesson
       return if params[:kanji].blank?
 
-      create_kanjis_for_lesson(lesson,
-                               params[:kanji])
+      create_kanjis_for_lesson(lesson, params[:kanji])
     end
   end
 end
