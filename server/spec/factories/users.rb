@@ -1,9 +1,10 @@
 FactoryBot.define do
   factory :user do
-    account { nil }
-    full_name { "MyString" }
-    bio { "MyText" }
-    goals { "MyText" }
-    image_url { "MyString" }
+    association :account
+    full_name { Faker::Name.name }
+    bio { Faker::Lorem.paragraph }
+    goals { Faker::Lorem.sentence }
+    image_url { Faker::Avatar.image }
+    sex { [0, 1].sample }
   end
 end
