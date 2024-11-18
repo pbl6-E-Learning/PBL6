@@ -414,7 +414,8 @@
     "lesson_details": "Lesson Details",
     "create_day": "Created on",
     "update_date": "Updated on",
-    "subscribe": "Subscribe"
+    "subscribe": "Subscribe",
+    "subscribed": "Subscribed"
   },
   "lesson_page_scroll": {
     "video": "Video",
@@ -572,7 +573,7 @@
     "previous": "Previous",
     "next": "Next",
     "error": "An error occurred.",
-    "add_course": "Create request"
+    "add_course": "Create lesson"
   },
   "edit_lesson": {
     "title": "Edit Lesson",
@@ -590,5 +591,45 @@
     "update_success": "Lesson updated successfully!",
     "update_failed": "Failed to update lesson!",
     "submit_add_lesson": "Submit"
+  },
+  "list_requests_course": {
+    "title": "Course Assignment Requests",
+    "searchUser": "Search by User",
+    "searchTitle": "Search by Course Title",
+    "filterStatus": "Filter by Status",
+    "status": "Status",
+    "allStatus": "All Statuses",
+    "accepted": "Accepted",
+    "pending": "Pending",
+    "rejected": "Rejected",
+    "search": "Search",
+    "error": "An error occurred",
+    "update_fail": "Failed to update status",
+    "previous": "Previous",
+    "next": "Next"
+  },
+  "list_requests_assign": {
+    "req_title": "Course Title",
+    "status": "Status",
+    "level": "Level",
+    "action": "Action",
+    "details": "Details",
+    "resolved": "Resolved",
+    "request_details": "Request Details",
+    "avatarAlt": "Course Image",
+    "title": "Title",
+    "teacher": "Teacher",
+    "createdAt": "Created At",
+    "cancel": "Cancel",
+    "accepted": "Accepted",
+    "pending": "Pending",
+    "rejected": "Rejected",
+    "N1": "N1",
+    "N2": "N2",
+    "N3": "N3",
+    "N4": "N4",
+    "N5": "N5",
+    "user_request": "User Request",
+    "student": "Student"
   }
 }

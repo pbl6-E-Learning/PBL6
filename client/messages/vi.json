@@ -410,7 +410,8 @@
     "lesson_details": "Chi tiết bài học",
     "create_day": "Ngày tạo",
     "update_date": "Ngày cập nhật",
-    "subscribe": "Đăng kí"
+    "subscribe": "Đăng kí",
+    "subscribed": "Đã đăng kí"
   },
   "lesson_page_scroll": {
     "video": "Video",
@@ -568,7 +569,7 @@
     "previous": "Trước",
     "next": "Tiếp theo",
     "error": "Đã xảy ra lỗi.",
-    "add_course": "Tạo yêu cầu"
+    "add_course": "Tạo bài học"
   },
   "edit_lesson": {
     "title": "Chỉnh sửa bài học",
@@ -586,5 +587,45 @@
     "update_success": "Cập nhật bài học thành công!",
     "update_failed": "Cập nhật bài học thất bại!",
     "submit_add_lesson": "Gửi"
+  },
+  "list_requests_course": {
+    "title": "Yêu cầu giao khoá học",
+    "searchUser": "Tìm theo người dùng",
+    "searchTitle": "Tìm theo tiêu đề khoá học",
+    "filterStatus": "Lọc theo trạng thái",
+    "status": "Trạng thái",
+    "allStatus": "Tất cả trạng thái",
+    "accepted": "Đã chấp nhận",
+    "pending": "Đang chờ",
+    "rejected": "Đã từ chối",
+    "search": "Tìm kiếm",
+    "error": "Có lỗi xảy ra",
+    "update_fail": "Cập nhật trạng thái thất bại",
+    "previous": "Trước",
+    "next": "Tiếp theo"
+  },
+  "list_requests_assign": {
+    "req_title": "Tiêu Đề Khóa Học",
+    "status": "Trạng Thái",
+    "level": "Cấp Độ",
+    "action": "Hành Động",
+    "details": "Chi Tiết",
+    "resolved": "Đã Xử Lý",
+    "request_details": "Chi Tiết Yêu Cầu",
+    "avatarAlt": "Ảnh Khóa Học",
+    "title": "Tiêu Đề",
+    "teacher": "Giáo Viên",
+    "createdAt": "Ngày Tạo",
+    "cancel": "Hủy",
+    "accepted": "Được Chấp Nhận",
+    "pending": "Đang Chờ",
+    "rejected": "Bị Từ Chối",
+    "N1": "N1",
+    "N2": "N2",
+    "N3": "N3",
+    "N4": "N4",
+    "N5": "N5",
+    "user_request": "Yêu cầu từ học sinh:",
+    "student": "Học viên"
   }
 }

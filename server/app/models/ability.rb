@@ -29,6 +29,7 @@ class Ability
     can :manage, Teacher, id: account&.teacher&.id
     can :manage, Account, id: account.id
     can :create, RequestCourse
+    can :manage, CourseAssignment
   end
 
   def set_user_permissions account

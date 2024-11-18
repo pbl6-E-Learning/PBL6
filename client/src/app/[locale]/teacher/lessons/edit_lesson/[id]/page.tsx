@@ -23,7 +23,7 @@ type resLesson = {
   }
 }
 
-export default function EditLessonsPage({ params }: { params: { params: Array<number> } }) {
+export default function EditLessonsPage({ params }: { params: { id: string } }) {
   const t = useTranslations('edit_lesson')
   const [lesson, setLesson] = useState<Lesson>()
   const [title, setTitle] = useState<string>('')
@@ -33,8 +33,7 @@ export default function EditLessonsPage({ params }: { params: { params: Array<nu
   const [newVideo, setNewVideo] = useState<string | null>(null)
   const router = useRouter()
   const dispatch = useAppDispatch()
-  const lessonId = params.params[0]
-  const courseId = params.params[1]
+  const lessonId = params.id
 
   console.log(listKanji)
 
@@ -53,7 +52,7 @@ export default function EditLessonsPage({ params }: { params: { params: Array<nu
   useEffect(() => {
     const fetchLessonDetail = async () => {
       try {
-        const res: resLesson = await http.get(`instructor/courses/${courseId}/lessons/${lessonId}`)
+        const res: resLesson = await http.get(`instructor/lessons/${lessonId}`)
         setLesson(res.data.message.lesson)
       } catch (error: any) {
         const message = error?.response?.data?.error || error.message || t('error')
@@ -61,7 +60,7 @@ export default function EditLessonsPage({ params }: { params: { params: Array<nu
       }
     }
     fetchLessonDetail()
-  }, [dispatch, t, courseId, lessonId])
+  }, [dispatch, t, lessonId])
 
   useEffect(() => {
     setTitle(lesson?.title as string)
@@ -79,9 +78,9 @@ export default function EditLessonsPage({ params }: { params: { params: Array<nu
     }
 
     try {
-      await http.patch(`instructor/courses/${courseId}/lessons/${lessonId}`, requestData)
+      await http.patch(`instructor/lessons/${lessonId}`, requestData)
       dispatch(successPopUp(t('update_success')))
-      router.push(`/teacher/lessons/${courseId}`)
+      router.push(`/teacher/lessons/${lesson?.course_id}`)
     } catch {
       dispatch(failPopUp(t('update_failed')))
     }
