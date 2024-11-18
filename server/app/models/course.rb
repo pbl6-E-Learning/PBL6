@@ -31,6 +31,7 @@ class Course < ApplicationRecord
       default_order
     end
   }
+
   delegate :pending_count, :accepted_count, :rejected_count,
            to: :course_assignments_scopes
 

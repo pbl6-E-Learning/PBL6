@@ -71,3 +71,4 @@ yarn.lock
 server/config/credentials.yml.enc
 server/config/database.yml
 server/config/application.yml
+server/coverage
