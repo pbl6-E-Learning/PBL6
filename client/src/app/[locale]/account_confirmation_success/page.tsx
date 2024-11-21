@@ -21,7 +21,7 @@ export default function Activate() {
     if (token) {
       const getConfirmation = async () => {
         try {
-          const response = await http.get(`activate/${token}`)
+          const response = await http.get(`accounts/activate/${token}`)
           controller.abort()
           const messenger = response.data.message
           setMessage(messenger)
