@@ -52,7 +52,7 @@ export default function CoursesPage() {
   const [filterLevel, setFilterLevel] = useState('')
   const [searchTriggered, setSearchTriggered] = useState(true)
   const dispatch = useAppDispatch()
-  const [categoryId, setCategoryId] = useState<number>(1)
+  const [categoryId, setCategoryId] = useState<number>(-1)
   const [title, setTitle] = useState<string>('')
   const [level, setLevel] = useState<string>('')
   const [description, setDescription] = useState<string>('')
@@ -206,6 +206,24 @@ export default function CoursesPage() {
                     />
                   </div>
                   <div className='flex flex-col space-y-1.5'>
+                    <Label className='font-bold'>{t('status')}</Label>
+                    <Select onValueChange={(value: string) => setLevel(value)} defaultValue={level}>
+                      <SelectTrigger className='w-full' id='select-level'>
+                        <SelectValue placeholder={t('status')} />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectGroup>
+                          <SelectLabel>{t('status')}</SelectLabel>
+                          {['N1', 'N2', 'N3', 'N4', 'N5'].map((levelOption, index) => (
+                            <SelectItem key={index} value={levelOption}>
+                              {levelOption}
+                            </SelectItem>
+                          ))}
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div className='flex flex-col space-y-1.5'>
                     <Label className='font-bold'>{t('select_category')}</Label>
                     <Select onValueChange={(value: string) => setCategoryId(parseInt(value))}>
                       <SelectTrigger className='w-full'>
@@ -219,24 +237,6 @@ export default function CoursesPage() {
                               {category?.name}
                             </SelectItem>
                           ))}
-                        </SelectGroup>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                  <div className='flex flex-col space-y-1.5'>
-                    <Label className='font-bold'>{t('status')}</Label>
-                    <Select onValueChange={(value: string) => setLevel(value)} defaultValue={level}>
-                      <SelectTrigger className='w-full'>
-                        <SelectValue placeholder={t('status')} />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectGroup>
-                          <SelectLabel>{t('status')}</SelectLabel>
-                          <SelectItem value='N1'>N1</SelectItem>
-                          <SelectItem value='N2'>N2</SelectItem>
-                          <SelectItem value='N3'>N3</SelectItem>
-                          <SelectItem value='N4'>N4</SelectItem>
-                          <SelectItem value='N5'>N5</SelectItem>
                         </SelectGroup>
                       </SelectContent>
                     </Select>

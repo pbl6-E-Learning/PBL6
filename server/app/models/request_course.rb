@@ -8,6 +8,7 @@ class RequestCourse < ApplicationRecord
   validates :title, presence: true
   validates :level, presence: true
   validates :description, presence: true
+  validates :image_url, presence: true
 
   scope :recent_first, ->{order(created_at: :desc)}
 
