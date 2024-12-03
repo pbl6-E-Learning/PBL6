@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "Courses", type: :request do
   let(:user) { create(:user) }
   let(:course) { create(:course) }
-  let(:headers) { { Authorization: "Bearer eyJhbGciOiJIUzI1NiJ9.eyJwYXlsb2FkIjp7ImFjY291bnQiOjYyfX0.RAHhb5RR5CXRzJZX6Ne33mTK6KzuphI-h8AaCgzFpMM" } }
+  let(:headers) { { Authorization: "Bearer #{ENV['TEST_API_TOKEN']}" } }
 
   before do
     allow_any_instance_of(Api::ApplicationController).to receive(:current_user).and_return(user)

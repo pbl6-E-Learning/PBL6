@@ -11,7 +11,7 @@ class Api::ProgressController < Api::ApplicationController
     progress = current_user.progresses.new(progress_params)
 
     unless progress.save
-      return error_response(errors: progress.errors.full_messages,
+      return error_response(message: progress.errors.full_messages,
                             status: :forbidden)
     end
 
@@ -19,6 +19,10 @@ class Api::ProgressController < Api::ApplicationController
   end
 
   def update
+    if @progress.nil?
+      return error_response(message: "Progress not found", status: :not_found)
+    end
+
     unless @progress.update(progress_params)
       return error_response(errors: @progress.errors.full_messages,
                             status: :forbidden)
