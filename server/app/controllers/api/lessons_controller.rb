@@ -4,6 +4,12 @@ class Api::LessonsController < Api::ApplicationController
   before_action :check_assignment, only: :index
 
   def index
+    if @course.nil?
+      return error_response(
+        message: "Course not found",
+        status: :not_found
+      )
+    end
     lessons = Lesson.by_course(@course.id)
                     .includes(:kanjis, :flashcards,
                               course: :teacher,
@@ -40,11 +46,17 @@ class Api::LessonsController < Api::ApplicationController
   end
 
   def check_assignment
-    assignment = current_user.course_assignments.find_by course_id: @course.id
+    if @course.nil?
+      return error_response(
+        message: "Course not found",
+        status: :not_found
+      )
+    end
+    assignment = current_user.course_assignments.find_by course_id: params[:course_id]
 
     unless assignment
       return error_response(
-        message: "You have not registered for" \
+        message: "You have not registered for " \
                  "this course or it is having an error.",
         status: :not_found
       )
