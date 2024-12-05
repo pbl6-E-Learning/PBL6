@@ -627,5 +627,15 @@
     "N5": "N5",
     "user_request": "Yêu cầu từ học sinh:",
     "student": "Học viên"
+  },
+  "write_kanji": {
+    "noKanji": "Không có kanji",
+    "practice": "Luyện tập",
+    "kanji": "Kanji",
+    "kunyomi": "Kunyomi",
+    "onyomi": "Onyomi",
+    "radical": "Radical",
+    "examples": "Ví dụ",
+    "playAudio": "Phát âm thanh"
   }
 }

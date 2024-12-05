@@ -154,12 +154,7 @@ export default function LoginPage() {
                 </div>
                 <div>
                   <GoogleOAuthProvider clientId={process.env.clientId as string}>
-                    <GoogleLogin
-                      onSuccess={responseGoogle}
-                      onError={() => {
-                        console.log(t('login_failed'))
-                      }}
-                    />
+                    <GoogleLogin onSuccess={responseGoogle} onError={() => {}} />
                   </GoogleOAuthProvider>
                 </div>
               </div>

@@ -21,8 +21,7 @@ module Api::Instructor
     def update_status
       if @course_assignment.update status: params[:status]
         @course_assignment.send_status_email
-        json_response(message: "Cập nhật trạng thái thành công!",
-                      status: @course_assignment.status, response_status: :ok)
+        json_response(message: "Cập nhật trạng thái thành công!")
       else
         error_response(message: "Cập nhật trạng thái thất bại!",
                        errors: @course_assignment.errors.full_messages,

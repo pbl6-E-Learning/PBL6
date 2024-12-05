@@ -27,6 +27,8 @@ import { ContentType } from '@/src/app/types/contentTypes.type'
 import { getCookie } from 'cookies-next'
 import FlashcardList from '@/src/components/FlashcardList/FlashcardList'
 import { Flashcard } from '@/src/app/types/flashcard.type'
+import KanjiList from '@/src/components/KanjiList'
+import { Kanji } from '@/src/app/types/kanji.type'
 
 type ResLesson = {
   data: {
@@ -54,7 +56,6 @@ export default function PageLesson({ params }: { params: { id: string } }) {
   const videoRef = useRef<HTMLVideoElement | null>(null)
 
   const { data, isFetching } = useGetTeacherInfoQuery(pramTeacherId.get('id_teacher') as string)
-
   useEffect(() => {
     document.title = t('title')
   }, [t])
@@ -67,7 +68,7 @@ export default function PageLesson({ params }: { params: { id: string } }) {
   const handleContentClick = useCallback(
     (
       type: 'video' | 'flashcard' | 'kanji',
-      content: { url?: string; flashCardContent?: Flashcard[]; kanjiContent?: [] }
+      content: { url?: string; flashCardContent?: Flashcard[]; kanjiContent?: Kanji[] }
     ) => {
       setCurrentContent({ type, ...content })
     },
@@ -209,7 +210,11 @@ export default function PageLesson({ params }: { params: { id: string } }) {
               <FlashcardList flashcards={currentContent.flashCardContent || []} />
             </div>
           ) : currentContent.type === 'kanji' ? (
-            <div>{currentContent.kanjiContent?.map((item, index) => <div key={index}>{item}</div>)}</div>
+            <div className='flex justify-center'>
+              <div className='w-[85%]'>
+                <KanjiList kanjis={currentContent.kanjiContent || []} />
+              </div>
+            </div>
           ) : (
             <div className='h-full flex justify-center items-center'>
               <h1 className='font-semibold text-2xl'>{t('select_one_lesson')}</h1>

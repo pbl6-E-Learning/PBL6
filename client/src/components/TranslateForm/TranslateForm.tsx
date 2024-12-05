@@ -4,6 +4,8 @@ import useDebounce from '../../app/hooks/customs/useDebounce'
 import { Textarea } from '../ui/textarea'
 import { Badge } from '../ui/badge'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select'
+import { failPopUp } from '@/src/app/hooks/features/popup.slice'
+import { useAppDispatch } from '@/src/app/hooks/store'
 
 interface TranslationResponse {
   responseData: {
@@ -25,6 +27,7 @@ export default function TranslateForm() {
   const [sourceLang, setSourceLang] = useState('vi')
   const [targetLang, setTargetLang] = useState('ja')
   const debouncedInput = useDebounce(inputText, 500)
+  const dispatch = useAppDispatch()
 
   const handleTranslate = async (text: string, source: string, target: string): Promise<void> => {
     if (!text.trim()) {
@@ -40,15 +43,17 @@ export default function TranslateForm() {
       const data: TranslationResponse = await response.json()
       setTranslatedText(data.responseData.translatedText)
       setAdditionalTranslations(data.matches)
-    } catch (error) {
-      console.error('Error during translation:', error)
+    } catch (error: any) {
+      const message = error?.response?.data?.error || error.message || t('error')
+      dispatch(failPopUp(message))
     }
   }
+
   useEffect(() => {
     if (debouncedInput) {
       handleTranslate(debouncedInput, sourceLang, targetLang)
     }
-  }, [debouncedInput, sourceLang, targetLang])
+  }, [debouncedInput, sourceLang, targetLang, t, dispatch])
 
   const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const text = e.target.value

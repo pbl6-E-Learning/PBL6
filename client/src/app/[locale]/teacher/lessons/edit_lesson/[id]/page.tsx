@@ -35,8 +35,6 @@ export default function EditLessonsPage({ params }: { params: { id: string } }) 
   const dispatch = useAppDispatch()
   const lessonId = params.id
 
-  console.log(listKanji)
-
   useEffect(() => {
     document.title = t('title')
   }, [t])
