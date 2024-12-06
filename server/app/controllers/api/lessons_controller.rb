@@ -52,7 +52,8 @@ class Api::LessonsController < Api::ApplicationController
         status: :not_found
       )
     end
-    assignment = current_user.course_assignments.find_by course_id: params[:course_id]
+    course_id = params[:course_id]
+    assignment = current_user.course_assignments.find_by course_id: course_id
 
     unless assignment
       return error_response(

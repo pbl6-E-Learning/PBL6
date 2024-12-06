@@ -631,5 +631,15 @@
     "N5": "N5",
     "user_request": "User Request",
     "student": "Student"
+  },
+  "write_kanji": {
+    "noKanji": "No kanji available",
+    "practice": "Practice",
+    "kanji": "Kanji",
+    "kunyomi": "Kunyomi",
+    "onyomi": "Onyomi",
+    "radical": "Radical",
+    "examples": "Examples",
+    "playAudio": "Play Audio"
   }
 }
