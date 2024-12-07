@@ -107,7 +107,8 @@
     "translate": "Dịch",
     "category": "Danh mục khóa học",
     "logo": "Return",
-    "search_placeholder": "Tìm kiếm khóa học"
+    "search_placeholder": "Tìm kiếm khóa học",
+    "check_grammar": "Kiểm tra ngữ pháp"
   },
   "announcements": {
     "title": "Thông báo",
@@ -637,5 +638,16 @@
     "radical": "Radical",
     "examples": "Ví dụ",
     "playAudio": "Phát âm thanh"
-  }
+  },
+    "grammar": {
+      "title": "Kiểm tra ngữ pháp",
+      "input": "Nhập văn bản để kiểm tra ngữ pháp...",
+      "check_grammar_failed": "Kiểm tra ngữ pháp thất bại. Vui lòng thử lại.",
+      "grammar_correct": "Ngữ pháp chính xác.",
+      "grammar_incorrect": "Ngữ pháp không chính xác.",
+      "error_occurred": "Đã xảy ra lỗi khi kiểm tra ngữ pháp.",
+      "recommendation": "Gợi ý chỉnh sửa",
+      "loading_text": "Đang kiểm tra ngữ pháp...",
+      "check_grammar": "Kiểm tra ngữ pháp"
+    }
 }
