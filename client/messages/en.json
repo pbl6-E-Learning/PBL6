@@ -111,7 +111,8 @@
     "translate": "Translate",
     "category": "Category",
     "logo": "Return",
-    "search_placeholder": "Search for courses"
+    "search_placeholder": "Search for courses",
+    "check_grammar": "Check grammar"
   },
   "announcements": {
     "title": "Announcements",
@@ -641,5 +642,16 @@
     "radical": "Radical",
     "examples": "Examples",
     "playAudio": "Play Audio"
+  },
+  "grammar": {
+    "title": "Grammar Check",
+    "input": "Enter text to check grammar...",
+    "check_grammar_failed": "Failed to check grammar. Please try again.",
+    "grammar_correct": "The grammar is correct.",
+    "grammar_incorrect": "The grammar is incorrect.",
+    "error_occurred": "An error occurred while checking the grammar.",
+    "recommendation": "Suggested correction",
+    "loading_text": "Checking grammar...",
+    "check_grammar": "Check grammar"
   }
 }
