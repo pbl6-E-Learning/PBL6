@@ -75,7 +75,10 @@ class Api::CoursesController < Api::ApplicationController
   end
 
   def course_with_lessons
-    @course.as_json(include: %i(lessons teacher category))
+    @course.as_json(
+      include: %i(lessons teacher category course_ratings),
+      methods: :average_rating
+    )
   end
 
   def assigned?
