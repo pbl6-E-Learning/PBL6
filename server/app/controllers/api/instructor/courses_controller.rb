@@ -1,5 +1,7 @@
 module Api::Instructor
   class CoursesController < ApplicationController
+    authorize_resource
+    before_action :teacher?
     before_action :set_course, only: %i(destroy update show)
     before_action :check_course_ownership, only: %i(update show)
 

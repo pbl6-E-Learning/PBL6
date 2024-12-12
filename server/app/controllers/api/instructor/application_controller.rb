@@ -1,7 +1,4 @@
 class Api::Instructor::ApplicationController < Api::ApplicationController
-  authorize_resource
-  before_action :teacher?
-
   def current_teacher
     return unless auth_present?
 

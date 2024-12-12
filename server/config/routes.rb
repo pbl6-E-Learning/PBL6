@@ -73,6 +73,7 @@ Rails.application.routes.draw do
           patch :update_status
         end
       end
+      resources :accounts, only: :create
     end
   end
 end

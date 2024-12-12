@@ -61,7 +61,9 @@
     "login_successful": "Đăng nhập thành công!",
     "processing": "Đang xử lý ...",
     "processing_check": "Đang kiểm tra email của bạn...",
-    "close": "Đóng"
+    "close": "Đóng",
+    "signup_teacher_account": "Đăng ký tài khoản",
+    "signup_teacher": "giáo viên"
   },
   "show_course": {
     "title": "Chi tiết thông tin khóa học",
@@ -643,15 +645,43 @@
     "examples": "Ví dụ",
     "playAudio": "Phát âm thanh"
   },
-    "grammar": {
-      "title": "Kiểm tra ngữ pháp",
-      "input": "Nhập văn bản để kiểm tra ngữ pháp...",
-      "check_grammar_failed": "Kiểm tra ngữ pháp thất bại. Vui lòng thử lại.",
-      "grammar_correct": "Ngữ pháp chính xác.",
-      "grammar_incorrect": "Ngữ pháp không chính xác.",
-      "error_occurred": "Đã xảy ra lỗi khi kiểm tra ngữ pháp.",
-      "recommendation": "Gợi ý chỉnh sửa",
-      "loading_text": "Đang kiểm tra ngữ pháp...",
-      "check_grammar": "Kiểm tra ngữ pháp"
-    }
+  "grammar": {
+    "title": "Kiểm tra ngữ pháp",
+    "input": "Nhập văn bản để kiểm tra ngữ pháp...",
+    "check_grammar_failed": "Kiểm tra ngữ pháp thất bại. Vui lòng thử lại.",
+    "grammar_correct": "Ngữ pháp chính xác.",
+    "grammar_incorrect": "Ngữ pháp không chính xác.",
+    "error_occurred": "Đã xảy ra lỗi khi kiểm tra ngữ pháp.",
+    "recommendation": "Gợi ý chỉnh sửa",
+    "loading_text": "Đang kiểm tra ngữ pháp...",
+    "check_grammar": "Kiểm tra ngữ pháp"
+  },
+  "sign_up_teacher": {
+    "title": "Sign Up as Teacher",
+    "welcome_message": "Welcome to the Teacher Registration Page",
+    "sign_up": "Sign Up",
+    "sign_up_prompt": "Please fill in your information to create a teacher account.",
+    "full_name": "Full Name",
+    "email": "Email",
+    "job_title": "Job Title",
+    "experience": "Experience",
+    "password": "Password",
+    "re_password": "Confirm Password",
+    "check_mail": "Please check your email to confirm your account.",
+    "register_failed": "Registration failed, please try again.",
+    "login_successful": "Login successful!",
+    "login_failed": "Login failed, please try again.",
+    "processing": "Processing...",
+    "processing_check": "We are verifying your information.",
+    "close": "Close",
+    "have_account": "Already have an account?",
+    "page_login": "Login",
+    "or_continue_with": "Or continue with"
+  },
+  "navbar_teacher": {
+    "error": "Đã xảy ra lỗi khi lấy thông tin hồ sơ.",
+    "button_sign_in": "Đăng nhập",
+    "admin": "Admin",
+    "no_token_message": "You are not logged in. Redirecting to login page..."
+  }
 }
