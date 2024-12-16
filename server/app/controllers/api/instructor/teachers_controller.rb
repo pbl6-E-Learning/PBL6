@@ -1,5 +1,8 @@
 module Api::Instructor
   class TeachersController < ApplicationController
+    authorize_resource
+    before_action :teacher?
+
     def profile
       teacher_profile = current_teacher.as_json(
         include: {

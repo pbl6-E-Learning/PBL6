@@ -4,6 +4,7 @@ class Account < ApplicationRecord
   VALID_ATTRIBUTES_ACCOUNT = %i(email password password_confirmation).freeze
   VALID_ATTRIBUTES_USER = %i(full_name sex).freeze
   VALID_ATTRIBUTES_USER_CHANGE = %i(full_name sex bio goals image_url).freeze
+  VALID_ATTRIBUTES_TEACHER = %i(experience job_title name).freeze
   enum roles: {user: 0, teacher: 1, admin: 2}
   enum status: {active: 0, ban: 1}
 

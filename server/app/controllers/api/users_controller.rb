@@ -26,7 +26,7 @@ class Api::UsersController < Api::ApplicationController
     enrolled_courses = current_user.courses
                                    .preload(:teacher, :category)
                                    .as_json(include: %i(teacher category),
-                                    methods: :average_rating)
+                                            methods: :average_rating)
     json_response(message: {courses: enrolled_courses}, status: :ok)
   end
 

@@ -18,25 +18,17 @@ import Link from 'next/link'
 import { toast } from 'sonner'
 import Flag_EN from '@/src/app/assets/england.png'
 import Flag_VI from '@/src/app/assets/vietnam.png'
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue
-} from '../../../components/ui/select'
 import http from '../../utils/http'
 import { AuthenticationType } from '../../types/authentication.type'
 
-export default function SignUpPage() {
-  const t = useTranslations('sign_up')
+export default function SignUpTeacherPage() {
+  const t = useTranslations('sign_up_teacher')
   const router = useRouter()
   const dispatch = useAppDispatch()
   const [email, setEmail] = useState<string>('')
   const [fullName, setFullName] = useState<string>('')
-  const [sex, setSex] = useState<string>('')
+  const [job_title, setJobTitle] = useState<string>('')
+  const [experience, setExperience] = useState<string>('')
   const [password, setPassword] = useState<string>('')
   const [password_confirmation, setRePassword] = useState<string>('')
 
@@ -48,12 +40,17 @@ export default function SignUpPage() {
     const token = getCookie('authToken')
     if (token) {
       const role = getCookie('role')
-      if (role === 'admin') {
-        router.push('/admin')
-      } else {
-        router.push('/')
+      switch (role) {
+        case 'admin':
+          router.push('/admin')
+          break
+        case 'teacher':
+          router.push('/teacher')
+          break
+        case 'user':
+          router.push('/')
+          break
       }
-      return
     }
   }, [router])
 
@@ -76,22 +73,13 @@ export default function SignUpPage() {
     event.preventDefault()
 
     try {
-      const response = await http.post('accounts', {
+      const response = await http.post('instructor/accounts', {
         account: { email, password, password_confirmation },
-        user: { full_name: fullName, sex }
+        teacher: { name: fullName, experience, job_title }
       })
       dispatch(successPopUp(t('check_mail')))
     } catch {
       dispatch(failPopUp(t('register_failed')))
-    }
-  }
-
-  const responseGoogle = async (response: CredentialResponse) => {
-    try {
-      const res = await http.post(`auth/google_oauth2`, { auth: { id_token: response.credential } })
-      handleLoginSuccess(res.data)
-    } catch {
-      dispatch(failPopUp(t('login_failed')))
     }
   }
 
@@ -140,26 +128,28 @@ export default function SignUpPage() {
                     />
                   </div>
                   <div className='flex flex-col space-y-1.5'>
-                    <Label htmlFor='sex' className='text-lg font-bold'>
-                      {t('sex')}
+                    <Label htmlFor='job_title' className='text-lg font-bold'>
+                      {t('job_title')}
                     </Label>
-                    <Select
-                      onValueChange={(e) => {
-                        setSex(e)
+                    <Input
+                      id='job_title'
+                      placeholder={t('job_title')}
+                      onChange={(e) => {
+                        setJobTitle(e.target.value)
                       }}
-                    >
-                      <SelectTrigger className='w-full'>
-                        <SelectValue placeholder={t('choose_sex')} />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectGroup>
-                          <SelectLabel>{t('sex')}</SelectLabel>
-                          <SelectItem value='male'>{t('male')}</SelectItem>
-                          <SelectItem value='female'>{t('female')}</SelectItem>
-                          <SelectItem value='other'>{t('other')}</SelectItem>
-                        </SelectGroup>
-                      </SelectContent>
-                    </Select>
+                    />
+                  </div>
+                  <div className='flex flex-col space-y-1.5'>
+                    <Label htmlFor='experience' className='text-lg font-bold'>
+                      {t('experience')}
+                    </Label>
+                    <Input
+                      id='experience'
+                      placeholder={t('experience')}
+                      onChange={(e) => {
+                        setExperience(e.target.value)
+                      }}
+                    />
                   </div>
                   <div className='flex flex-col space-y-1.5'>
                     <Label htmlFor='password' className='text-lg font-bold'>
@@ -208,27 +198,11 @@ export default function SignUpPage() {
                     {t('sign_up')}
                   </Button>
                 </div>
-                <div className='flex items-center justify-center mb-8 relative w-full'>
-                  <div className='flex-grow border-t border-gray-500'></div>
-                  <span className='mx-4 text-sm text-gray-500 whitespace-nowrap'>{t('or_continue_with')}</span>
-                  <div className='flex-grow border-t border-gray-500'></div>
-                </div>
-                <div>
-                  <GoogleOAuthProvider clientId={process.env.clientId as string}>
-                    <GoogleLogin onSuccess={responseGoogle} onError={() => {}} />
-                  </GoogleOAuthProvider>
-                </div>
               </div>
               <div className='flex gap-3 mt-4'>
                 <p>{t('have_account')}</p>
                 <Link href='/login'>
                   <p className='font-bold text-primary'>{t('page_login')}</p>
-                </Link>
-              </div>
-              <div className='flex gap-1 mt-4'>
-                <p>{t('signup_teacher_account')}</p>
-                <Link href='/signup_teacher'>
-                  <p className='font-bold text-primary'>{t('signup_teacher')}</p>
                 </Link>
               </div>
             </CardFooter>

@@ -1,5 +1,7 @@
 module Api::Instructor
   class LessonsController < ApplicationController
+    authorize_resource
+    before_action :teacher?
     before_action :set_course, only: %i(index create update show)
     before_action :set_lesson, only: %i(show destroy update)
     before_action :authorized_teacher?, only: %i(update destroy show)

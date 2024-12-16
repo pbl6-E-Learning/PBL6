@@ -1,5 +1,8 @@
 module Api::Instructor
   class RequestCoursesController < ApplicationController
+    authorize_resource
+    before_action :teacher?
+
     def create
       request_course = RequestCourse.new request_course_params
       request_course.teacher_id = current_teacher.id

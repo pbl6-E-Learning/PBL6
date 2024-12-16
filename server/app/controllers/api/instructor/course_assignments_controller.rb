@@ -1,5 +1,7 @@
 module Api::Instructor
   class CourseAssignmentsController < ApplicationController
+    authorize_resource
+    before_action :teacher?
     before_action :set_course
     before_action :set_course_assignment, only: :update_status
 

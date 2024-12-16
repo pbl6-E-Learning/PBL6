@@ -1,5 +1,4 @@
 'use client'
-import Sidebar from '@/src/components/Sidebar'
 import { useTranslations } from 'next-intl'
 import React, { FormEvent, useEffect, useState } from 'react'
 import updateProfile from '@/src/app/assets/updateProfile.png'
@@ -8,18 +7,8 @@ import Image from 'next/image'
 import { Avatar, AvatarImage } from '@/src/components/ui/avatar'
 import { Label } from '@/src/components/ui/label'
 import { Input } from '@/src/components/ui/input'
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue
-} from '@/src/components/ui/select'
 import { Textarea } from '@/src/components/ui/textarea'
 import http from '@/src/app/utils/http'
-import type { Profile } from '@/src/app/types/profile.type'
 import { useAppDispatch } from '@/src/app/hooks/store'
 import { failPopUp, successPopUp } from '@/src/app/hooks/features/popup.slice'
 import { Button } from '@/src/components/ui/button'
@@ -30,14 +19,7 @@ import { useRouter } from 'next/navigation'
 import { Teacher } from '@/src/app/types/teacher.type'
 import { ProgressBar } from '@/src/components/ProgressBar/ProgressBar'
 import findImg from '@/src/app/assets/rikimo_note.png'
-
-type ProfileResponse = {
-  data: {
-    message: {
-      profile: Teacher
-    }
-  }
-}
+import { ProfileResponse } from '@/src/app/types/profileRespone.type'
 
 export default function TeacherProfile() {
   const t = useTranslations('teacher_profile')

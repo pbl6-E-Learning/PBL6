@@ -65,7 +65,9 @@
     "login_successful": "Login successful!",
     "processing": "Processing ...",
     "processing_check": "Checking email for you...",
-    "close": "Close"
+    "close": "Close",
+    "signup_teacher_account": "Sign up",
+    "signup_teacher": "as a teacher"
   },
   "show_course": {
     "title": "Detail Course",
@@ -657,5 +659,33 @@
     "recommendation": "Suggested correction",
     "loading_text": "Checking grammar...",
     "check_grammar": "Check grammar"
+  },
+  "sign_up_teacher": {
+    "title": "Đăng ký Giảng viên",
+    "welcome_message": "Chào mừng đến với trang đăng ký giảng viên",
+    "sign_up": "Đăng ký",
+    "sign_up_prompt": "Vui lòng điền thông tin của bạn để tạo tài khoản giảng viên.",
+    "full_name": "Họ và tên",
+    "email": "Email",
+    "job_title": "Chức danh",
+    "experience": "Kinh nghiệm",
+    "password": "Mật khẩu",
+    "re_password": "Nhập lại mật khẩu",
+    "check_mail": "Vui lòng kiểm tra email của bạn để xác nhận tài khoản.",
+    "register_failed": "Đăng ký thất bại, vui lòng thử lại.",
+    "login_successful": "Đăng nhập thành công!",
+    "login_failed": "Đăng nhập thất bại, vui lòng thử lại.",
+    "processing": "Đang xử lý...",
+    "processing_check": "Chúng tôi đang kiểm tra thông tin của bạn.",
+    "close": "Đóng",
+    "have_account": "Bạn đã có tài khoản?",
+    "page_login": "Đăng nhập",
+    "or_continue_with": "Hoặc tiếp tục với"
+  },
+  "navbar_teacher": {
+    "error": "An error occurred while fetching the profile.",
+    "button_sign_in": "Sign in",
+    "admin": "Admin",
+    "no_token_message": "You are not logged in. Redirecting to login page..."
   }
 }
