@@ -28,11 +28,6 @@ const menuItems = [
         href: '/teacher/courses'
       },
       {
-        icon: student,
-        label: 'lesson',
-        href: '/teacher/users'
-      },
-      {
         icon: calendar,
         label: 'request',
         href: '/teacher/request'
@@ -46,11 +41,6 @@ const menuItems = [
         icon: teacher,
         label: 'profile',
         href: '/teacher/profile'
-      },
-      {
-        icon: setting,
-        label: 'settings',
-        href: '/settings'
       },
       {
         icon: logout,

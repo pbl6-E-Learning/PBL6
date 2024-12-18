@@ -11,6 +11,7 @@ import { useAppDispatch } from '@/src/app/hooks/store'
 import { failPopUp } from '@/src/app/hooks/features/popup.slice'
 import { IoCheckmarkDone } from 'react-icons/io5'
 import { IoCloseOutline } from 'react-icons/io5'
+import { MdOutlineRecommend } from 'react-icons/md'
 
 export default function CheckGrammarPage() {
   const t = useTranslations('grammar')
@@ -51,13 +52,26 @@ export default function CheckGrammarPage() {
       })
       const data = response.data
       setResult(data.prediction)
-      setRecommendation(data.suggestion || null)
       setLoadingPercent(100)
     } catch {
       dispatch(failPopUp(t('check_grammar_failed')))
       setResult(null)
     } finally {
       setLoading(false)
+    }
+  }
+
+  const handleRecommend = async () => {
+    setRecommendation(null)
+    try {
+      const response = await http.post(`${process.env.NEXT_PUBLIC_API_URL}/search`, {
+        text: inputText
+      })
+      const data = response.data
+      setRecommendation(data.results || null)
+    } catch {
+      dispatch(failPopUp(t('recommend_grammar_failed')))
+      setResult(null)
     }
   }
 
@@ -84,6 +98,7 @@ export default function CheckGrammarPage() {
         <Button
           onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
             handleCheckGrammar(e)
+            handleRecommend()
           }}
           disabled={loading}
         >
@@ -126,10 +141,9 @@ export default function CheckGrammarPage() {
             </div>
           )}
           {recommendation && (
-            <div className='mt-2'>
-              <p>
-                {t('recommendation')}: {recommendation}
-              </p>
+            <div className='flex gap-3'>
+              <MdOutlineRecommend size={25} />
+              <p>{recommendation}</p>
             </div>
           )}
         </div>

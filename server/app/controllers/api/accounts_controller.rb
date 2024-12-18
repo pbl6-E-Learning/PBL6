@@ -5,17 +5,23 @@ class Api::AccountsController < Api::ApplicationController
     account_params = account_params_from_request
     user_params = user_params_from_request
 
-    account = Account.new(account_params)
-
-    if account.save
-      AccountMailer.account_activation(account).deliver_now
-      account.create_user(user_params)
-      json_response(message: {id: account.id,
-                              email: account.email,
-                              created_at: account.created_at}, status: :ok)
-    else
-      error_response(message: account.errors.full_messages.join(", "),
+    if Account.exists?(email: account_params[:email])
+      error_response(message: "Email already exists",
                      status: :unprocessable_entity)
+    else
+      account = Account.new(account_params)
+
+      if account.save
+        AccountMailer.account_activation(account).deliver_now
+        account.create_user(user_params)
+        json_response(
+          message: {id: account.id, email: account.email,
+                    created_at: account.created_at}, status: :ok
+        )
+      else
+        error_response(message: account.errors.full_messages.join(", "),
+                       status: :unprocessable_entity)
+      end
     end
   end
 

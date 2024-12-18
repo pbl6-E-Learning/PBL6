@@ -129,8 +129,8 @@
     "title": "Attendance Chart"
   },
   "footer_page": {
-    "title": "The Coding Journey",
-    "description": "TCJ is a platform dedicated to empowering aspiring developers. From beginner tutorials to advanced programming concepts, we provide a comprehensive learning experience designed to help you master coding skills, build projects, and launch your tech career.",
+    "title": "Return",
+    "description": "Return is a platform dedicated to empowering aspiring Japanese learners. From beginner lessons to advanced language concepts, we provide a comprehensive learning experience designed to help you master Japanese, practice Kanji, and enhance your communication skills for academic, professional, or personal growth.",
     "coursesTitle": "Courses",
     "linksTitle": "Links",
     "getInTouchTitle": "Get In Touch",
@@ -218,7 +218,7 @@
   },
   "banner2": {
     "heading": "Join Our Community to Start your Journey",
-    "description": "More than 300 high-quality business lectures. Supports all skills in interviews, writing emails, and communication in the workplace.",
+    "description": "More than 300 high-quality Japanese lectures. Supports all skills in writing, listening, reading, and communication in the workplace.",
     "joinNow": "Join Now"
   },
   "banner1": {
@@ -687,5 +687,28 @@
     "button_sign_in": "Sign in",
     "admin": "Admin",
     "no_token_message": "You are not logged in. Redirecting to login page..."
+  },
+  "admin_dashboard": {
+    "general_analysis": "General Analysis",
+    "title": "Admin Dashboard",
+    "total_assigned_courses": "Total Assigned Courses",
+    "total_teachers": "Total Teachers",
+    "total_users": "Total Users",
+    "total_courses": "Total Courses",
+    "no_token_message": "No token found. Please log in again.",
+    "error": "An error occurred while fetching data.",
+    "teachers_number": "Number of teachers by category",
+    "unknown": "Unknown",
+    "course_enroll_request": "Course Enrollment Requests",
+    "approved": "Approved",
+    "pending": "Pending",
+    "rejected": "Rejected",
+    "course_requests": "Course Requests",
+    "course_title": "Course Title",
+    "status": "Status",
+    "create_at": "Created At",
+    "previous": "Previous",
+    "next": "Next",
+    "loading" : "Loading..."
   }
 }

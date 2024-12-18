@@ -15,3 +15,31 @@ export type DashboardResponse = {
     total_accepted_assignments?: number
   }
 }
+
+export type Message = {
+  total_assigned_courses?: number
+  total_teachers?: number
+  total_users?: number
+  total_courses?: number
+  course_requests?: CourseRequest[]
+  teachers_per_category?: TeachersPerCategory[]
+}
+
+export type CourseRequest = {
+  id?: number
+  title?: string
+  description?: string
+  status?: string
+  teacher_id?: number
+  created_at?: Date
+  teacher_name?: string
+}
+
+export type TeachersPerCategory = {
+  category?: string
+  number?: number
+}
+
+export type DashboardResponse_Admin = {
+  message?: Message
+}

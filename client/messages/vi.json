@@ -125,8 +125,8 @@
     "title": "Attendance"
   },
   "footer_page": {
-    "title": "The Coding Journey",
-    "description": "TCJ là nền tảng cung cấp các kiến thức lập trình từ cơ bản đến nâng cao, giúp các lập trình viên tương lai phát triển kỹ năng, xây dựng dự án và khởi nghiệp trong lĩnh vực công nghệ.",
+    "title": "Return",
+    "description": "Return là một nền tảng dành riêng để hỗ trợ những người học tiếng Nhật. Từ các bài học cơ bản đến các khái niệm ngôn ngữ nâng cao, chúng tôi cung cấp trải nghiệm học tập toàn diện, giúp bạn thành thạo tiếng Nhật, luyện viết Kanji và nâng cao kỹ năng giao tiếp phục vụ học tập, công việc, hoặc phát triển cá nhân.",
     "coursesTitle": "Khoá học",
     "linksTitle": "Liên kết",
     "getInTouchTitle": "Liên hệ",
@@ -214,7 +214,7 @@
   },
   "banner2": {
     "heading": "Tham gia cộng đồng của chúng tôi để bắt đầu hành trình của bạn",
-    "description": "Hơn 300 video bài giảng business chất lượng. Hỗ trợ đủ các kỹ năng khi phỏng vấn, viết mail, giao tiếp trong môi trường công sở.",
+    "description": "Hơn 300 video bài giảng tiếng Nhật chất lượng. Hỗ trợ đủ các kỹ năng khi viết, nghe hiểu, đọc hiểu, giao tiếp trong môi trường công sở.",
     "joinNow": "Tham gia ngay"
   },
   "banner1": {
@@ -683,5 +683,28 @@
     "button_sign_in": "Đăng nhập",
     "admin": "Admin",
     "no_token_message": "You are not logged in. Redirecting to login page..."
+  },
+  "admin_dashboard": {
+    "general_analysis": "Phân tích chung",
+    "title": "Bảng điều khiển Quản trị",
+    "total_assigned_courses": "Tổng số khóa học đã phân công",
+    "total_teachers": "Tổng số giảng viên",
+    "total_users": "Tổng số người dùng",
+    "total_courses": "Tổng số khóa học",
+    "no_token_message": "Không tìm thấy token. Vui lòng đăng nhập lại.",
+    "error": "Đã xảy ra lỗi khi lấy dữ liệu.",
+    "teachers_number": "Số lượng giáo viên theo danh mục",
+    "unknown": "Không xác định",
+    "course_enroll_request": "Yêu cầu đăng ký khóa học",
+    "approved": "Đã duyệt",
+    "pending": "Chờ duyệt",
+    "rejected": "Bị từ chối",
+    "course_requests": "Yêu cầu khóa học",
+    "course_title": "Tiêu đề khóa học",
+    "status": "Trạng thái",
+    "create_at": "Ngày tạo",
+    "previous": "Trước",
+    "next": "Tiếp theo",
+    "loading": "Đang tải..."
   }
 }
