@@ -683,5 +683,28 @@
     "button_sign_in": "Đăng nhập",
     "admin": "Admin",
     "no_token_message": "You are not logged in. Redirecting to login page..."
+  },
+  "admin_dashboard": {
+    "general_analysis": "Phân tích chung",
+    "title": "Bảng điều khiển Quản trị",
+    "total_assigned_courses": "Tổng số khóa học đã phân công",
+    "total_teachers": "Tổng số giảng viên",
+    "total_users": "Tổng số người dùng",
+    "total_courses": "Tổng số khóa học",
+    "no_token_message": "Không tìm thấy token. Vui lòng đăng nhập lại.",
+    "error": "Đã xảy ra lỗi khi lấy dữ liệu.",
+    "teachers_number": "Số lượng giáo viên",
+    "unknown": "Không xác định",
+    "course_enroll_request": "Yêu cầu đăng ký khóa học",
+    "approved": "Đã duyệt",
+    "pending": "Chờ duyệt",
+    "rejected": "Bị từ chối",
+    "course_requests": "Yêu cầu khóa học",
+    "course_title": "Tiêu đề khóa học",
+    "status": "Trạng thái",
+    "create_at": "Ngày tạo",
+    "previous": "Trước",
+    "next": "Tiếp theo",
+    "loading": "Đang tải..."
   }
 }
