@@ -2,7 +2,6 @@ module Api::Instructor
   class CourseAssignmentsController < ApplicationController
     authorize_resource
     before_action :teacher?
-    before_action :set_course
     before_action :set_course_assignment, only: :update_status
 
     def index
@@ -32,10 +31,6 @@ module Api::Instructor
     end
 
     private
-
-    def set_course
-      @course = Course.find_by id: params[:course_id]
-    end
 
     def set_course_assignment
       @course_assignment = CourseAssignment.find_by id: params[:id]

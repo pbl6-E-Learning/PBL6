@@ -47,16 +47,6 @@ const menuItems = [
     title: 'OTHER',
     items: [
       {
-        icon: profile,
-        label: 'Profile',
-        href: '/profile'
-      },
-      {
-        icon: setting,
-        label: 'Settings',
-        href: '/settings'
-      },
-      {
         icon: logout,
         label: 'Logout',
         href: '/logout'

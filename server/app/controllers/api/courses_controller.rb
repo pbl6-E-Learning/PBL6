@@ -95,7 +95,8 @@ class Api::CoursesController < Api::ApplicationController
   end
 
   def handle_existing_assignment course_assignment
-    return already_assigned unless course_assignment.status != "rejected"
+    return already_assigned if %w(pending
+accepted).include?(course_assignment.status)
 
     course_assignment.update(status: :pending, assigned_at: Time.zone.now)
     json_response(
@@ -129,9 +130,10 @@ class Api::CoursesController < Api::ApplicationController
     error_response(
       message: {
         course_id: @course.id,
-        status: :pending
+        status: "Cannot reassign as the course is already " \
+                "in pending or accepted state."
       },
-      status: :not_found
+      status: :unprocessable_entity
     )
   end
 

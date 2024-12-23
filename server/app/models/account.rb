@@ -11,7 +11,8 @@ class Account < ApplicationRecord
   mail_regex = Regexp.new(Settings.VALID_EMAIL_REGEX)
   validates :email, presence: true,
                     length: {maximum: Settings.email_max_length},
-                    format: {with: mail_regex}
+                    format: {with: mail_regex},
+                    uniqueness: true
   validates :password, presence: true,
                     length: {minimum: Settings.min_password_length},
                     allow_nil: true

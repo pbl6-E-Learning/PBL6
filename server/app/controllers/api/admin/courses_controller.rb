@@ -29,6 +29,19 @@ class Api::Admin::CoursesController < Api::Admin::ApplicationController
     )
   end
 
+  def dashboard_stats
+    dashboard_data = {
+      total_assigned_courses:,
+      total_teachers:,
+      total_users:,
+      total_courses:,
+      course_requests:,
+      teachers_per_category:
+    }
+
+    json_response(message: dashboard_data)
+  end
+
   private
 
   def set_course
@@ -57,5 +70,37 @@ class Api::Admin::CoursesController < Api::Admin::ApplicationController
       accepted: course.accepted_count,
       rejected: course.rejected_count
     }
+  end
+
+  def total_assigned_courses
+    CourseAssignment.count
+  end
+
+  def total_teachers
+    Teacher.count
+  end
+
+  def total_users
+    User.count
+  end
+
+  def total_courses
+    Course.count
+  end
+
+  def course_requests
+    RequestCourse.select(:id, :title, :description, :status, :teacher_id,
+                         :created_at).map do |request|
+      request.as_json.merge(teacher_name: request.teacher&.name)
+    end
+  end
+
+  def teachers_per_category
+    Category.joins(courses: :teacher)
+            .group(:id, :name)
+            .count("DISTINCT teachers.id")
+            .map do |(id, name), count|
+              { 'category' => name, 'number' => count }
+            end
   end
 end
