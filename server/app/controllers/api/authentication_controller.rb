@@ -12,6 +12,11 @@ class Api::AuthenticationController < Api::ApplicationController
                               status: :unauthorized)
       end
 
+      if account.ban?
+        return error_response(message: "Account is banned",
+                              status: :forbidden)
+      end
+
       jwt = Auth.issue(payload: {account: account.id})
       json_response(message: {jwt:, roles: account.roles}, status: :ok)
     else
@@ -24,6 +29,10 @@ class Api::AuthenticationController < Api::ApplicationController
     response = fetch_google_token_info(auth_params[:id_token])
     if response.code == Settings.success_code
       account = find_or_create_account(response.parsed_response)
+      if account.ban?
+        return error_response(message: "Account is banned",
+                              status: :forbidden)
+      end
       if account.persisted?
         jwt = issue_jwt(account)
         json_response(message: {jwt:, roles: account.roles}, status: :ok)
