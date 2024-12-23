@@ -53,7 +53,7 @@ class Api::LessonsController < Api::ApplicationController
       )
     end
     course_id = params[:course_id]
-    assignment = current_user.course_assignments.find_by course_id: course_id
+    assignment = current_user.course_assignments.find_by(course_id:)
 
     unless assignment
       return error_response(
