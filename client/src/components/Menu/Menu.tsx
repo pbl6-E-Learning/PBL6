@@ -5,8 +5,6 @@ import home from '@/src/app/assets/home.png'
 import teacher from '@/src/app/assets/teacher.png'
 import student from '@/src/app/assets/student.png'
 import lesson from '@/src/app/assets/levelMenu.png'
-import profile from '@/src/app/assets/profile.png'
-import setting from '@/src/app/assets/setting.png'
 import logout from '@/src/app/assets/logout.png'
 import list from '@/src/app/assets/list.png'
 import { deleteCookie } from 'cookies-next'
@@ -18,8 +16,8 @@ const menuItems = [
     items: [
       {
         icon: home,
-        label: 'Home',
-        href: '/'
+        label: 'Dashboard',
+        href: '/admin'
       },
       {
         icon: teacher,
