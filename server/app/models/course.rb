@@ -32,6 +32,11 @@ class Course < ApplicationRecord
       default_order
     end
   }
+  scope :enrolled_by_user, ->(user) {
+    joins(:course_assignments)
+      .where(course_assignments: { user_id: user.id, status: CourseAssignment.statuses[:accepted] })
+      .distinct
+  }
 
   delegate :pending_count, :accepted_count, :rejected_count,
            to: :course_assignments_scopes
