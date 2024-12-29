@@ -68,7 +68,7 @@ export default function CheckGrammarPage() {
         text: inputText
       })
       const data = response.data
-      setRecommendation(data.results || null)
+      setRecommendation(data.text || null)
     } catch {
       dispatch(failPopUp(t('recommend_grammar_failed')))
       setResult(null)
@@ -143,7 +143,11 @@ export default function CheckGrammarPage() {
           {recommendation && (
             <div className='flex gap-3'>
               <MdOutlineRecommend size={25} />
-              <p>{recommendation}</p>
+              <p>
+                {t('recommendation')}
+                <br />
+                {recommendation}
+              </p>
             </div>
           )}
         </div>

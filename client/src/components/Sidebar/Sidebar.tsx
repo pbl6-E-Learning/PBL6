@@ -16,7 +16,7 @@ const Sidebar = ({ activeItem }: SidebarProps) => {
   }
 
   return (
-    <div className='flex h-auto w-full max-w-64 flex-col bg-clip-border p-4 fixed top-20 '>
+    <div className='flex h-auto w-full max-w-64 flex-col bg-clip-border p-4 sticky top-20 '>
       <nav className='flex min-w-[240px] flex-col gap-1 p-2 font-sans text-base font-normal text-blue-gray-700'>
         <Link className={getNavItemClass('dashboard')} href='/user/progress'>
           <div className='grid mr-4 place-items-center'>

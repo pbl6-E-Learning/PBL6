@@ -656,7 +656,7 @@
     "grammar_correct": "The grammar is correct.",
     "grammar_incorrect": "The grammar is incorrect.",
     "error_occurred": "An error occurred while checking the grammar.",
-    "recommendation": "Suggested correction",
+    "recommendation": "Related sentences",
     "loading_text": "Checking grammar...",
     "check_grammar": "Check grammar"
   },
